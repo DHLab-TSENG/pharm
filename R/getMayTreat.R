@@ -1,0 +1,37 @@
+get.MayTreat <- function(df, RxCuiColName = RxCui, cores =8){
+
+  colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "RxCui"
+
+  cl <- makeCluster(cores)
+  registerDoParallel(cl)
+  RxNormMayTreatData = foreach(i = 1:nrow(df),
+                           .combine = "rbind",
+                           .packages = c("jsonlite","dplyr")) %dopar% {
+                             may_treatTemp <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui=", df$RxCui[i], "&relaSource=MEDRT&relas=may_treat"))
+                             may_treat <- may_treatTemp$rxclassDrugInfoList
+                             if(is.null(may_treat)){
+                               rxTable <- data.frame(RxCui = df$RxCui[i],
+                                                     min.rxcui = NA,
+                                                     Name = NA,
+                                                     classId = NA,
+                                                     May_treat = NA,
+                                                     stringsAsFactors = FALSE)
+                             }else{
+                               rxTable <- data.frame(RxCui = df$RxCui[i],
+                                                     min.rxcui = may_treat$rxclassDrugInfo$minConcept$rxcui,
+                                                     Name = may_treat$rxclassDrugInfo$minConcept$name,
+                                                     classId = may_treat$rxclassDrugInfo$rxclassMinConceptItem$classId,
+                                                     May_treat = may_treat$rxclassDrugInfo$rxclassMinConceptItem$className,
+                                                     stringsAsFactors = FALSE)
+                             }
+                             rxTable
+                           }
+  stopCluster(cl)
+
+  RxNormMayTreatData <- unique(RxNormMayTreatData)
+  RxCui_MayTreat <- left_join(df,RxNormMayTreatData, by = "RxCui")
+  colnames(RxCui_MayTreat)[colnames(RxCui_MayTreat)=="RxCui"] <- deparse(substitute(RxCuiColName))
+
+  return (RxCui_MayTreat)
+}
+
