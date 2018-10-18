@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1539835762957.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2924379372",
+    "id" : "D2BCF6EF",
+    "lastKnownWriteTime" : 1539839505,
+    "last_content_update" : 1539839505259,
+    "path" : "~/pharm/R/getATCBasedOnNHINo.R",
+    "project_path" : "R/getATCBasedOnNHINo.R",
+    "properties" : {
+        "cursorPosition" : "16,46",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
