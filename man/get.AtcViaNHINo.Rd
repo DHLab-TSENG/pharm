@@ -10,8 +10,6 @@ get.AtcViaNHINo(df, NHINoColName = NHINo)
 \item{df}{data.frame include NHINO}
 
 \item{NHINoColName}{A colum for NHINo of df}
-
-\item{Differ_ColName}{if colum for NHINo of df not named "NHINo"}
 }
 \description{
 Get ATC Code based on NHINO

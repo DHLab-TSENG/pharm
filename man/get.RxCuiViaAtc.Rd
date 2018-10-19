@@ -11,6 +11,8 @@ get.RxCuiViaAtc(df, AtcColName = ATC, cores = 8)
 
 \item{AtcColName}{A colum for ATC of df}
 
+\item{cores}{number of parallel operation}
+
 \item{Differ_ColName}{if colum for NHINo of df not named "ATC"}
 }
 \description{

@@ -11,7 +11,7 @@ get.AtcViaRxCui(df, RxCuiColName = RxCui, cores = 8)
 
 \item{RxCuiColName}{A colum for RxCui of df}
 
-\item{Differ_ColName}{if colum for RxCui of df not named "RxCui"}
+\item{cores}{number of parallel operation}
 }
 \description{
 Get NDC code based on RxCui

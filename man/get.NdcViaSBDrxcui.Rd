@@ -9,9 +9,9 @@ get.NdcViaSBDrxcui(df, SBDRxCuiColName = SBD.rxcui, cores = 8)
 \arguments{
 \item{df}{data.frame include RxCui}
 
-\item{RxCuiColName}{A colum for RxCui of df}
+\item{cores}{number of parallel operation}
 
-\item{Differ_ColName}{if colum for RxCui of df not named "RxCui"}
+\item{RxCuiColName}{A colum for RxCui of df}
 }
 \description{
 Get NDC code based on RxCui

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1539932626132.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "E361E43F",
+    "lastKnownWriteTime" : 1539933146,
+    "last_content_update" : 1539933146843,
+    "path" : "~/pharm/R/getRxInfo.R",
+    "project_path" : "R/getRxInfo.R",
+    "properties" : {
+        "cursorPosition" : "1,2",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

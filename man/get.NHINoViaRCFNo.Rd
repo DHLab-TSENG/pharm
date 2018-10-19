@@ -10,8 +10,6 @@ get.NHINoViaRCFNo(df, RCFNoColName = RCFNO)
 \item{df}{data.frame include RCFNO}
 
 \item{RCFNoColName}{A colum for RCFNo of df}
-
-\item{Differ_ColName}{if colum for NHINo of df not named "RCFNO"}
 }
 \description{
 Get NHINO based on RCFNO

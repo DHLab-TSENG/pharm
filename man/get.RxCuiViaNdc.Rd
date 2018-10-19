@@ -9,6 +9,8 @@ get.RxCuiViaNdc(df, NdcColName = NDC, cores = 8)
 \arguments{
 \item{df}{data.frame include NDC}
 
+\item{cores}{number of parallel operation}
+
 \item{AtcColName}{A colum for NDC of df}
 
 \item{Differ_ColName}{if colum for NHINo of df not named "NDC"}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1539930745511.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "D7C255A5",
+    "lastKnownWriteTime" : 1539934035,
+    "last_content_update" : 1539934035668,
+    "path" : "~/pharm/R/calculateDDDs.R",
+    "project_path" : "R/calculateDDDs.R",
+    "properties" : {
+        "cursorPosition" : "2,16",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
