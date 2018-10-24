@@ -1,6 +1,7 @@
 #' Get RxCui based on ATC
 #'
-#' @import doParallel, jsonlite, foreach, dplyr
+#' @import doParallel
+#' @import dplyr
 #' @param df data.frame include ATC
 #' @param AtcColName A colum for ATC of df
 #' @param Differ_ColName if colum for NHINo of df not named "ATC"

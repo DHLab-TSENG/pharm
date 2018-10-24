@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540369326007.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "4EAD1C6B",
+    "lastKnownWriteTime" : 1539933015,
+    "last_content_update" : 1539933015,
+    "path" : "~/pharm/R/getNDCBasedOnSBDrxcui.R",
+    "project_path" : "R/getNDCBasedOnSBDrxcui.R",
+    "properties" : {
+        "cursorPosition" : "3,21",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,6 +1,7 @@
 #' Get RxCui based on NDC
 #'
-#' @import doParallel, jsonlite, foreach, dplyr
+#' @import doParallel
+#' @import dplyr
 #' @param df data.frame include NDC
 #' @param AtcColName A colum for NDC of df
 #' @param Differ_ColName if colum for NHINo of df not named "NDC"
