@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1540457581596.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7BBDD48A",
+    "lastKnownWriteTime" : 1540456556,
+    "last_content_update" : 1540456556,
+    "path" : "~/pharm/R/getATCBaseOnRxCui.R",
+    "project_path" : "R/getATCBaseOnRxCui.R",
+    "properties" : {
+        "cursorPosition" : "49,62",
+        "scrollLine" : "29"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
