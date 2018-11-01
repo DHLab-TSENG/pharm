@@ -1,4 +1,4 @@
-#' Get NDC code based on RxCui
+#' Get Semantic Branded Drug RxCui  based on ingredient RxCui
 #'
 #' @import dplyr
 #' @import doParallel
