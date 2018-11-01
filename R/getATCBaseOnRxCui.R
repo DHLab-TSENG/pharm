@@ -15,6 +15,11 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=8){
   RxNormIdData = foreach(i = 1:nrow(df),
                          .combine = "rbind",
                          .packages = c("jsonlite", "data.table", "dplyr")) %dopar% {
+                           if(is.na(df$wRxCui[i])){
+                             AtcTable <- data.frame(wRxCui = df$wRxCui[i],
+                                                    ATC = NA,
+                                                    stringsAsFactors = FALSE)
+                           }else{
                            tty <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",df$wRxCui[i],"/property?propName=TTY"))
 
                            if(tty$propConceptGroup$propConcept$propValue == "IN"){
@@ -89,6 +94,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=8){
                                }
 
                              }
+                           }
                            }
                            AtcTable
                          }

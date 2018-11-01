@@ -15,6 +15,9 @@ ddd.test.df <- data.frame(patient_id = c("1", "1", "1", "2", "2"),
 
 
 calDDDs <- function(case){
+
+
+
   case <- get.ddd(case)
   case <- arrange(case, patient_id, Dispensing)
   case <- data.table(case)
