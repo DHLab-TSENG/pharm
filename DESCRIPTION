@@ -1,12 +1,11 @@
 Package: pharm
 Type: Package
-Title: What the Package Does (Title Case)
+Title: convert drug between ATC RxNorm NDC and NHINo
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: YEHYUNG CHIU
+Maintainer: YEHYUNG CHIU <lawrance39@gmail.com>
+Description: mapping rxnorm, atc, ndc, and nhino, moreover, it provide a function which can get rxcui from may treat or may prevent.
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0
+Imports: doParallel
