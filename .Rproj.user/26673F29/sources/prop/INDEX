@@ -1,3 +1,5 @@
+~%2FgetMinAtc.R="49603F53"
+~%2Fgetatc.R="753862FA"
 ~%2Fpharm%2FDESCRIPTION="BD18FA53"
 ~%2Fpharm%2FNAMESPACE="9E5470A6"
 ~%2Fpharm%2FR%2FcalDDDs_accumulat.R="3A13357B"
@@ -17,5 +19,6 @@
 ~%2Fpharm%2FR%2FgetSBDrxcuiBasedOnRxcui.R="35AE57C1"
 ~%2Fpharm%2FR%2Fget_ddd.R="61CD5012"
 ~%2Fpharm%2FR%2Fhello.R="1A4F499F"
+~%2Fpharm%2Fman%2Fget.RxCuiViaMayprevent.Rd="ED679906"
 ~%2Fpharm%2Fman%2Fget.SBDrxcuiViaRxCui.Rd="E9641193"
 ~%2Fpharm%2Fman%2Fhello.Rd="53D0C50C"

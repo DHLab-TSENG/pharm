@@ -1,0 +1,63 @@
+get.AtcViaRxCui2 <- function(df, RxCuiColName = RxCui, cores=8){
+
+  colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
+  cl <- makeCluster(cores)
+  registerDoParallel(cl)
+  RxNormIdData = foreach(i = 1:nrow(df),
+                         .combine = "rbind",
+                         .packages = "jsonlite") %dopar% {
+                           isPack <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/RxTerms/rxcui/", df$wRxCui[i], "/allinfo"))
+                           
+                           if(isPack$rxtermsProperties$rxtermsDoseForm != "Pack" || is.null(isPack$rxtermsProperties)){
+                           rxinfo <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",df$wRxCui[i],"/allrelated"))
+                           ingredient_cui_in <- data.frame(rxinfo$allRelatedGroup$conceptGroup$conceptProperties[rxinfo$allRelatedGroup$conceptGroup$tty == "IN"])
+                           ingredient_cui_min <- data.frame(rxinfo$allRelatedGroup$conceptGroup$conceptProperties[rxinfo$allRelatedGroup$conceptGroup$tty == "MIN"])
+                           rx_route <- data.frame(rxinfo$allRelatedGroup$conceptGroup$conceptProperties[rxinfo$allRelatedGroup$conceptGroup$tty == "DFG"])
+
+                           if(nrow(ingredient_cui_min) == 0){
+                             rxid <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",ingredient_cui_in$rxcui[1],"/allProperties.json?prop=all"))
+                           }else{
+                             rxid <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",ingredient_cui_min$rxcui[1],"/allProperties.json?prop=all"))
+                           }
+
+                           if(is.null(rxid) | length(rxid$propConceptGroup$propConcept$propValue[rxid$propConceptGroup$propConcept$propName == "ATC"])==0){
+                             AtcTable <- data.frame(wRxCui = df$wRxCui[i],
+                                                    Rx_route = NA,
+                                                    ATC = NA,
+                                                    stringsAsFactors = FALSE)
+                           }else{
+                             AtcTable <- data.frame(wRxCui = df$wRxCui[i],
+                                                    Rx_route = rx_route$name[1],
+                                                    ATC = rxid$propConceptGroup$propConcept$propValue[rxid$propConceptGroup$propConcept$propName == "ATC"],
+                                                    stringsAsFactors = FALSE)
+                           }
+                           AtcTable
+                           }else{
+                             AtcTable <- data.frame(wRxCui = df$wRxCui[i],
+                                                    Rx_route = "",
+                                                    ATC = NA,
+                                                    stringsAsFactors = FALSE)
+                           }
+                         }
+  stopCluster(cl)
+  RxNormIdData <- unique(RxNormIdData)
+  RxNormIdData <- data.table(RxNormIdData)
+  RxNormIdData[, Rx_DFG :=  if_else(Rx_route == "Drug Implant Product", "implant",
+                                    if_else(Rx_route == "Inhalant Product", "Inhal",
+                                            if_else(Rx_route == "Nasal Product", "N",
+                                                    if_else(Rx_route == "Oral Product", "O",
+                                                            if_else(Rx_route == "Injectable Product", "P",
+                                                                    if_else(Rx_route == "Rectal Product", "R",
+                                                                            if_else(Rx_route == "Sublingual Product", "SL",
+                                                                                    if_else(Rx_route == "Transdermal Product", "TD",
+                                                                                            if_else(Rx_route == "Vaginal Product", "V","")))))))),
+                                    missing = "")]
+
+  RxNormIdData <- RxNormIdData %>% select(wRxCui, Rx_DFG, ATC)
+  RxNormIdData <- RxNormIdData %>% left_join(resATC_Adm.R, by = "ATC") %>%
+    filter(Rx_DFG == Adm.R) %>% select(wRxCui, ATC) %>% unique()
+
+  RxCui_ATC <- left_join(df,RxNormIdData, by = "wRxCui")
+  colnames(RxCui_ATC)[colnames(RxCui_ATC)=="wRxCui"] <- deparse(substitute(RxCuiColName))
+  return (RxCui_ATC)
+}
