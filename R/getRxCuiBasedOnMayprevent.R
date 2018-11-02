@@ -5,8 +5,6 @@
 #' @import data.table
 #' @param strmaytreat A may prevent
 #' @export
-.datatable.aware = TRUE
-
 get.RxCuiViaMayprevent <- function(strmayprevent){
 
   strmayprevent <-  str_to_lower(gsub(" ","",strmayprevent))
@@ -19,3 +17,4 @@ get.RxCuiViaMayprevent <- function(strmayprevent){
   resMayprevent
 
 }
+.datatable.aware = TRUE
