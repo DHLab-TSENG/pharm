@@ -2,7 +2,7 @@
 % Please edit documentation in R/getSBDrxcuiBasedOnRxcui.R
 \name{get.SBDrxcuiViaRxCui}
 \alias{get.SBDrxcuiViaRxCui}
-\title{Get NDC code based on RxCui}
+\title{Get Semantic Branded Drug RxCui  based on ingredient RxCui}
 \usage{
 get.SBDrxcuiViaRxCui(df, RxCuiColName = RxCui, cores = 8)
 }
@@ -14,5 +14,5 @@ get.SBDrxcuiViaRxCui(df, RxCuiColName = RxCui, cores = 8)
 \item{cores}{number of parallel operation}
 }
 \description{
-Get NDC code based on RxCui
+Get Semantic Branded Drug RxCui  based on ingredient RxCui
 }
