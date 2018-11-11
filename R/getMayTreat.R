@@ -20,17 +20,17 @@ get.MayTreat <- function(df, RxCuiColName = RxCui, cores =8){
                              may_treat <- may_treatTemp$rxclassDrugInfoList
                              if(is.null(may_treat)){
                                rxTable <- data.frame(wRxCui = df$wRxCui[i],
-                                                     min.rxcui = NA,
-                                                     Name = NA,
-                                                     classId = NA,
-                                                     May_treat = NA,
+                                                     minConcept.rxcui = NA,
+                                                     minConcept.name = NA,
+                                                     rxclassMinConceptItem.classId = NA,
+                                                     rxclassMinConceptItem.className = NA,
                                                      stringsAsFactors = FALSE)
                              }else{
                                rxTable <- data.frame(wRxCui = df$wRxCui[i],
-                                                     min.rxcui = may_treat$rxclassDrugInfo$minConcept$rxcui,
-                                                     Name = may_treat$rxclassDrugInfo$minConcept$name,
-                                                     classId = may_treat$rxclassDrugInfo$rxclassMinConceptItem$classId,
-                                                     May_treat = may_treat$rxclassDrugInfo$rxclassMinConceptItem$className,
+                                                     minConcept.rxcui = may_treat$rxclassDrugInfo$minConcept$rxcui,
+                                                     minConcept.name = may_treat$rxclassDrugInfo$minConcept$name,
+                                                     rxclassMinConceptItem.classId = may_treat$rxclassDrugInfo$rxclassMinConceptItem$classId,
+                                                     rxclassMinConceptItem.className = may_treat$rxclassDrugInfo$rxclassMinConceptItem$className,
                                                      stringsAsFactors = FALSE)
                              }
                              rxTable
