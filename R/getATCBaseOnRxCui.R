@@ -24,19 +24,37 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=8){
 
                            if(tty$propConceptGroup$propConcept$propValue == "IN"){
                              ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",df$wRxCui[i],"/property?propName=ATC"))
+                             if(is.null(ATC$propConceptGroup$propConcept$propValue)){
+                               AtcTable <- data.frame(wRxCui = df$wRxCui[i],
+                                                      ATC = NA,
+                                                      stringsAsFactors = FALSE)
+                             }else{
                              AtcTable <- data.frame(wRxCui = df$wRxCui[i],
                                                     ATC = ATC$propConceptGroup$propConcept$propValue,
                                                     stringsAsFactors = FALSE)
+                             }
                            }else if(tty$propConceptGroup$propConcept$propValue == "MIN"){
                              ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",df$wRxCui[i],"/property?propName=ATC"))
+                             if(is.null(ATC$propConceptGroup$propConcept$propValue)){
+                               AtcTable <- data.frame(wRxCui = df$wRxCui[i],
+                                                      ATC = NA,
+                                                      stringsAsFactors = FALSE)
+                             }else{
                              AtcTable <- data.frame(wRxCui = df$wRxCui[i],
                                                     ATC = ATC$propConceptGroup$propConcept$propValue,
                                                     stringsAsFactors = FALSE)
+                             }
                            }else if(tty$propConceptGroup$propConcept$propValue == "PIN"){
                              ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",df$wRxCui[i],"/property?propName=ATC"))
+                             if(is.null(ATC$propConceptGroup$propConcept$propValue)){
+                               AtcTable <- data.frame(wRxCui = df$wRxCui[i],
+                                                      ATC = NA,
+                                                      stringsAsFactors = FALSE)
+                             }else{
                              AtcTable <- data.frame(wRxCui = df$wRxCui[i],
                                                     ATC = ATC$propConceptGroup$propConcept$propValue,
                                                     stringsAsFactors = FALSE)
+                             }
                            }else if(tty$propConceptGroup$propConcept$propValue == "BPCK"){
                              AtcTable <- data.frame(wRxCui = df$wRxCui[i],
                                                     ATC = "BPCK",
