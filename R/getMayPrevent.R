@@ -20,17 +20,17 @@ get.MayPrevent <- function(df, RxCuiColName = RxCui, cores =16){
                                  may_prevent <- may_preventTemp$rxclassDrugInfoList
                                  if(is.null(may_prevent)){
                                    rxTable <- data.frame(wRxCui = df$wRxCui[i],
-                                                         min.rxcui = NA,
-                                                         Name = NA,
-                                                         classId = NA,
-                                                         May_prevent = NA,
+                                                         minConcept.rxcui = NA,
+                                                         minConcept.name = NA,
+                                                         rxclassMinConceptItem.classId = NA,
+                                                         rxclassMinConceptItem.className = NA,
                                                          stringsAsFactors = FALSE)
                                  }else{
                                    rxTable <- data.frame(wRxCui = df$wRxCui[i],
-                                                         min.rxcui = may_prevent$rxclassDrugInfo$minConcept$rxcui,
-                                                         Name = may_prevent$rxclassDrugInfo$minConcept$name,
-                                                         classId = may_prevent$rxclassDrugInfo$rxclassMinConceptItem$classId,
-                                                         May_prevent = may_prevent$rxclassDrugInfo$rxclassMinConceptItem$className,
+                                                         minConcept.rxcui = may_prevent$rxclassDrugInfo$minConcept$rxcui,
+                                                         minConcept.name = may_prevent$rxclassDrugInfo$minConcept$name,
+                                                         rxclassMinConceptItem.classId = may_prevent$rxclassDrugInfo$rxclassMinConceptItem$classId,
+                                                         rxclassMinConceptItem.className = may_prevent$rxclassDrugInfo$rxclassMinConceptItem$className,
                                                          stringsAsFactors = FALSE)
                                  }
                                  rxTable

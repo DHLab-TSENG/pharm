@@ -12,9 +12,11 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=8){
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
   cl <- makeCluster(cores)
   registerDoParallel(cl)
+
   RxNormIdData = foreach(i = 1:nrow(df),
                          .combine = "rbind",
                          .packages = c("jsonlite", "data.table", "dplyr")) %dopar% {
+
                            if(is.na(df$wRxCui[i])){
                              AtcTable <- data.frame(wRxCui = df$wRxCui[i],
                                                     ATC = NA,

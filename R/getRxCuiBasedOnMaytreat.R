@@ -13,7 +13,7 @@ get.RxCuiViaMaytreat <- function(strmaytreat){
   resMaytreat[,t := grepl(strmaytreat, maytreat)]
   resMaytreat <- resMaytreat %>%
     filter(t == TRUE) %>%
-    select(RxCui, minConcept.rxcui, minConcept.name, rxclassMinConceptItem.classId, rxclassMinConceptItem.className) %>%
+    select(RxCui, Name, rxclassMinConceptItem.classId, rxclassMinConceptItem.className) %>%
     arrange(rxclassMinConceptItem.className)
   resMaytreat
 

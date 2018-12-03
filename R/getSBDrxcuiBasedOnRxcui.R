@@ -17,7 +17,7 @@ get.SBDrxcuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
                          .packages = "jsonlite") %dopar% {
                            sbd.rxcui <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", df$wRxCui[i], "/allrelated"))
                            sbd.df <- data.frame(sbd.rxcui$allRelatedGroup$conceptGroup$conceptProperties[sbd.rxcui$allRelatedGroup$conceptGroup$tty == "SBD"])
-                           if(is.null(sbd.rxcui$allRelatedGroup$conceptGroup$conceptProperties[sbd.rxcui$allRelatedGroup$conceptGroup$tty == "SBD"])){
+                           if(is.null(sbd.df$rxcui)){
                              RxSbdTable <- data.frame(wRxCui=df$wRxCui[i],
                                                    SBD.rxcui=NA,
                                                    stringsAsFactors = FALSE)

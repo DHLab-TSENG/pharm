@@ -13,7 +13,7 @@
 #' @export
 
 calDDDs.range <- function(case,
-                          index_day,
+                          index_dayColName = index_day,
                           expo_range_before = 36000,
                           expo_range_after = 36000,
                           idColName = patient_id,
@@ -21,17 +21,18 @@ calDDDs.range <- function(case,
                           SupplyDayColName = duration,
                           DailyDosageColName = Daily_dosage){
 
+  colnames(case)[colnames(case)==deparse(substitute(index_dayColName))] <- "index_day"
   colnames(case)[colnames(case)==deparse(substitute(idColName))] <- "patient_id"
   colnames(case)[colnames(case)==deparse(substitute(DispensingColName))] <- "Dispensing"
   colnames(case)[colnames(case)==deparse(substitute(SupplyDayColName))] <- "duration"
   colnames(case)[colnames(case)==deparse(substitute(DailyDosageColName))] <- "Daily_dosage"
 
-  index_day <- as.Date(gsub("\\s+", "", deparse(substitute(index_day))))
+  #index_day <- as.Date(gsub("\\s+", "", deparse(substitute(index_day))))
   case <- get.ddd(case)
   case <- arrange(case, patient_id, Dispensing)
   case <- data.table(case)
   case[, star_day := index_day-expo_range_before]
-  case[, index_day := index_day]
+  #case[, index_day := index_day]
   case[, end_day := index_day+expo_range_after]
   case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_dosage, "mg")))]
   case[, DDD_perday := round(Daily_dosage2/DDD, 2)]
@@ -70,9 +71,9 @@ calDDDs.range <- function(case,
   colnames(case_after)[colnames(case_after)=="V1"] <- paste0("DDDs_after_",expo_range_after,"_days")
 
   case <- case %>% select(patient_id, star_day, index_day, end_day, DDDs_before, DDDs_after)
-  case_bf_af <- inner_join(case_before,case_after)
+  case_bf_af <- inner_join(case_before,case_after, by = "patient_id")
   case_temp <- case %>% select(patient_id, star_day, index_day, end_day)
-  case <- inner_join(case_temp,case_bf_af)
+  case <- inner_join(case_temp,case_bf_af, by = "patient_id")
   case <- unique(case)
   colnames(case)[colnames(case)== "patient_id"] <- deparse(substitute(idColName))
   return(case)
