@@ -11,26 +11,27 @@
 get.RxCuiViaNdc <- function(df, NdcColName = NDC, cores=8){
 
   colnames(df)[colnames(df)==deparse(substitute(NdcColName))] <- "NDC"
+  dfu <- df %>% select("NDC") %>% unique()
 
   cl <- makeCluster(cores)
   registerDoParallel(cl)
-  RxNormIdData = foreach(i = 1:nrow(df),
+  RxNormIdData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "httr") %dopar% {
 
-                           JSON <- GET(paste0("https://rxnav.nlm.nih.gov/REST/rxcui.json?idtype=NDC&id=", df$NDC[i]), timeout(60))
+                           JSON <- GET(paste0("https://rxnav.nlm.nih.gov/REST/rxcui.json?idtype=NDC&id=", dfu$NDC[i]), timeout(60))
                            if(http_error(JSON)){
-                             rxTable <- data.frame(NDC = df$NDC[i],
-                                                   RxCui = "Error",
+                             rxTable <- data.frame(NDC = dfu$NDC[i],
+                                                   RxCui = "error",
                                                    stringsAsFactors = FALSE)
                            }else{
                            rxid <- content(JSON)
                            if(is.null(rxid$idGroup$rxnormId[[1]])){
-                             rxTable <- data.frame(NDC = df$NDC[i],
+                             rxTable <- data.frame(NDC = dfu$NDC[i],
                                                    RxCui = NA,
                                                    stringsAsFactors = FALSE)
                            }else{
-                             rxTable <- data.frame(NDC = df$NDC[i],
+                             rxTable <- data.frame(NDC = dfu$NDC[i],
                                                    RxCui = rxid$idGroup$rxnormId[[1]],
                                                    stringsAsFactors = FALSE)
                            }

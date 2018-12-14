@@ -1,40 +1,52 @@
 get.StrengthViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
+  dfu <- df %>% select("wRxCui") %>% unique()
   cl <- makeCluster(cores)
   registerDoParallel(cl)
-  StrengthData = foreach(i = 1:nrow(df),
+  StrengthData = foreach(i = 1:nrow(dfu),
                     .combine = "rbind",
-                    .packages = "jsonlite") %dopar% {
-                      if(is.na(df$wRxCui[i])){
-                        RxStrengthTable <- data.frame(wRxCui = df$wRxCui[i],
+                    .packages = "httr") %dopar% {
+                      if(is.na(dfu$wRxCui[i])){
+                        RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                       strength = NA,
                                                       stringsAsFactors = FALSE)
                       }else{
-                        tty <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",df$wRxCui[i],"/property?propName=TTY"))
-
-                        if(tty$propConceptGroup$propConcept$propValue == "BPCK"){
-                          RxStrengthTable <- data.frame(wRxCui = df$wRxCui[i],
+                        ttyJSON <- GET(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",dfu$wRxCui[i],"/property?propName=TTY"), timeout(60))
+                        if(http_error(ttyJSON)){
+                          RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
+                                                        strength = "error",
+                                                        stringsAsFactors = FALSE)
+                        }else{
+                        tty <- content(ttyJSON)
+                        if(tty$propConceptGroup$propConcept[[1]]$propValue == "BPCK"){
+                          RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                         strength = "BPCK",
                                                         stringsAsFactors = FALSE)
-                        }else if(tty$propConceptGroup$propConcept$propValue == "GPCK"){
-                          RxStrengthTable <- data.frame(wRxCui = df$wRxCui[i],
+                        }else if(tty$propConceptGroup$propConcept[[1]]$propValue == "GPCK"){
+                          RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                         strength = "GPCK",
                                                         stringsAsFactors = FALSE)
                         }else{
-                          strength <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", df$wRxCui[i],"/property?propName=AVAILABLE_STRENGTH"))
-                          if(is.null(strength$propConceptGroup$propConcept$propValue)){
-                            RxStrengthTable <- data.frame(wRxCui = df$wRxCui[i],
+                          strengthJSON <- GET(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$wRxCui[i],"/property?propName=AVAILABLE_STRENGTH"), timeout(60))
+                          if(http_error(strengthJSON)){
+                            RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
+                                                          strength = "error",
+                                                          stringsAsFactors = FALSE)
+                          }else{
+                          strength <- content(strengthJSON)
+                          if(is.null(strength$propConceptGroup$propConcept[[1]]$propValue)){
+                            RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                           strength = NA,
                                                           stringsAsFactors = FALSE)
                           }else{
-                            RxStrengthTable <- data.frame(wRxCui = df$wRxCui[i],
-                                                          strength = strength$propConceptGroup$propConcept$propValue,
+                            RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
+                                                          strength = strength$propConceptGroup$propConcept[[1]]$propValue,
                                                           stringsAsFactors = FALSE)
                           }
-
+                          }
+                        }
                         }
                       }
-
                       RxStrengthTable
                     }
   stopCluster(cl)
