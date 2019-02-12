@@ -11,19 +11,20 @@
 get.RxCuiViaAtc <- function(df, AtcColName = ATC, cores=8){
 
   colnames(df)[colnames(df)==deparse(substitute(AtcColName))] <- "ATC"
+  dfu <- df %>% select("ATC") %>% unique()
 
   cl <- makeCluster(cores)
   registerDoParallel(cl)
-  RxNormIdData = foreach(i = 1:nrow(df),
+  RxNormIdData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
-                           rxid <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui.json?idtype=ATC&id=",df$ATC[i]))
+                           rxid <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui.json?idtype=ATC&id=",dfu$ATC[i]))
                            if(is.null(rxid$idGroup$rxnormId)){
-                             rxTable <- data.frame(ATC = df$ATC[i],
+                             rxTable <- data.frame(ATC = dfu$ATC[i],
                                                    RxCui = NA,
                                                    stringsAsFactors = FALSE)
                            }else{
-                             rxTable <- data.frame(ATC = df$ATC[i],
+                             rxTable <- data.frame(ATC = dfu$ATC[i],
                                                    RxCui = rxid$idGroup$rxnormId,
                                                    stringsAsFactors = FALSE)
                            }

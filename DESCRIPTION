@@ -12,3 +12,6 @@ RoxygenNote: 6.1.0
 Imports: doParallel,
     data.table,
     dplyr
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

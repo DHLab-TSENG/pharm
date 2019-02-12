@@ -10,18 +10,19 @@
 get.NdcViaSBDrxcui <- function(df, SBDRxCuiColName = SBD.rxcui, cores = 8){
 
   colnames(df)[colnames(df)==deparse(substitute(SBDRxCuiColName))] <- "SBD.rxcui"
+  dfu <- df %>% select("SBD.rxcui") %>% unique()
   cl <- makeCluster(cores)
   registerDoParallel(cl)
-  NdcData = foreach(i = 1:nrow(df),
+  NdcData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
-                           ndc <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", df$SBD.rxcui[i], "/ndcs.json"))
+                           ndc <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$SBD.rxcui[i], "/ndcs.json"))
                            if(is.null(ndc$ndcGroup$ndcList)){
-                             RxNdcTable <- data.frame(SBD.rxcui=df$SBD.rxcui[i],
+                             RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
                                                    NDC=NA,
                                                    stringsAsFactors = FALSE)
                            }else{
-                             RxNdcTable <- data.frame(SBD.rxcui=df$SBD.rxcui[i],
+                             RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
                                                    NDC = ndc$ndcGroup$ndcList,
                                                    stringsAsFactors = FALSE)
                            }

@@ -10,19 +10,21 @@
 get.SBDrxcuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
+  dfu <- df %>% select("wRxCui") %>% unique()
+
   cl <- makeCluster(cores)
   registerDoParallel(cl)
-  SbdData = foreach(i = 1:nrow(df),
+  SbdData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
-                           sbd.rxcui <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", df$wRxCui[i], "/allrelated"))
+                           sbd.rxcui <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$wRxCui[i], "/allrelated"))
                            sbd.df <- data.frame(sbd.rxcui$allRelatedGroup$conceptGroup$conceptProperties[sbd.rxcui$allRelatedGroup$conceptGroup$tty == "SBD"])
                            if(is.null(sbd.df$rxcui)){
-                             RxSbdTable <- data.frame(wRxCui=df$wRxCui[i],
+                             RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
                                                    SBD.rxcui=NA,
                                                    stringsAsFactors = FALSE)
                            }else{
-                             RxSbdTable <- data.frame(wRxCui=df$wRxCui[i],
+                             RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
                                                       SBD.rxcui = sbd.df$rxcui,
                                                    stringsAsFactors = FALSE)
                            }

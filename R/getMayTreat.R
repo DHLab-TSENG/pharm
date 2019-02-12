@@ -1,4 +1,4 @@
-#' Get may treat based on RxCui
+#' Get the Veterans Health Administration’s Medication Reference Terminology (MED-RT) information based on RxCui
 #'
 #' @import dplyr
 #' @import doParallel
@@ -7,26 +7,27 @@
 #' @param cores number of parallel operation
 #' @export
 
-get.MayTreat <- function(df, RxCuiColName = RxCui, cores =8){
+get.MEDRTinfo <- function(df, RxCuiColName = RxCui, cores =8){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
+  dfu <- df %>% select("wRxCui") %>% unique()
 
   cl <- makeCluster(cores)
   registerDoParallel(cl)
-  RxNormMayTreatData = foreach(i = 1:nrow(df),
+  RxNormMayTreatData = foreach(i = 1:nrow(dfu),
                            .combine = "rbind",
                            .packages = c("jsonlite","dplyr")) %dopar% {
-                             may_treatTemp <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui=", df$wRxCui[i], "&relaSource=MEDRT&relas=may_treat"))
+                             may_treatTemp <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui=", dfu$wRxCui[i], "&relaSource=MEDRT&relas=may_treat"))
                              may_treat <- may_treatTemp$rxclassDrugInfoList
                              if(is.null(may_treat)){
-                               rxTable <- data.frame(wRxCui = df$wRxCui[i],
+                               rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                      minConcept.rxcui = NA,
                                                      minConcept.name = NA,
                                                      rxclassMinConceptItem.classId = NA,
                                                      rxclassMinConceptItem.className = NA,
                                                      stringsAsFactors = FALSE)
                              }else{
-                               rxTable <- data.frame(wRxCui = df$wRxCui[i],
+                               rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                      minConcept.rxcui = may_treat$rxclassDrugInfo$minConcept$rxcui,
                                                      minConcept.name = may_treat$rxclassDrugInfo$minConcept$name,
                                                      rxclassMinConceptItem.classId = may_treat$rxclassDrugInfo$rxclassMinConceptItem$classId,

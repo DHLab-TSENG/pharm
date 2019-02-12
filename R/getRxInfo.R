@@ -10,15 +10,16 @@
 get.rxinfo <- function(df, RxCuiColName = RxCui, cores = 8){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
+  dfu <- df %>% select("wRxCui") %>% unique()
 
   cl <- makeCluster(cores)
   registerDoParallel(cl)
-  RxNormInFoData = foreach(i = 1:nrow(df),
+  RxNormInFoData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
-                           rxinfo <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/RxTerms/rxcui/", df$wRxCui[i], "/allinfo"))
+                           rxinfo <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/RxTerms/rxcui/", dfu$wRxCui[i], "/allinfo"))
                            if(is.null(rxinfo$rxtermsProperties)){
-                             rxTable <- data.frame(wRxCui = df$wRxCui[i],
+                             rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                    brandName = NA,
                                                    displayName = NA,
                                                    GenericName = NA,
@@ -29,7 +30,7 @@ get.rxinfo <- function(df, RxCuiColName = RxCui, cores = 8){
                                                    termtype = NA,
                                                    stringsAsFactors = FALSE)
                            }else{
-                             rxTable <- data.frame(wRxCui = df$wRxCui[i],
+                             rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                    brandName = rxinfo$rxtermsProperties$brandName,
                                                    displayName = rxinfo$rxtermsProperties$displayName,
                                                    GenericName = rxinfo$rxtermsProperties$fullGenericName,
