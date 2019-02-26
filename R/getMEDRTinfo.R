@@ -1,4 +1,4 @@
-#' Get the Veterans Health Administration’s Medication Reference Terminology (MED-RT) information based on RxCui
+#' Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui
 #'
 #' @import dplyr
 #' @import doParallel
