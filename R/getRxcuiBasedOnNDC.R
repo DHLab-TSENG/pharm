@@ -22,16 +22,19 @@ get.RxCuiViaNdc <- function(df, NdcColName = NDC, cores=8){
                            if(http_error(JSON)){
                              rxTable <- data.frame(NDC = dfu$NDC[i],
                                                    RxCui = "error",
+                                                   ndcStatus = "error",
                                                    stringsAsFactors = FALSE)
                            }else{
                            rxid <- content(JSON)
                            if(is.null(rxid$ndcStatus$rxcui)){
                              rxTable <- data.frame(NDC = dfu$NDC[i],
                                                    RxCui = NA,
+                                                   ndcStatus = NA,
                                                    stringsAsFactors = FALSE)
                            }else{
                              rxTable <- data.frame(NDC = dfu$NDC[i],
                                                    RxCui = rxid$ndcStatus$rxcui,
+                                                   ndcStatus = rxid$ndcStatus$status,
                                                    stringsAsFactors = FALSE)
                            }
                            rxTable
