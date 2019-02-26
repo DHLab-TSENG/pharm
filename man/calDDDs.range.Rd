@@ -4,15 +4,13 @@
 \alias{calDDDs.range}
 \title{Calculate subjects' ddd in a period}
 \usage{
-calDDDs.range(case, index_day, expo_range_before = 36000,
-  expo_range_after = 36000, idColName = patient_id,
-  DispensingColName = Dispensing, SupplyDayColName = duration,
-  DailyDosageColName = Daily_dosage)
+calDDDs.range(case, index_dayColName = index_day,
+  expo_range_before = 36000, expo_range_after = 36000,
+  idColName = patient_id, DispensingColName = Dispensing,
+  SupplyDayColName = duration, DailyDosageColName = Daily_dosage)
 }
 \arguments{
 \item{case}{data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration}
-
-\item{index_day}{observation day}
 
 \item{expo_range_before}{days before observation day}
 
@@ -25,6 +23,8 @@ calDDDs.range(case, index_day, expo_range_before = 36000,
 \item{SupplyDayColName}{a colum for supply day}
 
 \item{DailyDosageColName}{a colum for daily dosage}
+
+\item{index_day}{observation day}
 }
 \description{
 Calculate subjects' ddd in a period
