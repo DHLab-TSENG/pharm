@@ -2,7 +2,7 @@
 % Please edit documentation in R/getMEDRTinfo.R
 \name{get.MEDRTinfo}
 \alias{get.MEDRTinfo}
-\title{Get the Veterans Health Administration’s Medication Reference Terminology (MED-RT) information based on RxCui}
+\title{Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui}
 \usage{
 get.MEDRTinfo(df, RxCuiColName = RxCui, cores = 8)
 }
@@ -14,5 +14,5 @@ get.MEDRTinfo(df, RxCuiColName = RxCui, cores = 8)
 \item{cores}{number of parallel operation}
 }
 \description{
-Get the Veterans Health Administration’s Medication Reference Terminology (MED-RT) information based on RxCui
+Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui
 }
