@@ -5,9 +5,8 @@
 \title{Generate Drug Era}
 \usage{
 get.DrugEra(df, window = 30, MemberIDColName = MemberID,
-  DrugColName = Drug, DispenseDateColName = NULL,
-  DaysSupplyColName = NULL, StartDateColName = NULL,
-  EndDateColName = NULL)
+  DrugColName = Drug, DispenseDateColName, DaysSupplyColName,
+  StartDateColName, EndDateColName)
 }
 \arguments{
 \item{df}{data.frame with MemberID ,Drug,DispenseDate ,DaysSupply, or with MemberID ,Drug, StartDate, EndDate}
