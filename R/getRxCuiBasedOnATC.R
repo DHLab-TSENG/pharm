@@ -1,5 +1,7 @@
 #' Get RxCui based on ATC
-#'
+#' @importFrom parallel::makeCluster()
+#' @importFrom parallel::stopCluster()
+#' @import foreach
 #' @import doParallel
 #' @import dplyr
 #' @param df data.frame include ATC

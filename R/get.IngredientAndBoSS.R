@@ -1,5 +1,7 @@
 #' Get Ingredient and Basis of strength substance (BoSS)
-#'
+#' @importFrom parallel::makeCluster()
+#' @importFrom parallel::stopCluster()
+#' @import foreach
 #' @import doParallel
 #' @param df data.frame include RxCui
 #' @param RxCuiColName A colum for RxCui of df

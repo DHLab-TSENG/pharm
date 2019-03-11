@@ -1,5 +1,7 @@
 #' Get may prevent based on RxCui
-#'
+#' @importFrom parallel::makeCluster()
+#' @importFrom parallel::stopCluster()
+#' @import foreach
 #' @import dplyr
 #' @import doParallel
 #' @param df data.frame include RxCui

@@ -1,5 +1,7 @@
 #' Get Semantic Branded Drug RxCui  based on ingredient RxCui
-#'
+#' @importFrom parallel::makeCluster()
+#' @importFrom parallel::stopCluster()
+#' @import foreach
 #' @import dplyr
 #' @import doParallel
 #' @param df data.frame include RxCui

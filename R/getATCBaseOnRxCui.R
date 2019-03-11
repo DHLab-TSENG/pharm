@@ -1,4 +1,7 @@
 #' Get NDC code based on RxCui
+#' @importFrom parallel::makeCluster()
+#' @importFrom parallel::stopCluster()
+#' @import foreach
 #' @import dplyr
 #' @import doParallel
 #' @import data.table
