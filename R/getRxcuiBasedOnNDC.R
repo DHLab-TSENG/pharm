@@ -1,5 +1,5 @@
 #' Get RxCui based on NDC
-#'
+#' @importFrom parallel::makeCluster()
 #' @import doParallel
 #' @import dplyr
 #' @param df data.frame include NDC
