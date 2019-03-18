@@ -31,14 +31,14 @@ calDDDs.range <- function(case,
   case <- get.ddd(case)
   case <- arrange(case, patient_id, Dispensing)
   case <- data.table(case)
-  case[, star_day := index_day-expo_range_before]
+  case[, start_day := index_day-expo_range_before]
   #case[, index_day := index_day]
   case[, end_day := index_day+expo_range_after]
   case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_dosage, "mg")))]
   case[, DDD_perday := round(Daily_dosage2/DDD, 2)]
 
   #DDDs before index
-  case[, date3 := as.numeric(star_day-Dispensing)]
+  case[, date3 := as.numeric(start_day-Dispensing)]
   case[, date4 := as.numeric(index_day-Dispensing)]
   case[, DDDs_before := if_else(date3<0,
                          if_else(date4>duration,
@@ -70,9 +70,9 @@ calDDDs.range <- function(case,
   case_after <- case[, sum(DDDs_after), by = patient_id]
   colnames(case_after)[colnames(case_after)=="V1"] <- paste0("DDDs_after_",expo_range_after,"_days")
 
-  case <- case %>% select(patient_id, star_day, index_day, end_day, DDDs_before, DDDs_after)
+  case <- case %>% select(patient_id, start_day, index_day, end_day, DDDs_before, DDDs_after)
   case_bf_af <- inner_join(case_before,case_after, by = "patient_id")
-  case_temp <- case %>% select(patient_id, star_day, index_day, end_day)
+  case_temp <- case %>% select(patient_id, start_day, index_day, end_day)
   case <- inner_join(case_temp,case_bf_af, by = "patient_id")
   case <- unique(case)
   colnames(case)[colnames(case)== "patient_id"] <- deparse(substitute(idColName))
