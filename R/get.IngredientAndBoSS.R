@@ -21,8 +21,20 @@ get.BoSSViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
                                                       strength = NA,
                                                       stringsAsFactors = FALSE)
                       }else{
-                        ttyJSON <- GET(paste0("https://rxnav.nlm.nih.gov/REST/rxcuihistory/concept.json?rxcui=",dfu$wRxCui[i]), timeout(60))
+                        ttyJSON <- tryCatch({GET(paste0("https://rxnav.nlm.nih.gov/REST/rxcuihistory/concept.json?rxcui=",dfu$wRxCui[i]), timeout(60))},
+                                 error = function(e){return("ERROR")})
                         if(http_error(ttyJSON)){
+                          RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
+                                                        baseRxcui = "error",
+                                                        baseName = "error",
+                                                        bossRxcui = "error",
+                                                        bossName = "error",
+                                                        numeratorValue = "error",
+                                                        numeratorUnit = "error",
+                                                        denominatorValue = "error",
+                                                        denominatorUnit = "error",
+                                                        stringsAsFactors = FALSE)
+                        }else if(ttyJSON == "ERROR"){
                           RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                         baseRxcui = "error",
                                                         baseName = "error",

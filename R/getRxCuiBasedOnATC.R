@@ -20,7 +20,13 @@ get.RxCuiViaAtc <- function(df, AtcColName = ATC, cores=8){
   RxNormIdData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
-                           rxid <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui.json?idtype=ATC&id=",dfu$ATC[i]))
+                           rxid <- tryCatch({fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui.json?idtype=ATC&id=",dfu$ATC[i]))},
+                                            error = function(e){"ERROR"})
+                           if(rxid == "ERROR"){
+                             rxTable <- data.frame(ATC = dfu$ATC[i],
+                                                   RxCui = "error",
+                                                   stringsAsFactors = FALSE)
+                           }else{
                            if(is.null(rxid$idGroup$rxnormId)){
                              rxTable <- data.frame(ATC = dfu$ATC[i],
                                                    RxCui = NA,
@@ -29,6 +35,7 @@ get.RxCuiViaAtc <- function(df, AtcColName = ATC, cores=8){
                              rxTable <- data.frame(ATC = dfu$ATC[i],
                                                    RxCui = rxid$idGroup$rxnormId,
                                                    stringsAsFactors = FALSE)
+                           }
                            }
                            rxTable
                          }

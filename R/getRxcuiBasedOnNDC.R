@@ -19,9 +19,14 @@ get.RxCuiViaNdc <- function(df, NdcColName = NDC, cores=8){
   RxNormIdData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "httr") %dopar% {
-
-                           JSON <- GET(paste0("https://rxnav.nlm.nih.gov/REST/ndcstatus?ndc=", dfu$NDC[i]), timeout(60))
-                           if(http_error(JSON)){
+                           JSON <- tryCatch({GET(paste0("https://rxnav.nlm.nih.gov/REST/ndcstatus?ndc=", dfu$NDC[i]), timeout(60))},
+                                            error = function(e){return("ERROR")})
+                           if(JSON == "ERROR"){
+                             rxTable <- data.frame(NDC = dfu$NDC[i],
+                                                   RxCui = "error",
+                                                   ndcStatus = "error",
+                                                   stringsAsFactors = FALSE)
+                           }else if(http_error(JSON)){
                              rxTable <- data.frame(NDC = dfu$NDC[i],
                                                    RxCui = "error",
                                                    ndcStatus = "error",
@@ -39,9 +44,8 @@ get.RxCuiViaNdc <- function(df, NdcColName = NDC, cores=8){
                                                    ndcStatus = rxid$ndcStatus$status,
                                                    stringsAsFactors = FALSE)
                            }
+                           }
                            rxTable
-                         }
-
                          }
   stopCluster(cl)
   RxNormIdData <- unique(RxNormIdData)

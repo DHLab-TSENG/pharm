@@ -19,7 +19,16 @@ get.MayPrevent <- function(df, RxCuiColName = RxCui, cores =16){
   RxNormMayPreventData = foreach(i = 1:nrow(dfu),
                                .combine = "rbind",
                                .packages = c("jsonlite","dplyr")) %dopar% {
-                                 may_preventTemp <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui=", dfu$wRxCui[i], "&relaSource=MEDRT&relas=may_prevent"))
+                                 may_preventTemp <- tryCatch({fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui=", dfu$wRxCui[i], "&relaSource=MEDRT&relas=may_prevent"))},
+                                                             error = function(e){return("ERROR")})
+                                 if(may_preventTemp == "ERROR"){
+                                   rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
+                                                         minConcept.rxcui = "error",
+                                                         minConcept.name = "error",
+                                                         rxclassMinConceptItem.classId = "error",
+                                                         rxclassMinConceptItem.className = "error",
+                                                         stringsAsFactors = FALSE)
+                                 }else{
                                  may_prevent <- may_preventTemp$rxclassDrugInfoList
                                  if(is.null(may_prevent)){
                                    rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
@@ -35,6 +44,7 @@ get.MayPrevent <- function(df, RxCuiColName = RxCui, cores =16){
                                                          rxclassMinConceptItem.classId = may_prevent$rxclassDrugInfo$rxclassMinConceptItem$classId,
                                                          rxclassMinConceptItem.className = may_prevent$rxclassDrugInfo$rxclassMinConceptItem$className,
                                                          stringsAsFactors = FALSE)
+                                 }
                                  }
                                  rxTable
                                }

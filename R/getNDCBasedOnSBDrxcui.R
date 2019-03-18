@@ -18,15 +18,22 @@ get.NdcViaSBDrxcui <- function(df, SBDRxCuiColName = SBD.rxcui, cores = 8){
   NdcData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
-                           ndc <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$SBD.rxcui[i], "/ndcs.json"))
+                           ndc <- tryCatch({fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$SBD.rxcui[i], "/ndcs.json"))},
+                                           error = function(e){return("ERROR")})
+                           if(ndc == "ERROR"){
+                             RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
+                                                      ndc = "error",
+                                                      stringsAsFactors = FALSE)
+                           }else{
                            if(is.null(ndc$ndcGroup$ndcList)){
                              RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
-                                                   NDC=NA,
+                                                   ndc = NA,
                                                    stringsAsFactors = FALSE)
                            }else{
                              RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
-                                                   NDC = ndc$ndcGroup$ndcList,
+                                                   ndc = ndc$ndcGroup$ndcList,
                                                    stringsAsFactors = FALSE)
+                           }
                            }
                            RxNdcTable
                          }

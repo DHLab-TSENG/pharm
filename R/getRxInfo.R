@@ -19,7 +19,20 @@ get.rxinfo <- function(df, RxCuiColName = RxCui, cores = 8){
   RxNormInFoData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
-                           rxinfo <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/RxTerms/rxcui/", dfu$wRxCui[i], "/allinfo"))
+                           rxinfo <- tryCatch({fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/RxTerms/rxcui/", dfu$wRxCui[i], "/allinfo"))},
+                                              error = function(e){return("ERROR")})
+                           if(rxinfo == "ERROR"){
+                             rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
+                                                   brandName = "error",
+                                                   displayName = "error",
+                                                   GenericName = "error",
+                                                   synonym = "error",
+                                                   strength = "error",
+                                                   DoseForm = "error",
+                                                   route = "error",
+                                                   termtype = "error",
+                                                   stringsAsFactors = FALSE)
+                           }else{
                            if(is.null(rxinfo$rxtermsProperties)){
                              rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                    brandName = NA,
@@ -43,6 +56,7 @@ get.rxinfo <- function(df, RxCuiColName = RxCui, cores = 8){
                                                    termtype = rxinfo$rxtermsProperties$termType,
                                                    stringsAsFactors = FALSE)
                            }
+                             }
                            rxTable
                          }
   stopCluster(cl)

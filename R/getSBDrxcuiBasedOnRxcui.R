@@ -19,6 +19,13 @@ get.SBDrxcuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
   SbdData = foreach(i = 1:nrow(dfu),
                          .combine = "rbind",
                          .packages = "jsonlite") %dopar% {
+                           sbd.rxcui <- tryCatch({fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$wRxCui[i], "/allrelated"))},
+                                                 error = function(e){return("ERROR")})
+                           if(sbd.rxcui == "ERROR"){
+                             RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
+                                                      SBD.rxcui="error",
+                                                      stringsAsFactors = FALSE)
+                           }else{
                            sbd.rxcui <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$wRxCui[i], "/allrelated"))
                            sbd.df <- data.frame(sbd.rxcui$allRelatedGroup$conceptGroup$conceptProperties[sbd.rxcui$allRelatedGroup$conceptGroup$tty == "SBD"])
                            if(is.null(sbd.df$rxcui)){
@@ -29,6 +36,7 @@ get.SBDrxcuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
                              RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
                                                       SBD.rxcui = sbd.df$rxcui,
                                                    stringsAsFactors = FALSE)
+                           }
                            }
                            RxSbdTable
                          }
