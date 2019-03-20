@@ -20,7 +20,7 @@ get.MEDRTinfo <- function(df, RxCuiColName = RxCui, cores =8){
                            .combine = "rbind",
                            .packages = c("jsonlite","dplyr")) %dopar% {
                              may_treatTemp <- tryCatch({fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxclass/class/byRxcui.json?rxcui=", dfu$wRxCui[i], "&relaSource=MEDRT&relas=may_treat"))},
-                                                       error = function(e){return("error")})
+                                                       error = function(e){return("ERROR")})
                              if(may_treatTemp == "ERROR"){
                                rxTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                      minConcept.rxcui = "error",
