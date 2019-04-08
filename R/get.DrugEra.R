@@ -31,6 +31,7 @@ get.DrugEra <- function(df, window = 30,
 
     case <- df
     case <- arrange(case, MemberID, Drug, DispenseDate) %>% as.data.table()
+    case[, DispenseDate := as.Date(DispenseDate)]
     case[, duration2 := shift(DaysSupply,1), by = c("MemberID", "Drug")]
     case[, duration3 := if_else(is.na(duration2), 0, as.double(duration2))]
     case[, Diff := c(1, diff(DispenseDate)), by = c("MemberID", "Drug")]

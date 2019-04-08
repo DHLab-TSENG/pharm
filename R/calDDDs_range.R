@@ -17,12 +17,14 @@ calDDDs.range <- function(case,
                           expo_range_before = 36000,
                           expo_range_after = 36000,
                           idColName = Patient_ID,
+                          AtcCodeColName = ATC_CODE,
                           DispensingColName = Dispensing,
                           SupplyDayColName = Duration,
                           DailyDosageColName = Daily_Dosage){
 
   colnames(case)[colnames(case)==deparse(substitute(index_dayColName))] <- "Index_Day"
   colnames(case)[colnames(case)==deparse(substitute(idColName))] <- "Patient_ID"
+  colnames(case)[colnames(case)==deparse(substitute(AtcCodeColName))] <- "ATC_CODE"
   colnames(case)[colnames(case)==deparse(substitute(DispensingColName))] <- "Dispensing"
   colnames(case)[colnames(case)==deparse(substitute(SupplyDayColName))] <- "Duration"
   colnames(case)[colnames(case)==deparse(substitute(DailyDosageColName))] <- "Daily_Dosage"
@@ -34,7 +36,8 @@ calDDDs.range <- function(case,
   case[, start_day := Index_Day-expo_range_before]
   #case[, index_day := index_day]
   case[, end_day := Index_Day+expo_range_after]
-  case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_Dosage, "mg")))]
+  #case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_Dosage, "mg")))]
+  case[, Daily_dosage2 := Daily_Dosage]
   case[, DDD_perday := round(Daily_dosage2/DDD, 2)]
 
   #DDDs before index
@@ -78,6 +81,7 @@ calDDDs.range <- function(case,
 
   colnames(case)[colnames(case)== "Patient_ID"] <- deparse(substitute(idColName))
   colnames(case)[colnames(case)== "Index_Day"] <- deparse(substitute(index_dayColName))
+  colnames(case)[colnames(case)=="ATC_CODE"] <- deparse(substitute(AtcCodeColName))
   colnames(case)[colnames(case)== "Dispensing"] <- deparse(substitute(DispensingColName))
   colnames(case)[colnames(case)== "Duration"] <- deparse(substitute(SupplyDayColName))
   colnames(case)[colnames(case)== "Daily_Dosage"] <- deparse(substitute(DailyDosageColName))

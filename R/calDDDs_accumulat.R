@@ -21,7 +21,8 @@ calDDDs.accumulat <- function(case,
   case <- get.ddd(case)
   case <- arrange(case, Patient_ID, Dispensing)
   case <- data.table(case)
-  case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_Dosage, "mg")))]
+  #case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_Dosage, "mg")))]
+  case[, Daily_dosage2 := Daily_Dosage]
   case[, DDD_perday := round(Daily_dosage2/DDD, 2)]
   case[, DDDs := Duration*DDD_perday]
   case <- case %>% select(Patient_ID, Dispensing, ATC_CODE, Daily_Dosage, Duration, DDDs)
