@@ -18,7 +18,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
   cl <- makeCluster(cores)
   registerDoParallel(cl)
 
-  if(AccuracyTranscoding == TRUE){
+  if(MatchRoute == TRUE){
     RxNormIdData = foreach(i = 1:nrow(dfu),
                            .combine = "rbind",
                            .packages = c("jsonlite", "data.table", "dplyr")) %dopar% {
