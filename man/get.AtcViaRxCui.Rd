@@ -4,7 +4,8 @@
 \alias{get.AtcViaRxCui}
 \title{Get NDC code based on RxCui}
 \usage{
-get.AtcViaRxCui(df, RxCuiColName = RxCui, cores = 8)
+get.AtcViaRxCui(df, RxCuiColName = RxCui, cores = 4,
+  MatchRoute = TRUE)
 }
 \arguments{
 \item{df}{data.frame include RxCui}
@@ -12,6 +13,8 @@ get.AtcViaRxCui(df, RxCuiColName = RxCui, cores = 8)
 \item{RxCuiColName}{A colum for RxCui of df}
 
 \item{cores}{number of parallel operation}
+
+\item{MatchRoute}{An option to mapping ingredient and route}
 }
 \description{
 Get NDC code based on RxCui
