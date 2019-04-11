@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1554972119976.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1520016620",
+    "id" : "C1A12AED",
+    "lastKnownWriteTime" : 1554972381,
+    "last_content_update" : 1554972381317,
+    "path" : "~/pharm/R/ATC1LevelPlot.R",
+    "project_path" : "R/ATC1LevelPlot.R",
+    "properties" : {
+        "cursorPosition" : "18,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
