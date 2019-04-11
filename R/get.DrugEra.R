@@ -35,13 +35,15 @@ get.DrugEra <- function(df, window = 30,
     case[, duration2 := shift(DaysSupply,1), by = c("MemberID", "Drug")]
     case[, duration3 := if_else(is.na(duration2), 0, as.double(duration2))]
     case[, Diff := c(1, diff(DispenseDate)), by = c("MemberID", "Drug")]
-    case[, gap := if_else(window<(Diff-duration3) , 1, 0)]
+    case[, Diff2 := c(0, diff(DispenseDate)), by = c("MemberID", "Drug")]
+    case[, gap := if_else(window<(Diff-duration3) , 1, 0), by = c("MemberID", "Drug")]
+    case[, Gap := Diff2-duration3, by = c("MemberID", "Drug")]
     case[, DrugEra := cumsum(gap)+1, by = c("MemberID", "Drug")]
     case[, DrugEraStartDate := DispenseDate[1], by = c("MemberID", "Drug", "DrugEra")]
     case[, DrugEraEndDate := DispenseDate[.N]+DaysSupply[.N], by = c("MemberID", "Drug", "DrugEra")]
     case[, ExposureDays := DrugEraEndDate - DrugEraStartDate]
     case[, SupplyDays := sum(DaysSupply), by = c("MemberID", "Drug", "DrugEra")]
-    case <- select(case, MemberID, Drug, DispenseDate, DrugEra, DrugEraStartDate, DrugEraEndDate, ExposureDays, SupplyDays)
+    case <- select(case, MemberID, Drug, DispenseDate, DrugEra, DrugEraStartDate, DrugEraEndDate, Gap, ExposureDays, SupplyDays)
 
     DateWithDrugEra <- inner_join(df, case, by = c("MemberID", "DispenseDate", "Drug")) %>% arrange(MemberID, Drug, DrugEra)
 
@@ -62,14 +64,15 @@ get.DrugEra <- function(df, window = 30,
     case <- arrange(case, MemberID, Drug, StartDate) %>% as.data.table()
     case[, preEndDate := shift(EndDate,1), by = c("MemberID", "Drug")]
     case[, preEndDate2 := if_else(is.na(preEndDate), StartDate, preEndDate)]
-    case[, gap := if_else((as.numeric(as.Date(StartDate) - as.Date(preEndDate2)))>window, 1, 0)]
+    case[, gap := if_else((as.numeric(as.Date(StartDate) - as.Date(preEndDate2)))>window, 1, 0), by = c("MemberID", "Drug")]
+    case[, Gap := as.numeric(as.Date(StartDate) - as.Date(preEndDate2)), by = c("MemberID", "Drug")]
     case[, DrugEra := cumsum(gap)+1, by = c("MemberID", "Drug")]
     case[, DrugEraStartDate := StartDate[1], by = c("MemberID", "Drug", "DrugEra")]
     case[, DrugEraEndDate := EndDate[.N], by = c("MemberID", "Drug", "DrugEra")]
     case[, ExposureDays := as.numeric(as.Date(DrugEraEndDate) - as.Date(DrugEraStartDate))]
     case[, SupplyDays := as.numeric(as.Date(DrugEraEndDate) - as.Date(DrugEraStartDate))]
 
-    case <- select(case, MemberID, Drug, StartDate, EndDate, DrugEra, DrugEraStartDate, DrugEraEndDate, ExposureDays, SupplyDays)
+    case <- select(case, MemberID, Drug, StartDate, EndDate, DrugEra, DrugEraStartDate, DrugEraEndDate, Gap, ExposureDays, SupplyDays)
     DateWithDrugEra <- inner_join(df, case, by = c("MemberID", "StartDate", "EndDate", "Drug")) %>% arrange(MemberID, Drug, DrugEra)
 
     colnames(DateWithDrugEra)[colnames(DateWithDrugEra)=="MemberID"] <- deparse(substitute(MemberIDColName))
