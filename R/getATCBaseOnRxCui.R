@@ -92,7 +92,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                                         DFG = NA,
                                                         stringsAsFactors = FALSE)
                                }else{
-                                 ingredient <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",dfu$wRxCui[i],"/allProperties.json?prop=all"))
+                                 ingredient <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",dfu$wRxCui[i],"/allProperties.json?prop=ATTRIBUTES"))
                                  general_cardinality <- ingredient$propConceptGroup$propConcept$propValue[ingredient$propConceptGroup$propConcept$propName == "GENERAL_CARDINALITY"]
 
                                  if(general_cardinality == "SINGLE"){
@@ -214,7 +214,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                  }else{
                                    ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",ingredient_rxcui,"/property?propName=ATC"))
                                    AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
-                                                          ATC = ATC$propConceptGroup$propConcept$propValue,
+                                                          ATC = ATC$propConceptGroup$propConcept$propValue[1],
                                                           stringsAsFactors = FALSE)
                                  }
                                }else if(tty$propConceptGroup$propConcept$propValue == "IN"){
@@ -225,7 +225,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                                           stringsAsFactors = FALSE)
                                  }else{
                                    AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
-                                                          ATC = ATC$propConceptGroup$propConcept$propValue,
+                                                          ATC = ATC$propConceptGroup$propConcept$propValue[1],
                                                           stringsAsFactors = FALSE)
                                  }
                                }else if(tty$propConceptGroup$propConcept$propValue == "MIN"){
@@ -236,7 +236,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                                           stringsAsFactors = FALSE)
                                  }else{
                                    AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
-                                                          ATC = ATC$propConceptGroup$propConcept$propValue,
+                                                          ATC = ATC$propConceptGroup$propConcept$propValue[1],
                                                           stringsAsFactors = FALSE)
                                  }
                                }else if(tty$propConceptGroup$propConcept$propValue == "PIN"){
@@ -247,7 +247,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                                           stringsAsFactors = FALSE)
                                  }else{
                                    AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
-                                                          ATC = ATC$propConceptGroup$propConcept$propValue,
+                                                          ATC = ATC$propConceptGroup$propConcept$propValue[1],
                                                           stringsAsFactors = FALSE)
                                  }
                                }else if(tty$propConceptGroup$propConcept$propValue == "BPCK"){
@@ -273,7 +273,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                      ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",ingredient_cui$rxcui[1],"/property?propName=ATC"))
                                      if(!is.null(ATC$propConceptGroup$propConcept$propValue)){
                                        AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
-                                                              ATC = ATC$propConceptGroup$propConcept$propValue,
+                                                              ATC = ATC$propConceptGroup$propConcept$propValue[1],
                                                               stringsAsFactors = FALSE)
                                      }else{
                                        AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
@@ -293,7 +293,7 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                      ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",ingredient_cui$rxcui[1],"/property?propName=ATC"))
                                      if(!is.null(ATC$propConceptGroup$propConcept$propValue)){
                                        AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
-                                                              ATC = ATC$propConceptGroup$propConcept$propValue,
+                                                              ATC = ATC$propConceptGroup$propConcept$propValue[1],
                                                               stringsAsFactors = FALSE)
                                      }else{
                                        AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],

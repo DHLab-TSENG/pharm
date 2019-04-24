@@ -11,6 +11,7 @@ get.ATC1LevelPlot <- function(df, ATCColName = ATC) {
   df <- data.table(df)
   df[, ATC1Level := if_else(ATC == "BPCK" |
                               ATC == "GPCK", ATC, substr(ATC, 1, 1))]
+  df <- filter(df, ATC1Level != "BPCK" & ATC1Level != "GPCK" & !is.na(ATC1Level))
   ggplot(df,
          aes(x = ATC1Level)) +
     geom_bar(color = "darkblue",
