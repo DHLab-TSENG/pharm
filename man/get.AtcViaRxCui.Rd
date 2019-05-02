@@ -2,7 +2,8 @@
 % Please edit documentation in R/getATCBaseOnRxCui.R
 \name{get.AtcViaRxCui}
 \alias{get.AtcViaRxCui}
-\title{Get NDC code based on RxCui}
+\title{Get NDC code based on RxCui
+WHO Collaborating Centre for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018}
 \usage{
 get.AtcViaRxCui(df, RxCuiColName = RxCui, cores = 4,
   MatchRoute = TRUE)
@@ -18,4 +19,5 @@ get.AtcViaRxCui(df, RxCuiColName = RxCui, cores = 4,
 }
 \description{
 Get NDC code based on RxCui
+WHO Collaborating Centre for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018
 }
