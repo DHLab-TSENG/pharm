@@ -6,34 +6,34 @@
 #' @export
 
 calDDDs.accumulat <- function(case,
-                              PatientIdColName = Patient_ID,
-                              DispensingColName = Dispensing,
-                              AtcCodeColName = ATC_CODE,
-                              DailyDosageColName = Daily_Dosage,
-                              DurationColName = Duration){
+                              PatientIdColName = MemberId,
+                              DispensingColName = DispenseDate,
+                              AtcCodeColName = ATC,
+                              DailyDosageColName = DailyDosage,
+                              DurationColName = DaysSupply){
 
-  colnames(case)[colnames(case)==deparse(substitute(PatientIdColName))] <- "Patient_ID"
-  colnames(case)[colnames(case)==deparse(substitute(DispensingColName))] <- "Dispensing"
-  colnames(case)[colnames(case)==deparse(substitute(AtcCodeColName))] <- "ATC_CODE"
-  colnames(case)[colnames(case)==deparse(substitute(DailyDosageColName))] <- "Daily_Dosage"
-  colnames(case)[colnames(case)==deparse(substitute(DurationColName))] <- "Duration"
+  colnames(case)[colnames(case)==deparse(substitute(PatientIdColName))] <- "MemberId"
+  colnames(case)[colnames(case)==deparse(substitute(DispensingColName))] <- "DispenseDate"
+  colnames(case)[colnames(case)==deparse(substitute(AtcCodeColName))] <- "ATC"
+  colnames(case)[colnames(case)==deparse(substitute(DailyDosageColName))] <- "DailyDosage"
+  colnames(case)[colnames(case)==deparse(substitute(DurationColName))] <- "DaysSupply"
 
   case <- get.ddd(case)
-  case <- arrange(case, Patient_ID, Dispensing)
+  case <- arrange(case, MemberId, DispenseDate)
   case <- data.table(case)
   #case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_Dosage, "mg")))]
-  case[, Daily_dosage2 := Daily_Dosage]
+  case[, Daily_dosage2 := DailyDosage]
   case[, DDD_perday := round(Daily_dosage2/DDD, 2)]
-  case[, DDDs := Duration*DDD_perday]
-  case <- case %>% select(Patient_ID, Dispensing, ATC_CODE, Daily_Dosage, Duration, DDDs)
-  case <- case[, sum(DDDs), by = Patient_ID]
+  case[, DDDs := DaysSupply*DDD_perday]
+  case <- case %>% select(MemberId, DispenseDate, ATC, DailyDosage, DaysSupply, DDDs)
+  case <- case[, sum(DDDs), by = MemberId]
   colnames(case)[colnames(case)=="V1"] <- "DDDs"
 
-  colnames(case)[colnames(case)=="Patient_ID"] <- deparse(substitute(PatientIdColName))
-  colnames(case)[colnames(case)=="Dispensing"] <- deparse(substitute(DispensingColName))
-  colnames(case)[colnames(case)=="ATC_CODE"] <- deparse(substitute(AtcCodeColName))
-  colnames(case)[colnames(case)=="Daily_Dosage"] <- deparse(substitute(DailyDosageColName))
-  colnames(case)[colnames(case)=="Duration"] <- deparse(substitute(DurationColName))
+  colnames(case)[colnames(case)=="MemberId"] <- deparse(substitute(PatientIdColName))
+  colnames(case)[colnames(case)=="DispenseDate"] <- deparse(substitute(DispensingColName))
+  colnames(case)[colnames(case)=="ATC"] <- deparse(substitute(AtcCodeColName))
+  colnames(case)[colnames(case)=="DailyDosage"] <- deparse(substitute(DailyDosageColName))
+  colnames(case)[colnames(case)=="DaysSupply"] <- deparse(substitute(DurationColName))
   return(case)
 
 }

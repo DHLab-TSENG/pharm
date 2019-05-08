@@ -7,8 +7,8 @@
 #' @param expo_range_before days before observation day
 #' @param expo_range_after days after observation day
 #' @param idColName a colum for subject's id
-#' @param DispensingColName a colum for dispensing
-#' @param SupplyDayColName a colum for supply day
+#' @param DispenseDateColName a colum for dispensing
+#' @param DaysSupplyColName a colum for supply day
 #' @param DailyDosageColName a colum for daily dosage
 #' @export
 
@@ -16,75 +16,75 @@ calDDDs.range <- function(case,
                           index_dayColName = Index_Day,
                           expo_range_before = 36000,
                           expo_range_after = 36000,
-                          idColName = Patient_ID,
-                          AtcCodeColName = ATC_CODE,
-                          DispensingColName = Dispensing,
-                          SupplyDayColName = Duration,
-                          DailyDosageColName = Daily_Dosage){
+                          idColName = MemberId,
+                          AtcCodeColName = ATC,
+                          DispenseDateColName = DispenseDate,
+                          DaysSupplyColName = DaysSupply,
+                          DailyDosageColName = DailyDosage){
 
   colnames(case)[colnames(case)==deparse(substitute(index_dayColName))] <- "Index_Day"
-  colnames(case)[colnames(case)==deparse(substitute(idColName))] <- "Patient_ID"
-  colnames(case)[colnames(case)==deparse(substitute(AtcCodeColName))] <- "ATC_CODE"
-  colnames(case)[colnames(case)==deparse(substitute(DispensingColName))] <- "Dispensing"
-  colnames(case)[colnames(case)==deparse(substitute(SupplyDayColName))] <- "Duration"
-  colnames(case)[colnames(case)==deparse(substitute(DailyDosageColName))] <- "Daily_Dosage"
+  colnames(case)[colnames(case)==deparse(substitute(idColName))] <- "MemberId"
+  colnames(case)[colnames(case)==deparse(substitute(AtcCodeColName))] <- "ATC"
+  colnames(case)[colnames(case)==deparse(substitute(DispenseDateColName))] <- "DispenseDate"
+  colnames(case)[colnames(case)==deparse(substitute(DaysSupplyColName))] <- "DaysSupply"
+  colnames(case)[colnames(case)==deparse(substitute(DailyDosageColName))] <- "DailyDosage"
 
   #index_day <- as.Date(gsub("\\s+", "", deparse(substitute(index_day))))
   case <- get.ddd(case)
-  case <- arrange(case, Patient_ID, Dispensing)
+  case <- arrange(case, MemberId, DispenseDate)
   case <- data.table(case)
   case[, start_day := Index_Day-expo_range_before]
   #case[, index_day := index_day]
   case[, end_day := Index_Day+expo_range_after]
   #case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_Dosage, "mg")))]
-  case[, Daily_dosage2 := Daily_Dosage]
+  case[, Daily_dosage2 := DailyDosage]
   case[, DDD_perday := round(Daily_dosage2/DDD, 2)]
 
   #DDDs before index
-  case[, date3 := as.numeric(start_day-Dispensing)]
-  case[, date4 := as.numeric(Index_Day-Dispensing)]
+  case[, date3 := as.numeric(start_day-DispenseDate)]
+  case[, date4 := as.numeric(Index_Day-DispenseDate)]
   case[, DDDs_before := if_else(date3<0,
-                         if_else(date4>Duration,
-                                 Duration*DDD_perday,
+                         if_else(date4>DaysSupply,
+                                 DaysSupply*DDD_perday,
                                  if_else(date4>0,
-                                         (Duration-date4)*DDD_perday,
+                                         (DaysSupply-date4)*DDD_perday,
                                  0)),
-                         if_else(date3>Duration,
+                         if_else(date3>DaysSupply,
                                  0,
-                                 (Duration-date3)*DDD_perday)),
-       by = Patient_ID]
-  case_before <- case[, sum(DDDs_before), by = Patient_ID]
+                                 (DaysSupply-date3)*DDD_perday)),
+       by = MemberId]
+  case_before <- case[, sum(DDDs_before), by = MemberId]
   colnames(case_before)[colnames(case_before)=="V1"] <- paste0("DDDs_Before_",expo_range_before,"_Days")
 
   #DDDs after index
-  case[, date3_ := as.numeric(end_day-Dispensing)]
-  case[, date4_ := as.numeric(Dispensing-Index_Day)]
-  case[, date5 := as.numeric((Dispensing+Duration)-Index_Day)]
+  case[, date3_ := as.numeric(end_day-DispenseDate)]
+  case[, date4_ := as.numeric(DispenseDate-Index_Day)]
+  case[, date5 := as.numeric((DispenseDate+DaysSupply)-Index_Day)]
   case[, DDDs_after := if_else(date3_>0,
                                 if_else(date4_>0,
-                                        if_else(date3_>Duration,
-                                                Duration*DDD_perday,
+                                        if_else(date3_>DaysSupply,
+                                                DaysSupply*DDD_perday,
                                                 date3_*DDD_perday),
                                                 if_else(date5>0,
-                                                        (Duration-abs(date4_)*DDD_perday),
+                                                        (DaysSupply-abs(date4_)*DDD_perday),
                                                         0)),
                                 0),
-       by = Patient_ID]
-  case_after <- case[, sum(DDDs_after), by = Patient_ID]
+       by = MemberId]
+  case_after <- case[, sum(DDDs_after), by = MemberId]
   colnames(case_after)[colnames(case_after)=="V1"] <- paste0("DDDs_After_",expo_range_after,"_Days")
 
-  case <- case %>% select(Patient_ID, start_day, Index_Day, end_day, DDDs_before, DDDs_after)
-  case_bf_af <- inner_join(case_before,case_after, by = "Patient_ID")
-  case_temp <- case %>% select(Patient_ID, start_day, Index_Day, end_day)
-  case <- inner_join(case_temp,case_bf_af, by = "Patient_ID")
+  case <- case %>% select(MemberId, start_day, Index_Day, end_day, DDDs_before, DDDs_after)
+  case_bf_af <- inner_join(case_before,case_after, by = "MemberId")
+  case_temp <- case %>% select(MemberId, start_day, Index_Day, end_day)
+  case <- inner_join(case_temp,case_bf_af, by = "MemberId")
   case <- unique(case)
 
-  colnames(case)[colnames(case)== "Patient_ID"] <- deparse(substitute(idColName))
+  colnames(case)[colnames(case)== "MemberId"] <- deparse(substitute(idColName))
   colnames(case)[colnames(case)== "Index_Day"] <- deparse(substitute(index_dayColName))
-  colnames(case)[colnames(case)=="ATC_CODE"] <- deparse(substitute(AtcCodeColName))
-  colnames(case)[colnames(case)== "Dispensing"] <- deparse(substitute(DispensingColName))
-  colnames(case)[colnames(case)== "Duration"] <- deparse(substitute(SupplyDayColName))
-  colnames(case)[colnames(case)== "Daily_Dosage"] <- deparse(substitute(DailyDosageColName))
+  colnames(case)[colnames(case)=="ATC"] <- deparse(substitute(AtcCodeColName))
+  colnames(case)[colnames(case)== "DispenseDate"] <- deparse(substitute(DispenseDateColName))
+  colnames(case)[colnames(case)== "DaysSupply"] <- deparse(substitute(DaysSupplyColName))
+  colnames(case)[colnames(case)== "DailyDosage"] <- deparse(substitute(DailyDosageColName))
   return(case)
 
 }

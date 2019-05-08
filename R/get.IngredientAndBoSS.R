@@ -18,7 +18,14 @@ get.BoSSViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
                     .packages = "httr") %dopar% {
                       if(is.na(dfu$wRxCui[i])){
                         RxStrengthTable <- data.frame(wRxCui = dfu$wRxCui[i],
-                                                      strength = NA,
+                                                      baseRxcui = NA,
+                                                      baseName = NA,
+                                                      bossRxcui = NA,
+                                                      bossName = NA,
+                                                      numeratorValue = NA,
+                                                      numeratorUnit = NA,
+                                                      denominatorValue = NA,
+                                                      denominatorUnit = NA,
                                                       stringsAsFactors = FALSE)
                       }else{
                         ttyJSON <- tryCatch({GET(paste0("https://rxnav.nlm.nih.gov/REST/rxcuihistory/concept.json?rxcui=",dfu$wRxCui[i]), timeout(60))},

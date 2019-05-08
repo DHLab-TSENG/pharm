@@ -14,7 +14,8 @@ get.RxCuiViaMaytreat <- function(strmaytreat){
   resMaytreat <- resMaytreat %>%
     filter(t == TRUE) %>%
     select(RxCui, Name, rxclassMinConceptItem.classId, rxclassMinConceptItem.className) %>%
-    arrange(rxclassMinConceptItem.className)
+    arrange(rxclassMinConceptItem.className) %>% unique()
+  colnames(resMaytreat)[3:4] <- c("MinConcept.classId", "MinConcept.className")
   resMaytreat
 
 }

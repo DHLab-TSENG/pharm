@@ -1,4 +1,5 @@
 #' Get NDC code based on RxCui
+#' WHO Collaborating Centre for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018
 #' @importFrom parallel::makeCluster()
 #' @importFrom parallel::stopCluster()
 #' @import foreach

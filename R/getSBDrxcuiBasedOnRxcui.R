@@ -9,7 +9,7 @@
 #' @param cores number of parallel operation
 #' @export
 
-get.SBDrxcuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
+get.SbdScdRxCuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
   dfu <- df %>% select("wRxCui") %>% unique()
@@ -26,16 +26,25 @@ get.SBDrxcuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
                                                       SBD.rxcui="error",
                                                       stringsAsFactors = FALSE)
                            }else{
-                           sbd.rxcui <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$wRxCui[i], "/allrelated"))
+                           #sbd.rxcui <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/", dfu$wRxCui[i], "/allrelated"))
                            sbd.df <- data.frame(sbd.rxcui$allRelatedGroup$conceptGroup$conceptProperties[sbd.rxcui$allRelatedGroup$conceptGroup$tty == "SBD"])
-                           if(is.null(sbd.df$rxcui)){
+                           scd.df <- data.frame(sbd.rxcui$allRelatedGroup$conceptGroup$conceptProperties[sbd.rxcui$allRelatedGroup$conceptGroup$tty == "SCD"])
+                           if(is.null(sbd.df$rxcui) & is.null(scd.df$rxcui)){
                              RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
                                                    SBD.rxcui=NA,
                                                    stringsAsFactors = FALSE)
-                           }else{
+                           }else if(!is.null(sbd.df$rxcui) & is.null(scd.df$rxcui)){
                              RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
                                                       SBD.rxcui = sbd.df$rxcui,
                                                    stringsAsFactors = FALSE)
+                           }else if(is.null(sbd.df$rxcui) & !is.null(scd.df$rxcui)){
+                             RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
+                                                      SBD.rxcui = scd.df$rxcui,
+                                                      stringsAsFactors = FALSE)
+                           }else{
+                             RxSbdTable <- data.frame(wRxCui=dfu$wRxCui[i],
+                                                      SBD.rxcui = c(scd.df$rxcui, sbd.df$rxcui),
+                                                      stringsAsFactors = FALSE)
                            }
                            }
                            RxSbdTable
