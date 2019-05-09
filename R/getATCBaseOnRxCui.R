@@ -208,15 +208,22 @@ get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE
                                if(is.null(tty$propConceptGroup)){
                                  ingredient <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcuihistory/concept.json?rxcui=",dfu$wRxCui[i]))
                                  ingredient_rxcui <- ingredient$rxcuiHistoryConcept$bossConcept$baseRxcui[1]
+
                                  if(is.null(ingredient_rxcui)){
                                    AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                           ATC = NA,
                                                           stringsAsFactors = FALSE)
                                  }else{
                                    ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",ingredient_rxcui,"/property?propName=ATC"))
+                                   if(is.null(ATC$propConceptGroup)){
+                                     AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
+                                                            ATC = NA,
+                                                            stringsAsFactors = FALSE)
+                                   }else{
                                    AtcTable <- data.frame(wRxCui = dfu$wRxCui[i],
                                                           ATC = ATC$propConceptGroup$propConcept$propValue[1],
                                                           stringsAsFactors = FALSE)
+                                   }
                                  }
                                }else if(tty$propConceptGroup$propConcept$propValue == "IN"){
                                  ATC <- fromJSON(paste0("https://rxnav.nlm.nih.gov/REST/rxcui/",dfu$wRxCui[i],"/property?propName=ATC"))
