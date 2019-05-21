@@ -22,16 +22,16 @@ get.NdcViaSBDrxcui <- function(df, SBDRxCuiColName = SBD.rxcui, cores = 8){
                                            error = function(e){return("ERROR")})
                            if(ndc == "ERROR"){
                              RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
-                                                      ndc = "error",
+                                                      NDC = "error",
                                                       stringsAsFactors = FALSE)
                            }else{
                            if(is.null(ndc$ndcGroup$ndcList)){
                              RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
-                                                   ndc = NA,
+                                                      NDC = NA,
                                                    stringsAsFactors = FALSE)
                            }else{
                              RxNdcTable <- data.frame(SBD.rxcui=dfu$SBD.rxcui[i],
-                                                   ndc = ndc$ndcGroup$ndcList,
+                                                      NDC = ndc$ndcGroup$ndcList,
                                                    stringsAsFactors = FALSE)
                            }
                            }
