@@ -14,12 +14,10 @@ Imports:doParallel,
     data.table,
     dplyr
 Depends: R (>= 3.4.0)
-
 Suggests: 
     testthat,
     roxygen2,
     knitr,
     devtools,
     rmarkdown
-
 VignetteBuilder: knitr
