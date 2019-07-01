@@ -6,9 +6,9 @@
 \usage{
 calDDDs.range(case, index_dayColName = Index_Day,
   expo_range_before = 36000, expo_range_after = 36000,
-  idColName = Patient_ID, AtcCodeColName = ATC_CODE,
-  DispensingColName = Dispensing, SupplyDayColName = Duration,
-  DailyDosageColName = Daily_Dosage)
+  idColName = MemberId, AtcCodeColName = ATC,
+  DispenseDateColName = DispenseDate, DaysSupplyColName = DaysSupply,
+  DailyDosageColName = DailyDosage)
 }
 \arguments{
 \item{case}{data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration}
@@ -19,9 +19,9 @@ calDDDs.range(case, index_dayColName = Index_Day,
 
 \item{idColName}{a colum for subject's id}
 
-\item{DispensingColName}{a colum for dispensing}
+\item{DispenseDateColName}{a colum for dispensing}
 
-\item{SupplyDayColName}{a colum for supply day}
+\item{DaysSupplyColName}{a colum for supply day}
 
 \item{DailyDosageColName}{a colum for daily dosage}
 

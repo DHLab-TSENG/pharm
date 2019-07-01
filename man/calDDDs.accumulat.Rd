@@ -4,9 +4,9 @@
 \alias{calDDDs.accumulat}
 \title{Calculate subjects' acculated ddd before last dispensing}
 \usage{
-calDDDs.accumulat(case, PatientIdColName = Patient_ID,
-  DispensingColName = Dispensing, AtcCodeColName = ATC_CODE,
-  DailyDosageColName = Daily_Dosage, DurationColName = Duration)
+calDDDs.accumulat(case, PatientIdColName = MemberId,
+  DispensingColName = DispenseDate, AtcCodeColName = ATC,
+  DailyDosageColName = DailyDosage, DurationColName = DaysSupply)
 }
 \arguments{
 \item{case}{data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration}
