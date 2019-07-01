@@ -33,15 +33,15 @@ calDDDs.range <- function(case,
   case <- get.ddd(case)
   case <- arrange(case, MemberId, DispenseDate)
   case <- data.table(case)
-  case[, start_day := Index_Day-expo_range_before]
+  case[, Start_day := Index_Day-expo_range_before]
   #case[, index_day := index_day]
-  case[, end_day := Index_Day+expo_range_after]
+  case[, End_day := Index_Day+expo_range_after]
   #case[, Daily_dosage2 := as.numeric(as.character(strsplit(case$Daily_Dosage, "mg")))]
   case[, Daily_dosage2 := DailyDosage]
   case[, DDD_perday := round(Daily_dosage2/DDD, 2)]
 
   #DDDs before index
-  case[, date3 := as.numeric(start_day-DispenseDate)]
+  case[, date3 := as.numeric(Start_day-DispenseDate)]
   case[, date4 := as.numeric(Index_Day-DispenseDate)]
   case[, DDDs_before := if_else(date3<0,
                          if_else(date4>DaysSupply,
@@ -57,7 +57,7 @@ calDDDs.range <- function(case,
   colnames(case_before)[colnames(case_before)=="V1"] <- paste0("DDDs_Before_",expo_range_before,"_Days")
 
   #DDDs after index
-  case[, date3_ := as.numeric(end_day-DispenseDate)]
+  case[, date3_ := as.numeric(End_day-DispenseDate)]
   case[, date4_ := as.numeric(DispenseDate-Index_Day)]
   case[, date5 := as.numeric((DispenseDate+DaysSupply)-Index_Day)]
   case[, DDDs_after := if_else(date3_>0,
@@ -73,9 +73,9 @@ calDDDs.range <- function(case,
   case_after <- case[, sum(DDDs_after), by = MemberId]
   colnames(case_after)[colnames(case_after)=="V1"] <- paste0("DDDs_After_",expo_range_after,"_Days")
 
-  case <- case %>% select(MemberId, start_day, Index_Day, end_day, DDDs_before, DDDs_after)
+  case <- case %>% select(MemberId, Start_day, Index_Day, End_day, DDDs_before, DDDs_after)
   case_bf_af <- inner_join(case_before,case_after, by = "MemberId")
-  case_temp <- case %>% select(MemberId, start_day, Index_Day, end_day)
+  case_temp <- case %>% select(MemberId, Start_day, Index_Day, End_day)
   case <- inner_join(case_temp,case_bf_af, by = "MemberId")
   case <- unique(case)
 
