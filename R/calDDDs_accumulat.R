@@ -1,10 +1,7 @@
 #' Calculate subjects' acculated ddd before last dispensing
 #'
 #' @import dplyr
-
-#' @importFrom data.table::last()
-#' @importFrom data.table::first()
-#' @importFrom data.table::between()
+#' @import data.table
 #' @param case data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration
 #' @export
 
