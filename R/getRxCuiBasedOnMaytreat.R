@@ -2,7 +2,10 @@
 #'
 #' @import dplyr
 #' @import stringr
-#' @import data.table
+
+#' @importFrom data.table::last()
+#' @importFrom data.table::first()
+#' @importFrom data.table::between()
 #' @param strmaytreat A may treat
 #' @export
 

@@ -1,7 +1,10 @@
 #' Calculate subjects' ddd in a period
 #'
 #' @import dplyr
-#' @import data.table
+
+#' @importFrom data.table::last()
+#' @importFrom data.table::first()
+#' @importFrom data.table::between()
 #' @param case data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration
 #' @param index_day observation day
 #' @param expo_range_before days before observation day

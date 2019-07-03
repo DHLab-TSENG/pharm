@@ -1,5 +1,8 @@
 #' Get ATC 1 level histogram plot
-#' @import data.table
+
+#' @importFrom data.table::last()
+#' @importFrom data.table::first()
+#' @importFrom data.table::between()
 #' @import ggplot2
 #' @param df data.frame include ATC code
 #' @param ATCColName A colum for ATC of df

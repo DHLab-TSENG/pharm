@@ -26,3 +26,7 @@ import(ggplot2)
 import(stringr)
 importFrom(parallel, makeCluster)
 importFrom(parallel, stopCluster)
+importFrom(data.table, between)
+importFrom(data.table, first)
+importFrom(data.table, last)
+

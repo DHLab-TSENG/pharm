@@ -5,7 +5,10 @@
 #' @import foreach
 #' @import dplyr
 #' @import doParallel
-#' @import data.table
+
+#' @importFrom data.table::last()
+#' @importFrom data.table::first()
+#' @importFrom data.table::between()
 #' @param df data.frame include RxCui
 #' @param RxCuiColName A colum for RxCui of df
 #' @param cores number of parallel operation
