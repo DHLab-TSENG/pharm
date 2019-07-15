@@ -31,13 +31,12 @@ get.DrugEraPlot <- function(df,
   tempDF <-  mutate(tempDF, SupplyDaysRange = cut(SupplyDays, breaks = breaks, labels = labels))
   tempDF$DispenseTimes <- factor(tempDF$DispenseTimes, levels = rev(levels(tempDF$DispenseTimes)))
   ggplot(tempDF, aes(SupplyDaysRange, fill = DispenseTimes)) +
-    geom_bar(position = "stack") +
+    geom_bar(position = "stack", colour="black") +
     geom_text(stat='count',aes(label=..count..),position=position_stack(0.5), color="black", size=3.5) +
     theme_bw() + theme(panel.grid.major = element_blank(),
                        panel.grid.minor = element_blank())+
     labs(x = "Total Supply Days",
          y = "Drug Era") +
     theme(axis.text.x = element_text(angle = 45, vjust = 0.5)) +
-    scale_fill_discrete(name = "Dispense\nTime")
-
+    scale_colour_grey(name = "Dispense\nTime",aesthetics = "fill", start = 0.1, end = 0.99)
 }
