@@ -5,13 +5,22 @@
 #' @param df data.frame include ATC code
 #' @param ATCColName A colum for ATC of df
 #' @export
-get.ATC1LevelPlot <- function(df, ATCColName = ATC) {
+get.ATC1LevelPlot <- function(df, ATCColName = ATC, level = 1) {
+
   colnames(df)[colnames(df) == deparse(substitute(ATCColName))] <-
     "ATC"
   df$ATC <- as.character(df$ATC)
   df <- data.table(df)
-  df[, ATC1Level := if_else(ATC == "BPCK" |
-                              ATC == "GPCK", ATC, substr(ATC, 1, 1))]
+  if(level == 1){
+    df[, ATC1Level := if_else(ATC == "BPCK" |
+                                ATC == "GPCK", ATC, substr(ATC, 1, 1))]
+  }else if(level == 2){
+    df[, ATC1Level := if_else(ATC == "BPCK" |
+                                ATC == "GPCK", ATC, substr(ATC, 1, 3))]
+  }else{
+    return("Wrong input")
+  }
+
   df <- filter(df, ATC1Level != "BPCK" & ATC1Level != "GPCK" & !is.na(ATC1Level))
   ggplot(df,
          aes(x = ATC1Level)) +
