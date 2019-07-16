@@ -12,7 +12,7 @@
 #' @param MatchRoute An option to mapping ingredient and route
 #' @export
 
-get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = TRUE){
+get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = FALSE){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
   dfu <- df %>% select("wRxCui") %>% unique()
