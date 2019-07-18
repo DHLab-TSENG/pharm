@@ -1,0 +1,58 @@
+m <- data.table(m)
+m[, DFG := gsub(" ", "", DFG)]
+m[, route := if_else(grepl(DFG_implant, DFG), "implant",
+                    if_else(grepl(DFG_inhalation, DFG), "inhalation",
+                            if_else(grepl(DFG_nasal, DFG), "nasal",
+                                    if_else(grepl(DFG_oral, DFG), "oral",
+                                            if_else(grepl(DFG_ophthalmic, DFG), "ophthalmic",
+                                                    if_else(grepl(DFG_otic, DFG), "otic",
+                                                            if_else(grepl(DFG_parenteral, DFG), "parenteral",
+                                                                    if_else(grepl(DFG_rectal, DFG), "rectal",
+                                                                            if_else(grepl(DFG_sublingual, DFG), "sublingual",
+                                                                                    if_else(grepl(DFG_stomatologic, DFG), "stomatologic",
+                                                                                            if_else(grepl(DFG_transdermal, DFG), "transdermal",
+                                                                                                    if_else(grepl(DFG_topical, DFG), "topical",
+                                                                                                            if_else(grepl(DFG_urethral, DFG), "urethral",
+                                                                                                                    if_else(grepl(DFG_vaginal, DFG), "vaginal", ""))))))))))))))]
+
+m <- left_join(m, resATC_Adm.RF, by = "ATC")
+m <- data.table(m)
+HasSameRoute <- mapply(grepl, m$Adm.RF, m$route)
+m$HasSameRoute <- HasSameRoute
+m <- filter(m, is.na(HasSameRoute) | HasSameRoute == T) %>% select(RxCui, ATC) %>% unique()
+
+sum(grepl("[|][|]",m$Adm.RFNew))
+
+m$routeNew<-c("test",m$route[-1])
+m$Adm.RFNew<-c("oral|parenteral",m$Adm.RF[-1])
+
+test<-mapply(grepl,m$Adm.RFNew,m$routeNew)
+test[test==0]
+mapply(grepl,c("oral","oral"),c("oooral","test"))
+grepl(m$Adm.RF,m$route)
+
+
+DFG_implant <- "DrugImplantProduct"
+DFG_inhalation <-"InhalantProduct"
+DFG_nasal <- "NasalProduct"
+DFG_oral <- "OralProduct"
+DFG_ophthalmic <- "OphthalmicProduct"
+DFG_otic <- "OticProduct"
+DFG_parenteral <- "InjectableProduct"
+DFG_rectal <- "RectalProduct"
+DFG_sublingual <- "SublingualProduct"
+DFG_stomatologic <- "BuccalProduct|DentalProduct|OralCreamProduct|OralFoamProduct|OralGelProduct|OralOintmentProduct|OralPasteProduct"
+DFG_transdermal <- "TransdermalProduct"
+DFG_topical <- "IntraperitonealProduct|IrrigationProduct|MucosalProduct|PrefilledApplicatorProduct|ShampooProduct|SoapProduct|TopicalProduct"
+DFG_urethral <- "UrethralProduct"
+DFG_vaginal <- "VaginalProduct"
+##########################################
+
+
+get.ATC1LevelPlot(z1)
+get.DrugEraPlot(filter(z1, ATC != "GPCK" & ATC != "BPCK" & !is.na(ATC)), MemberIDColName = MemberId, DrugColName = ATC)
+get.DispensingPlot(TestPatientData2, Member = 23, TimeInterval = 20, Unit = day)
+get.DispensingPlot(Pharm_IBD2.2.2, Member = "00000000002627080525", MemberIDColName = MemberId, TimeInterval = 20, Unit = day)
+get.DispensingPlot(Demo_data2, Member = "00000000012576164925", MemberIDColName = MemberId, DrugColName = RxCui, TimeInterval = 2, Unit = month)
+
+sample_taiwan_drug <- data.frame(CGMH_CODE = c("P6A780M", "P6A022E", "P6A741M", "P6A674M", "PBA024P", "PBA061M"))

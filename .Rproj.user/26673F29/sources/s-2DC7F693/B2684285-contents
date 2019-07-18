@@ -1,0 +1,147 @@
+---
+title: "Introduction to pharm"
+author: "Yeh-Yung, Chiu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+### 安裝套件
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("DHLab-CGU/pharm")
+library(pharm)
+```
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(pharm)
+library(dplyr)
+```
+## 範例資料
+功能演示所使用的`sample_data_subset`資料內容如下表，是由`sample_data`資料中選取出病人編號1以及病人編號42所做的子集，`sample_data`生成方式為將美國真實的給藥紀錄做去識別化，除對原始資料的病患編碼從新編排並將每筆給藥日期做時間推移外，也將部份給藥紀錄中的NDC藥物編碼替換為相同藥物但不同的NDC編碼 ( 該藥物的NDC編碼歷史中不同的NDC編碼 )，最生產生2,747,617筆給藥紀錄資料，此藥物資料紀錄中，有39,989名不同的病人，資料內容包括病患編號、配藥日期 ( 時間區間為 2025-12-06 至 2038-01-25 )、美國NDC藥物編碼 ( 共17,326種不同的藥物編碼 )、每次發放數量以及藥物供給天數。
+```{r message=FALSE, warning=FALSE}
+knitr::kable(sample_data_subset)
+```
+
+## 一、 適應症查尋藥物功能
+本套件根據美國退伍軍人局之MED-RT資料庫建立`get.RxCuiViaMaytreat()`，可透過輸入**適應症**來取得可用於該種適應症的所有**藥物成份**。以下以輸入**食道炎 (esophagitis) **為例
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_List <- get.RxCuiViaMaytreat("esophagitis")
+knitr::kable(head(Esophagitis_List))
+```
+
+在得到可用於適應症之藥物成份後，可透過`get.SbdScdRxCuiViaRxCui`功能取得含有特定藥物成份之品牌及臨床用藥。
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_SBD_SCD_List <- get.SbdScdRxCuiViaRxCui(Esophagitis_List[3,])
+knitr::kable(head(Esophagitis_SBD_SCD_List))
+```
+
+## 二、 藥物編碼轉換功能
+本套件提供不同藥物詞彙表間藥物編碼轉換功能，包含  
+- U.S. National Drug Code  
+- NLM RxNorm  
+- WHO ATC 
+- 台灣全民健康保險藥品編碼
+
+### **2.1 National Drug Code 與 RxNorm 編碼轉換**
+**- RxNorm 轉換為 NDC**  
+`get.NdcViaSBDrxcui`功能可將以**RxNorm**編碼之臨床藥物及品牌藥物轉換為**NDC**編碼，因相同藥物種類但因包裝不同會有不同的**NDC**編碼，因此，此功能輸出結果大多會有一對多的狀況。
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_NDC_List <- get.NdcViaSBDrxcui(Esophagitis_SBD_SCD_List[1,])
+knitr::kable(head(Esophagitis_NDC_List))
+```
+
+**- NDC 轉換為 RxNorm**  
+`get.RxCuiViaNdc`功能可將以**NDC**編碼之藥物轉換為**RxNorm**編碼。
+
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_rxcui <- get.RxCuiViaNdc(sample_data_subset, NdcColName = NationalDrugCode)
+knitr::kable(head(sample_data_subset_rxcui))
+```
+
+### **2.2 RxNorm 與 ATC 編碼轉換**  
+[Bodenreider et al. 的研究]
+
+**- RxNorm 轉換為 ATC**
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
+```
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_atc <- get.AtcViaRxCui(sample_data_subset_rxcui, MatchRoute = FALSE)
+knitr::kable(head(sample_data_subset_atc))
+```
+
+**- ATC 轉換為 RxNorm**
+
+
+
+### **2.3 台灣醫院藥品編碼 與 台灣健康保險藥品編碼轉換**
+
+### **2.4 台灣健康保險藥品編碼 與 ATC轉換**
+
+
+## 三、 藥物資料分析功能
+
+### **3.1 藥物世代計算**
+
+```{r, warning=FALSE, message=FALSE}
+knitr::kable(get.DrugEra(MemberIDColName = MemberId,
+                         sample_data_subset,
+                         DrugColName = NationalDrugCode,
+                         DispenseDateColName = DispenseDate,
+                         DaysSupplyColName = DaysSupply))
+```
+
+### **3.2 定義每日劑量 (DDD) 計算**
+
+**- 總DDD計算**
+
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_atc <- calDailyDosage(sample_data_subset_atc)
+accumulat_DDD <- calDDDs.accumulat(sample_data_subset_atc)
+knitr::kable(accumulat_DDD)
+```
+
+**- 自訂區間DDD計算**
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
+```
+```{r, warning=FALSE, message=FALSE}
+index_DDD <- calDDDs.range(sample_data_subset_atc, expo_range_before = 15, expo_range_after = 30)
+knitr::kable(index_DDD)
+```
+
+## 四、 藥物資料及分析結果視覺化功能
+
+### **4.1 ATC分布統計圖**
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+get.ATC1LevelPlot(sample_data_ATC1LevelPlot)
+```
+
+### **4.2 藥物世代長條圖**
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+get.DrugEraPlot(sample_data_DrugEraPlot, 
+                MemberIDColName = MemberId,
+                DrugColName = ATC)
+```
+
+### **4.3 視覺化用藥歷史**
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+get.DispensingPlot(sample_data_subset, 
+                   MemberIDColName = MemberId, 
+                   Member = 42, 
+                   TimeInterval = 20, 
+                   Unit = day)
+```
+
+
+

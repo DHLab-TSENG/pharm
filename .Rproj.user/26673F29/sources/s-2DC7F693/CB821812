@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1563349927433.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "161909614",
+    "id" : "CB821812",
+    "lastKnownWriteTime" : 1563174589,
+    "last_content_update" : 1563174589,
+    "path" : "~/pharm/R/getRxCuiBasedOnMaytreat.R",
+    "project_path" : "R/getRxCuiBasedOnMaytreat.R",
+    "properties" : {
+        "cursorPosition" : "7,0",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,130 @@
+"0","knitr::kable(get.DrugEra(MemberIDColName = MemberId,"
+"0","                         sample_data_subset,"
+"0","                         DrugColName = NationalDrugCode,"
+"0","                         DispenseDateColName = DispenseDate,"
+"0","                         DaysSupplyColName = DaysSupply))"
+"1","<table>
+ <thead>
+  <tr>
+   <th style=""text-align:right;""> MemberId </th>
+   <th style=""text-align:left;""> DispenseDate </th>
+   <th style=""text-align:left;""> NationalDrugCode </th>
+   <th style=""text-align:right;""> Quantity </th>
+   <th style=""text-align:right;""> DaysSupply </th>
+   <th style=""text-align:right;""> DrugEra </th>
+   <th style=""text-align:left;""> DrugEraStartDate </th>
+   <th style=""text-align:left;""> DrugEraEndDate </th>
+   <th style=""text-align:right;""> Gap </th>
+   <th style=""text-align:left;""> ExposureDays </th>
+   <th style=""text-align:right;""> SupplyDays </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style=""text-align:right;""> 1 </td>
+   <td style=""text-align:left;""> 2031-12-01 </td>
+   <td style=""text-align:left;""> 00186504031 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 1 </td>
+   <td style=""text-align:left;""> 2031-12-01 </td>
+   <td style=""text-align:left;""> 2031-12-31 </td>
+   <td style=""text-align:right;""> 0 </td>
+   <td style=""text-align:left;""> 30 days </td>
+   <td style=""text-align:right;""> 30 </td>
+  </tr>
+  <tr>
+   <td style=""text-align:right;""> 1 </td>
+   <td style=""text-align:left;""> 2032-01-31 </td>
+   <td style=""text-align:left;""> 00186504031 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 2 </td>
+   <td style=""text-align:left;""> 2032-01-31 </td>
+   <td style=""text-align:left;""> 2032-04-24 </td>
+   <td style=""text-align:right;""> 0 </td>
+   <td style=""text-align:left;""> 84 days </td>
+   <td style=""text-align:right;""> 60 </td>
+  </tr>
+  <tr>
+   <td style=""text-align:right;""> 1 </td>
+   <td style=""text-align:left;""> 2032-03-25 </td>
+   <td style=""text-align:left;""> 00186504031 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 2 </td>
+   <td style=""text-align:left;""> 2032-01-31 </td>
+   <td style=""text-align:left;""> 2032-04-24 </td>
+   <td style=""text-align:right;""> 24 </td>
+   <td style=""text-align:left;""> 84 days </td>
+   <td style=""text-align:right;""> 60 </td>
+  </tr>
+  <tr>
+   <td style=""text-align:right;""> 42 </td>
+   <td style=""text-align:left;""> 2032-03-08 </td>
+   <td style=""text-align:left;""> 00006504031 </td>
+   <td style=""text-align:right;""> 90 </td>
+   <td style=""text-align:right;""> 90 </td>
+   <td style=""text-align:right;""> 1 </td>
+   <td style=""text-align:left;""> 2032-03-08 </td>
+   <td style=""text-align:left;""> 2032-07-24 </td>
+   <td style=""text-align:right;""> 0 </td>
+   <td style=""text-align:left;""> 138 days </td>
+   <td style=""text-align:right;""> 180 </td>
+  </tr>
+  <tr>
+   <td style=""text-align:right;""> 42 </td>
+   <td style=""text-align:left;""> 2032-04-25 </td>
+   <td style=""text-align:left;""> 00006504031 </td>
+   <td style=""text-align:right;""> 90 </td>
+   <td style=""text-align:right;""> 90 </td>
+   <td style=""text-align:right;""> 1 </td>
+   <td style=""text-align:left;""> 2032-03-08 </td>
+   <td style=""text-align:left;""> 2032-07-24 </td>
+   <td style=""text-align:right;""> -42 </td>
+   <td style=""text-align:left;""> 138 days </td>
+   <td style=""text-align:right;""> 180 </td>
+  </tr>
+  <tr>
+   <td style=""text-align:right;""> 42 </td>
+   <td style=""text-align:left;""> 2032-01-05 </td>
+   <td style=""text-align:left;""> 00186504031 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 1 </td>
+   <td style=""text-align:left;""> 2032-01-05 </td>
+   <td style=""text-align:left;""> 2032-02-04 </td>
+   <td style=""text-align:right;""> 0 </td>
+   <td style=""text-align:left;""> 30 days </td>
+   <td style=""text-align:right;""> 30 </td>
+  </tr>
+  <tr>
+   <td style=""text-align:right;""> 42 </td>
+   <td style=""text-align:left;""> 2032-03-07 </td>
+   <td style=""text-align:left;""> 00186504031 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 2 </td>
+   <td style=""text-align:left;""> 2032-03-07 </td>
+   <td style=""text-align:left;""> 2032-05-30 </td>
+   <td style=""text-align:right;""> 0 </td>
+   <td style=""text-align:left;""> 84 days </td>
+   <td style=""text-align:right;""> 60 </td>
+  </tr>
+  <tr>
+   <td style=""text-align:right;""> 42 </td>
+   <td style=""text-align:left;""> 2032-04-30 </td>
+   <td style=""text-align:left;""> 00186504031 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 30 </td>
+   <td style=""text-align:right;""> 2 </td>
+   <td style=""text-align:left;""> 2032-03-07 </td>
+   <td style=""text-align:left;""> 2032-05-30 </td>
+   <td style=""text-align:right;""> 24 </td>
+   <td style=""text-align:left;""> 84 days </td>
+   <td style=""text-align:right;""> 60 </td>
+  </tr>
+</tbody>
+</table>"
+"1","
+"

@@ -1,0 +1,24 @@
+---
+title: "Introduction to pharm"
+author: "Yeh-Yung, Chiu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
+)
+devtools::install_github("DHLab-CGU/pharm")
+library(pharm)
+```
+
+
+

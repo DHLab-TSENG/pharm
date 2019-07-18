@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1563347578942.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "764247712",
+    "id" : "69505E33",
+    "lastKnownWriteTime" : 1563437124,
+    "last_content_update" : 1563437124805,
+    "path" : "~/pharm/vignettes/pharm-overview.Rmd",
+    "project_path" : "vignettes/pharm-overview.Rmd",
+    "properties" : {
+        "cursorPosition" : "221,5",
+        "last_setup_crc32" : "",
+        "scrollLine" : "197",
+        "working_dir" : "project"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1563360021436.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "1F391898",
+    "lastKnownWriteTime" : 1562134290,
+    "last_content_update" : 1562134290,
+    "path" : "~/pharm/R/calDDDs_accumulat.R",
+    "project_path" : "R/calDDDs_accumulat.R",
+    "properties" : {
+        "cursorPosition" : "12,58",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 11,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
