@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Yeh-Yung, Chiu" />
+
+<meta name="date" content="2019-07-18" />
+
+<title>Introduction to pharm</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to pharm</h1>
+<h4 class="author"><em>Yeh-Yung, Chiu</em></h4>
+<h4 class="date"><em>2019-07-18</em></h4>
+
+
+
+<div class="section level3">
+<h3>安裝套件</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;DHLab-CGU/pharm&quot;</span>)
+<span class="kw">library</span>(pharm)</code></pre></div>
+</div>
+<div class="section level2">
+<h2>範例資料</h2>
+<p>功能演示所使用的<code>sample_data_subset</code>資料內容如下表，是由<code>sample_data</code>資料中選取出病人編號1以及病人編號42所做的子集，<code>sample_data</code>生成方式為將美國真實的給藥紀錄做去識別化，除對原始資料的病患編碼從新編排並將每筆給藥日期做時間推移外，也將部份給藥紀錄中的NDC藥物編碼替換為相同藥物但不同的NDC編碼 (該藥物的NDC編碼歷史中不同的NDC編碼)，最生產生2,747,617筆給藥紀錄資料，共有39,989名不同的病人，資料欄位包括:</p>
+<ul>
+<li>病患編號<br />
+</li>
+<li>配藥日期 (時間區間為 2025-12-06 至 2038-01-25)<br />
+</li>
+<li>美國NDC藥物編碼 (共17,326種不同的藥物編碼)<br />
+</li>
+<li>發放數量<br />
+</li>
+<li>藥物供給天數</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(sample_data_subset)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">MemberId</th>
+<th align="left">DispenseDate</th>
+<th align="left">NationalDrugCode</th>
+<th align="right">Quantity</th>
+<th align="right">DaysSupply</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2031-12-01</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">2032-01-31</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2032-03-25</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-01-05</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-07</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-30</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-08</td>
+<td align="left">00006504031</td>
+<td align="right">90</td>
+<td align="right">90</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-25</td>
+<td align="left">00006504031</td>
+<td align="right">90</td>
+<td align="right">90</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="-" class="section level2">
+<h2>一、 適應症查尋藥物功能</h2>
+<p>本套件根據美國退伍軍人局之MED-RT資料庫建立<code>get.RxCuiViaMaytreat()</code>，可透過輸入適應症來取得可用於該適應症之所有藥物成份。以下以輸入esophagitis (食道炎)為例。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Esophagitis_List &lt;-<span class="st"> </span><span class="kw">get.RxCuiViaMaytreat</span>(<span class="st">&quot;esophagitis&quot;</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(Esophagitis_List)
+  )</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">RxCui</th>
+<th align="left">Name</th>
+<th align="left">MinConcept.Id</th>
+<th align="left">MinConcept.Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1792108</td>
+<td align="left">Omeprazole Sodium</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+</tr>
+<tr class="even">
+<td align="left">236486</td>
+<td align="left">Omeprazole magnesium</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+</tr>
+<tr class="odd">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+</tr>
+<tr class="even">
+<td align="left">10156</td>
+<td align="left">Sucralfate</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+</tr>
+<tr class="odd">
+<td align="left">1487143</td>
+<td align="left">sucralfate malate</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+</tr>
+<tr class="even">
+<td align="left">17128</td>
+<td align="left">lansoprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+</tr>
+</tbody>
+</table>
+<p>在得到可用於特定適應症之藥物成份後，使用者可透過<code>get.SbdScdRxCuiViaRxCui</code>功能取得以所有含有這些藥物成份之品牌及臨床用藥，此功能取得之藥物是以RxNorm編碼。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Esophagitis_SBD_SCD_List &lt;-<span class="st"> </span><span class="kw">get.SbdScdRxCuiViaRxCui</span>(<span class="dt">df =</span> Esophagitis_List[<span class="dv">3</span>,],
+                                                    <span class="dt">RxCuiColName =</span> RxCui,
+                                                    <span class="dt">cores =</span> <span class="dv">2</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(Esophagitis_SBD_SCD_List)
+  )</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">RxCui</th>
+<th align="left">Name</th>
+<th align="left">MinConcept.Id</th>
+<th align="left">MinConcept.Name</th>
+<th align="left">SBD.rxcui</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">2003656</td>
+</tr>
+<tr class="even">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">198051</td>
+</tr>
+<tr class="odd">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">199119</td>
+</tr>
+<tr class="even">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">389171</td>
+</tr>
+<tr class="odd">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">389172</td>
+</tr>
+<tr class="even">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">402013</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="-" class="section level2">
+<h2>二、 藥物編碼轉換功能</h2>
+<p>本套件提供不同藥物詞彙表間藥物編碼轉換功能，包含</p>
+<ul>
+<li>U.S. National Drug Code<br />
+</li>
+<li>NLM RxNorm<br />
+</li>
+<li>WHO ATC</li>
+<li>台灣全民健康保險藥品編碼</li>
+</ul>
+<div id="national-drug-code--rxnorm-" class="section level3">
+<h3><strong>2.1 National Drug Code 與 RxNorm 編碼轉換</strong></h3>
+<p><strong>RxNorm 轉換為 NDC</strong><br />
+<code>get.NdcViaSBDrxcui</code>功能可將以RxNorm編碼之臨床藥物及品牌藥物轉換為NDC編碼，因相同藥物種類但因包裝不同會有不同的NDC編碼，因此，此功能輸出結果大多會一對多。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Esophagitis_NDC_List &lt;-<span class="st"> </span><span class="kw">get.NdcViaSBDrxcui</span>(<span class="dt">df =</span> Esophagitis_SBD_SCD_List[<span class="dv">1</span>,],
+                                           <span class="dt">SBDRxCuiColName =</span> SBD.rxcui,
+                                           <span class="dt">cores =</span> <span class="dv">2</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(Esophagitis_NDC_List)
+  )</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">RxCui</th>
+<th align="left">Name</th>
+<th align="left">MinConcept.Id</th>
+<th align="left">MinConcept.Name</th>
+<th align="left">SBD.rxcui</th>
+<th align="left">ndc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">2003656</td>
+<td align="left">00113052055</td>
+</tr>
+<tr class="even">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">2003656</td>
+<td align="left">00113052074</td>
+</tr>
+<tr class="odd">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">2003656</td>
+<td align="left">00113752055</td>
+</tr>
+<tr class="even">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">2003656</td>
+<td align="left">00113752074</td>
+</tr>
+<tr class="odd">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">2003656</td>
+<td align="left">00363181955</td>
+</tr>
+<tr class="even">
+<td align="left">7646</td>
+<td align="left">Omeprazole</td>
+<td align="left">D004941</td>
+<td align="left">Esophagitis</td>
+<td align="left">2003656</td>
+<td align="left">00363181974</td>
+</tr>
+</tbody>
+</table>
+<p><strong>NDC 轉換為 RxNorm</strong><br />
+<code>get.RxCuiViaNdc</code>功能可將以NDC編碼之藥物轉換為RxNorm編碼。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_data_subset_rxcui &lt;-<span class="st"> </span><span class="kw">get.RxCuiViaNdc</span>(<span class="dt">df =</span> sample_data_subset,
+                                            <span class="dt">NdcColName =</span> NationalDrugCode)
+knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">head</span>(sample_data_subset_rxcui))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">MemberId</th>
+<th align="left">DispenseDate</th>
+<th align="left">NationalDrugCode</th>
+<th align="right">Quantity</th>
+<th align="right">DaysSupply</th>
+<th align="left">RxCui</th>
+<th align="left">ndcStatus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2031-12-01</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">ACTIVE</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">2032-01-31</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">ACTIVE</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2032-03-25</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">ACTIVE</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-01-05</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">ACTIVE</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-07</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">ACTIVE</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-30</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">ACTIVE</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rxnorm--atc-" class="section level3">
+<h3><strong>2.2 RxNorm 與 ATC 編碼轉換</strong></h3>
+<p><strong>RxNorm 轉換為 ATC</strong><br />
+<code>get.AtcViaRxCui</code>功能可將以RxNorm編碼之藥物轉換為ATC編碼，因在ATC中相同的藥物成份會因用藥路徑的不同，而有不同的ATC編碼，因此，此功能也參考<a href="https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index">Bodenreider et al. 的研究</a>加入了是否同時比對要用藥路徑的參數<code>MatchRoute</code>供使用者選擇，若使用者欲同時比對用要路徑則在該參數中填入<code>TRUE</code>若不需要則填入<code>FALSE</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_data_subset_atc &lt;-<span class="st"> </span><span class="kw">get.AtcViaRxCui</span>(<span class="dt">df =</span> sample_data_subset_rxcui,
+                                          <span class="dt">RxCuiColName =</span> RxCui,
+                                          <span class="dt">cores =</span> <span class="dv">2</span>,
+                                          <span class="dt">MatchRoute =</span> <span class="ot">FALSE</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(sample_data_subset_atc)
+  )</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">MemberId</th>
+<th align="left">DispenseDate</th>
+<th align="left">NationalDrugCode</th>
+<th align="right">Quantity</th>
+<th align="right">DaysSupply</th>
+<th align="left">RxCui</th>
+<th align="left">ATC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2031-12-01</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">2032-01-31</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2032-03-25</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-01-05</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-07</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-30</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ATC 轉換為 RxNorm</strong><br />
+<code>get.RxCuiViaAtc</code>功能可將以ATC編碼之藥物轉換為RxNorm編碼</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_atc_rxcui &lt;-<span class="st"> </span><span class="kw">get.RxCuiViaAtc</span>(<span class="dt">df =</span> sample_ATC,
+                                    <span class="dt">AtcColName =</span> ATC,
+                                    <span class="dt">cores =</span> <span class="dv">2</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(sample_data_subset_atc)
+  )</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">MemberId</th>
+<th align="left">DispenseDate</th>
+<th align="left">NationalDrugCode</th>
+<th align="right">Quantity</th>
+<th align="right">DaysSupply</th>
+<th align="left">RxCui</th>
+<th align="left">ATC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2031-12-01</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">2032-01-31</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2032-03-25</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-01-05</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-07</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-30</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3><strong>2.3 台灣藥品編碼轉換</strong></h3>
+<p><strong>台灣醫院藥品編碼 與 台灣健康保險藥品編碼轉換</strong> <code>get.NHINoViaRCFNo</code>功能可將台灣長庚醫院藥品編碼轉換為台灣健康保險藥品編碼，若欲轉換之醫院藥物代碼無相對應之健康保險藥品代碼該欄位則顯示<code>NA</code>，此外，若欲將其他醫院之藥品編碼轉換為台灣健康保險藥品編碼，則可使用<code>get.NHINoViaHC</code>功能進行編碼轉換。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(
+    <span class="kw">get.NHINoViaRCFNo</span>(<span class="dt">df =</span> sample_taiwan_drug, 
+                      <span class="dt">RCFNoColName =</span> CGMH_CODE)
+    )
+  )</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">CGMH_CODE</th>
+<th align="left">NHINO1</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">P6A780M</td>
+<td align="left">BC26139100</td>
+</tr>
+<tr class="even">
+<td align="left">P6A022E</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">P6A741M</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">P6A674M</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">PBA024P</td>
+<td align="left">N002967209</td>
+</tr>
+<tr class="even">
+<td align="left">PBA024P</td>
+<td align="left">A010784209</td>
+</tr>
+</tbody>
+</table>
+<p><strong>台灣健康保險藥品編碼 與 ATC轉換</strong><br />
+<code>get.AtcViaNHINo</code>功能可將以台灣健康保險藥品編碼之藥物轉換為ATC編碼。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(
+  <span class="kw">head</span>(
+    <span class="kw">get.AtcViaNHINo</span>(<span class="dt">df =</span> sample_nhino_code,
+                    <span class="dt">NHINoColName =</span> NHINo)
+    )
+  )</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">NHINo</th>
+<th align="left">ATC_CODE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">BC26139100</td>
+<td align="left">L02BX03</td>
+</tr>
+<tr class="even">
+<td align="left">A014118335</td>
+<td align="left">D07XB01</td>
+</tr>
+<tr class="odd">
+<td align="left">BC26359100</td>
+<td align="left">L01XE18</td>
+</tr>
+<tr class="even">
+<td align="left">BC25224100</td>
+<td align="left">C01BD07</td>
+</tr>
+<tr class="odd">
+<td align="left">AC22049209</td>
+<td align="left">R06AA02</td>
+</tr>
+<tr class="even">
+<td align="left">AC45972100</td>
+<td align="left">R06AX27</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="-" class="section level2">
+<h2>三、 藥物資料分析功能</h2>
+<div class="section level3">
+<h3><strong>3.1 藥物世代計算</strong></h3>
+<p>藥物世代 (Drug Era) 的概念 (Ryan, 2010)，是將連續性的處方用藥串連成單一藥物開方長度，計算方式為，每次病患拿藥後，根據處方之領藥時間 (Dispense Date) 加上處方之藥物供給時間 (Drug Supply Days) 的時間區間為一個事件 (Event)，若病患拿藥與拿藥事件間的時間間隔 (gap) 超過研究者定義之間隔 (persistent window)，則將此兩事件視為不同之Drug Era，若小於則視為同一Drug Era，如圖1所示，Event 1與Event 2小於定義之gap長度，視為為同一Drug Era；Event 2 與Event 3大於定義之gap長度則視為不同Drug Era，<code>pharm</code>建立以此為基礎計算Drug Era之<code>get.DrugEra</code>功能。此功能輸出每筆給藥紀錄之:</p>
+<ul>
+<li>Drug Era (藥物世代</li>
+<li>Drug Era Start Date藥物世代起開始日期</li>
+<li>Drug Era End Date藥物世代結束日期</li>
+<li>Gap發藥紀錄間的時間間隔</li>
+<li>Exposure Days藥物世代天數</li>
+<li>Supply Days藥物世代中藥物的供給天數</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span><span class="kw">kable</span>(<span class="kw">get.DrugEra</span>(<span class="dt">MemberIDColName =</span> MemberId,
+                         sample_data_subset,
+                         <span class="dt">DrugColName =</span> NationalDrugCode,
+                         <span class="dt">DispenseDateColName =</span> DispenseDate,
+                         <span class="dt">DaysSupplyColName =</span> DaysSupply))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">MemberId</th>
+<th align="left">DispenseDate</th>
+<th align="left">NationalDrugCode</th>
+<th align="right">Quantity</th>
+<th align="right">DaysSupply</th>
+<th align="right">DrugEra</th>
+<th align="left">DrugEraStartDate</th>
+<th align="left">DrugEraEndDate</th>
+<th align="right">Gap</th>
+<th align="left">ExposureDays</th>
+<th align="right">SupplyDays</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2031-12-01</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="right">1</td>
+<td align="left">2031-12-01</td>
+<td align="left">2031-12-31</td>
+<td align="right">0</td>
+<td align="left">30 days</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">2032-01-31</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="left">2032-01-31</td>
+<td align="left">2032-04-24</td>
+<td align="right">0</td>
+<td align="left">84 days</td>
+<td align="right">60</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2032-03-25</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="left">2032-01-31</td>
+<td align="left">2032-04-24</td>
+<td align="right">24</td>
+<td align="left">84 days</td>
+<td align="right">60</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-03-08</td>
+<td align="left">00006504031</td>
+<td align="right">90</td>
+<td align="right">90</td>
+<td align="right">1</td>
+<td align="left">2032-03-08</td>
+<td align="left">2032-07-24</td>
+<td align="right">0</td>
+<td align="left">138 days</td>
+<td align="right">180</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-04-25</td>
+<td align="left">00006504031</td>
+<td align="right">90</td>
+<td align="right">90</td>
+<td align="right">1</td>
+<td align="left">2032-03-08</td>
+<td align="left">2032-07-24</td>
+<td align="right">-42</td>
+<td align="left">138 days</td>
+<td align="right">180</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-01-05</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="right">1</td>
+<td align="left">2032-01-05</td>
+<td align="left">2032-02-04</td>
+<td align="right">0</td>
+<td align="left">30 days</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-07</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="left">2032-03-07</td>
+<td align="left">2032-05-30</td>
+<td align="right">0</td>
+<td align="left">84 days</td>
+<td align="right">60</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-30</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="right">2</td>
+<td align="left">2032-03-07</td>
+<td align="left">2032-05-30</td>
+<td align="right">24</td>
+<td align="left">84 days</td>
+<td align="right">60</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="-ddd-" class="section level3">
+<h3><strong>3.2 定義每日劑量 (DDD) 計算</strong></h3>
+<p>pharm提供兩種不同計算DDD的功能，分別為計算病人累積的所有DDD量的<code>calDDDs.accumulate</code> 功能，以及計算病人在特定日期前後自訂區間的累積DDD量的<code>calDDDS.range</code>功能。在進行DDD的計算時，需有病患每日所服用的藥物量 (Daily Dosage)，<code>pharm</code>套件提供一功能<code>calDailyDosage</code>，可針對以RxNorm編碼之藥物進行簡單的每日劑量計算，其計算方法為將該藥物之劑量乘以拿藥數量後再除以藥物供給天數。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sample_data_subset_atc &lt;-<span class="st"> </span><span class="kw">calDailyDosage</span>(<span class="dt">df =</span> sample_data_subset_atc, 
+                                         <span class="dt">RxCuiColName =</span> RxCui, 
+                                         <span class="dt">QuantityColName =</span> Quantity, 
+                                         <span class="dt">DaysSupplyConName =</span> DaysSupply, 
+                                         <span class="dt">cores =</span> <span class="dv">2</span>)
+knitr<span class="op">::</span><span class="kw">kable</span>(sample_data_subset_atc)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">MemberId</th>
+<th align="left">DispenseDate</th>
+<th align="left">NationalDrugCode</th>
+<th align="right">Quantity</th>
+<th align="right">DaysSupply</th>
+<th align="left">RxCui</th>
+<th align="left">ATC</th>
+<th align="right">DailyDosage</th>
+<th align="left">Unit</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2031-12-01</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">2032-01-31</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">2032-03-25</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-01-05</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-07</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-30</td>
+<td align="left">00186504031</td>
+<td align="right">30</td>
+<td align="right">30</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+<tr class="odd">
+<td align="right">42</td>
+<td align="left">2032-03-08</td>
+<td align="left">00006504031</td>
+<td align="right">90</td>
+<td align="right">90</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="left">2032-04-25</td>
+<td align="left">00006504031</td>
+<td align="right">90</td>
+<td align="right">90</td>
+<td align="left">606731</td>
+<td align="left">A02BC05</td>
+<td align="right">40</td>
+<td align="left">MG</td>
+</tr>
+</tbody>
+</table>
+<p><strong>總DDD計算</strong><br />
+<code>calDDDs.accumulate</code>功能提供計算病患所有用藥時間之DDD量。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">accumulat_DDD &lt;-<span class="st"> </span><span class="kw">calDDDs.accumulat</span>(<span class="dt">case =</span> sample_data_subset_atc, 
+                                   <span class="dt">PatientIdColName =</span> MemberId,
+                                   <span class="dt">DispensingColName =</span> DispenseDate,
+                                   <span class="dt">AtcCodeColName =</span> ATC,
+                                   <span class="dt">DailyDosageColName =</span> DailyDosage,
+                                   <span class="dt">DurationColName =</span> DaysSupply)
+knitr<span class="op">::</span><span class="kw">kable</span>(accumulat_DDD)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">MemberId</th>
+<th align="right">DDDs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">119.7</td>
+</tr>
+<tr class="even">
+<td align="right">42</td>
+<td align="right">359.1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>自訂區間DDD計算</strong><br />
+<code>calDDDS.range</code>功能提供使用者能選擇欲計算DDD的時間點 (index day) 以及在這個時間點前後多少時間區間內所累積的DDD量。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">index_DDD &lt;-<span class="st"> </span><span class="kw">calDDDs.range</span>(<span class="dt">case =</span> sample_data_subset_atc,
+                           <span class="dt">index_dayColName =</span> Index_Day,
+                           <span class="dt">expo_range_before =</span> <span class="dv">15</span>,
+                           <span class="dt">expo_range_after =</span> <span class="dv">30</span>,
+                           <span class="dt">idColName =</span> MemberId,
+                           <span class="dt">AtcCodeColName =</span> ATC,
+                           <span class="dt">DispenseDateColName =</span> DispenseDate,
+                           <span class="dt">DaysSupplyColName =</span> DaysSupply,
+                           <span class="dt">DailyDosageColName =</span> DailyDosage)
+knitr<span class="op">::</span><span class="kw">kable</span>(index_DDD)</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="right">MemberId</th>
+<th align="left">Start_day</th>
+<th align="left">Index_Day</th>
+<th align="left">End_day</th>
+<th align="right">DDDs_Before_15_Days</th>
+<th align="right">DDDs_After_30_Days</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td align="right">1</td>
+<td align="left">2032-01-14</td>
+<td align="left">2032-01-29</td>
+<td align="left">2032-02-28</td>
+<td align="right">0.0</td>
+<td align="right">37.24</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td align="right">42</td>
+<td align="left">2032-04-07</td>
+<td align="left">2032-04-22</td>
+<td align="left">2032-05-22</td>
+<td align="right">79.8</td>
+<td align="right">95.32</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="-" class="section level2">
+<h2>四、 藥物資料及分析結果視覺化功能</h2>
+<p>有意義的視覺化呈現資料內容，可以幫助使用者者快速了解資料內容或是呈現分析結果，pharm套件提供資料及分析結果視覺化的功能，讓使用者可以快速看出資料中藥品類別的分布狀況、呈現藥物世代分析結果以及各個病人的用藥歷史。</p>
+<div id="atc" class="section level3">
+<h3><strong>4.1 ATC分布統計圖</strong></h3>
+<p><code>get.ATC1LevelPlot</code>功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數<code>level</code>讓使用者可以選擇繪製ATC編碼第一階或第二階分布。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#一階分布</span>
+<span class="kw">get.ATC1LevelPlot</span>(<span class="dt">df =</span> sample_data_ATC1LevelPlot, 
+                  <span class="dt">ATCColName =</span> ATC, 
+                  <span class="dt">level =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#二階分布</span>
+<span class="kw">get.ATC1LevelPlot</span>(<span class="dt">df =</span> sample_data_ATC1LevelPlot, 
+                  <span class="dt">ATCColName =</span> ATC, 
+                  <span class="dt">level =</span> <span class="dv">2</span>)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+<div class="section level3">
+<h3><strong>4.2 藥物世代長條圖</strong></h3>
+<p><code>get.DrugEraPlot</code>功能，可將以<code>get.DrugEra</code>計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get.DrugEraPlot</span>(<span class="dt">df =</span> sample_data_DrugEraPlot,
+                <span class="dt">MemberIDColName =</span> MemberId,
+                <span class="dt">DrugColName =</span> ATC,
+                <span class="dt">DrugEraColName =</span> DrugEra,
+                <span class="dt">SupplyDaysColName =</span> SupplyDays)</code></pre></div>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkAAAAGACAMAAAByRC0tAAACDVBMVEUAAAAAAAoAADIAADYAADkAADoAAEoAAFkAAGUAAGYAMjIAMn0AOY4AOpAAZbMAZrYGAAoGCgoKAAATGRkVDgYVExMVGRkZFQ4ZGRMZGRkfADYfNjYqAEoqSkoyAAAyADIyAFkyMn0yWVkyfb8zMzM2AAA5ADk5AGU5ZWU5jtg6AAA6ADo6AGY6OpA6kNtKAABNTU1NTW5NTY5Nbm5NbqtNjshZAABZADJZMn1Znt5hiIhlAABlADlls/xmAABmADpmAGZmOpBmkJBmtrZmtv9uTU1uTW5uTY5ubm5ubqtujshuq6tuq+R1TB91YWF1iIh9Mll9v96DubmIdUyIiGGIiIiOOQCOTU2OTW6OTY6Obk2ObquOjo6OjsiOyMiOyOSOyP+O2PyQOgCQZgCQkGaQtpCQ27aQ2/+eWQCeaCqeg4Oeubmev32e3t6rbk2rbm6rbo6rjk2rjo6rq+SryKuryMir5P+zZQCzjjmz/Py2ZgC22/+2/9u2//+5nmi5uYO5ubm/fTK/np6/3t7Ijk3Ijm7IjqvIq6vIyI7I5KvI5P/I///YjjnYs7PY/PzbkDrb///enlnev33e3p7e3r/e3t7kq27kq47kq6vkyI7k/8jk///8s2X82I78/LP8/Nj8/Pz/tmb/yI7/yMj/25D/27b/29v/5Kv/5Mj/5OT//7b//8j//9v//+T///8DZxCtAAAACXBIWXMAAA7DAAAOwwHHb6hkAAATFUlEQVR4nO2di38j11WAxWNpF7KYN5RngUBa79ZoF2+htN3y8CakMY8CrROgwTUpLo86oRSHGEwTIqCN0/VmwyrAJulKFahY1vyNzL3zkGRJI91zRpq5o+/7/bKyNbozN9anc869c2dUCwAU1IruAPgNAoEKBAIVCAQqEAhUIBCocBToUfCKxUgzjKtAi+kFLAYEAhUIBCoQCFQgEKhAIFCBQKACgUAFAoEKBAIVCAQqEAhUIBCoKLFANRl5dx8yKbNA9yUg0HJBIFCBQKACgUAFAoEKBAIVCAQqEAhUIBCoKFag7u16fTcIejv1zQdjPUIgHyhUoN7Th0H38cP+wW7QvDnWIwTygUIFahtrGru9Z06C7hMnF3uEQD5QeA0URqHukw9sMIova07bIZAHFC1Q/2A7aG8mAo30CIF8oGCBejvbYSn9JAJ5S9GjsHAMFlADeUyhAkX+2DTGKMxTChWoWTfsMg/kMUUX0eMgkFcgEKhAIFDhpUD33v9FBCoJXgr0hfcgUFnwUaA3vpsIVBo8FOg/fv9vEKg0eCjQKz9PDVQe/BPozV99FYHKg38CfeEjjMJKhHcCvflhewuFjyBQOfBOIAMRqDwgEKjwUqAsEGi5IBCoQCBQgUCgAoFABQKBCgQCFQgEKhAIVCAQqEAgUIFAoAKBQAUCgQoEAhUIBCoQCFQgEKhAIFCBQKCizALxnakeUGaBHkpAoOWCQKACgUAFAoEKBAIVCAQqEAhUIBCoQCBQgUCgAoFABQKBiskCne/Z85Jr4Y+dq/vKQyBQlZkm0Ib998rdHA6BQFUmS6Dg7NZWDodAoCqTKVBwumZTWGc9zGdb4Y/P1WomKJkMd/k4/P3z6+b5ZHvy/AUQqMpkC9S6cjcUyJZBnfWtzvrl4/O9tcD8F5yGm9ZDm04vHyfbk+cv7AyBqswMgawdnWtRVAkdsUV1y0SZML0lvyfbk+cv7AyBqsw8ESg4GhqQhYKcRmtHN6LIM9iePH9hZwhUZbIFOlqLh/Fnt2pxqjICxVkqFSjePp69LAhUZWaOwpJ5oDRlXTtuXYqeGhLIbk+evwACVZmZ80BJzWNqnbSIDp8PbUkESrYnz1/YGQJVmcyZ6I0gijCt8OfQCzuMX4s329/3R7Ynz18g8y3tPnESBM16vX7j5GKPEMgHXM6FCc9qZL2lbStOY3dSjxDIB4oVqHH9y2EE6j9/OKlHCOQDBUcgm8J6O2EKs0HoUUPaDoE8oOjlHEag7uOHQ1EIgbyiDAJZ0joIgbxiokDxICwcculXAyFQtZkagfJQJ2KmQO3NB0H/BYbxXlIGgcw80PV0IIZAXjFDILuYw6z62eisZyz5yYSZ6Cozh0B21U8tWvozZclPJghUZeYRaGt8KZDLIRCoysyTwvYHJ96nLPnJBIGqjKtAgus0EKjKOAo0ZclPJghUZRwFmrLkJxMEqjKOAk1Z8pMJAlWZos+FjYNAXoFAoAKBQAUCgQoEAhUIBCoQCFQgEKiYIlCeX8WFQFVmmkDvmwACwRgIBCoQCFQgEKhAIFCBQKACgUCFSKDOusu1YQhUZSQCnX1i3+XasJG31N6TPPPaRATyColAnQ/dDc5+fe4QNPyWnu9tnO9tZV5YhkBeseQIZNQ52jD3n57dIwTyAVENdHar5nB92EWBTteie9rP6hEC+YAohZkbs85fRY+8pUfWnqz4hUBeIRHIJCCTxuZk5C01d6A+yrwwCIG8YtkRyKFHCOQDohqo5XRx4egobOaNPRDIK5Y8Ez3HnWEQyCuWfSpj9vAfgbxi6RGoxkx0peBkKqhAIFCxzKsybAVtx//MRFcGBAIV0wT69AQQCMZAIFCBQKACgUAFAoGK5QqUjucQqCosUyDHHiGQD4gEOt+TLudw6REC+YBIoKOtzGXxF/cl7BEC+YBEIIdLeuy+hD1CIB+QCNT50J+TwiBCJND6lr24cE4QqMrIIpD4qozBSH5tZo8QyAdENdBvyC/rOY2+M3PDfvlqdo8QyAekozBhCosX1bcuH0+djEYgrxAJFCYi4e1dEKhqLHsmOklh0y/PQCCvWPqpjJapoLeC03geoPvESRD0duqbD8Z6hEA+UPC5sHb9xknQP9gNmjfHeoRAPlCsQI3rXw4jUO+ZkygSjfYIgXxgyQKNXVhoxOk++SDoPX1oemNI2yGQBxTyZStDk0hGoPZmItBIjxDIB4r5uqfBufzRCDTSIwTygWK+7qk1ksKogTxmmkAvTyA/gY5GIlD/YJtRmK8sWaC4iL40UgMxD+QxxUSguXqEQD6wZIG4xV3VWHoKQ6BqsewUxi3uKoZIoFbmlYFj+xr6mVvcVQ2JQJ1rx+b7CuaFIrrKSFOYkWhOEKjKSAUSRiC7GqiWWUgjkFfIBOqsi64LO9+ztc/ZraxKGoG8QhqBRFdlJEMw840rs3uEQD4gHsYfzZzQSfeV/DCYRdR83dM7j7308G2bCT+IQMUjEUj6dU+DWUTFDabe/eh7X7I/vB0/IlChiCLQqezbevIQ6PXaBx57KRLp46SwErDMmeg8BPr6nXcigV5/5A4ClQDfBIpqoIcPv/GZyQEIgZbMcgXK4x6JkUBxHEKgovFvPVCkzuvfO3krAi0ZXwV6ceIYHoGWTjGL6ufqUZZAU0sgBFoyxVzWk8VcAr37sc8hUCnwLwLNAIGWyzSB7k8AgWAMBAIVCAQqEAhUIBCoQCBQIRKosz5jXfPovoQ9QiAfkAhkFpN1rspuNO7QIwTyAYlALXNFhmBJq2OPEMgHpDWQ9KsOHHqEQD4gFCjzuoqL+xL2CIF8QCaQudX83CBQlRGOwuYfgyFQtZEI5OYPAlUaiUCnsy9wH9mXsEcI5APMRIMKBAIVCAQqEAhUIBCoYFE9qPDvsh4EKhVEIFAxTaAc3xsEqjIIBCoqKtDkFDwT2f/gSlNVgRRtwQUEQiAVCIRAKoQCOXxVBgJVGplALenXPbn0CIF8QCTQ0aXPE4HAQgpDIBUIhEAqEAiBVJRCoGa9Xr9xcrFHCOQDpRCosTupRwjkA2UQqP/84aQeIZAPlGEmurcTpjAbhB41ZPYBgUpGGQTqPn44FIUQyCvKIJAlrYMQyCsQCIFUlEGg9uaDoP8Cw3gvKcWi+ma9fj0diCGQV1T0sh4EWhYIhEAqEAiBVCAQAqlAIARSgUAIpAKBEEgFAiGQCgRCIBUIhEAqEAiBVCAQAqlAIARSgUAIpAKBEEgFAiGQCgRCIBUrJtA3PlOrfRCBcmTFBHrxkTvv/OLnECg/Vkugdz82VR4EkrFaAr3z2EtztOUWwQ6slkBvP/IPtdrHZ7Wd9E1FM0GghVEmgcIK+u3vnFEDIZALKybQI3fCgdjUEIRA7qyWQKYGQqBcWS2BHr4YprD3Ti2kEcidFRPITCRSROfJigk0V1sEcgCBEEgFAiGQCgRCIBUIhEAqEAiBVCBQrgIpzsN6eg4XgfIV6GUBiqYvI9AYCIRAo1RFoDdqtW//lFigf/7JP5AKlNEUgcYpq0D3fuZT9994zxeFAn3ll75LKlBWUwQap6wCGd78lakhKNuCv6z9lDQCZTZFoHHKLNAr3/OqTKC/+mtxCstsikDjlFegez9NDTQGAs0v0H1FDYRAciokkLgGQiAFCIRAKioikElf935WWEQjkIKKCHT/lVptegmEQIujKgJlU+jJ1KLaBgiUt0AFHfZ9EuK2n5aAQAt6Jws6LAINqKhAGfd1mHXYe++fWXpNleRHv+8HxQL94Y//GgJJ2i5CoHc/Kr6e8c0Pz67dpznyYz/wbWKB/ugXvgOBRG0XINDrtQ9II9ArtZ8TR6Afqn2/OAL9Tu0niECytgsQ6Ot3xCnsX16Vp7Af/hF5Cvvd3yOFCdsuQCBqIAUIZEAgMQhkQCAxswXq7dQ3HyS/IBACjTJToP7BbtC8mfyGQAg0ykyBes+cBN0nTuLfEAiBRpkpUPfJB0Hv6UPTG0ParqAzhMtv62GXSyVQezMRyLCEHkF+lEGgQQQyIJBXlEGgKTUQ+EAZBOofbE8ahYEPlEGgKfNA4AOlEGgEBPIKBAIVCAQqEAhUIBCoQCBQgUCgAoFARQkFAq9YjDTDLOD6f02vPWzrYZfzBIG0bT3scp4gkLath13OkwUIBKsEAoEKBAIVCAQqEAhUIBCoQCBQgUB50r1942T2qybTHqw8d25av344+1WLAYFypH3jpF2/Oft1E+nelhoUHrYpF1cJAuVH//lDcxGL0KDen/ytzCBzWHvoQkCgUdr1+ra4cWM3MAbJdtB/4aSx+d+fFTQ82A7DV10c+nQg0AhhIdK9vStubRNJ93FZNPjXw6BR/6wgFYX2hDWQuQ9PAZRSoDAMyP8YimI0ygRN2UfZHLdhj91w7Hwc9Zq7I9dwzkdUtpsbGARNeehUUEaBwrfi//5e3FpejAbRXSTaMoHscRvh2+kaCpKo135qZzdouB08Lttt6HP1Nh8WJJBqYGn+Ek1xe3Ex+lYcfYQCRcdt1F2LkTTqCXJnWrY36s9Ki3clixFIN7BsbPcPbnxVWhSKi9FG7Gz4ZkoKYelxNVFvULa3i5oJWohAqoHlt15r3/jaJ82fRRiSpcVo87ejN6G5LRtIiY8rj3rKsj0PFiOQYmBpSolGVFS6votx3hQVo4H5NEcf4+ZTjv68FUcuwXGTWQNJ1IuKLlHZniOLSWHygaUtBMIMJigKk7wpKUZD+v92EiWCtutMUJz7BMdNZw0EUS/8320Iy/Y8yV+g6EMlHFiaP2f/oL7tXosO8qagGH0rSQHGoN7fObaOc5/7cQezBs5Rz7Y1d48TlO25krtA8YdKOrBs3gw/iqKRuCZvNtIStC2YgUpynzOD+tk56tkSsbj55wF5C5R+qIQDy/7Bn24LC2jFhGxSP4tIc5/guEn97Bz1guA/nzVlu3iokRd5CzT0oZL9TZOaQNRWOiErjiEp8vbCWYO0eSHzzwNyT2GaQekAx+TX/aR9kOZNRQxJcc19cZflswYxBQ7ALAsZhckGpdE72Nv55dtPOSa/ZB1Xr66YkBUYlNRqvR3nmi3t8k7duX5OSn7btmo1kEUyKDW19007L//Nrzq+ld3bz9o7oYdt3S341mtpF1zr53ggLVkCNNxl5/q5kXzUbnytwBnEmMUIJBqUBsYgwanwsGqKKmfJaXTFqdd0IO1+3OEuu9fPcckvXDWQMzkKFEfWMJ7/l2hQGvS/9MeCYsA2lf4x47kbQQ7SDKRVXc6j5M+RHAWKIquJ54JBaTN8B9s3B9+pMD82B0kaBum8pbCS0A2khV3Op+TPjxwFiiKr4INl564bdTOL4z6miHKQmUWUEM1b1q87x5+3Bm+g60A6Hi6IupwukymNQXlGIGFkHVpG6n4KP2kpPCEtnrcczF27Sp8MFyRdHlomI5kyXwT5CSSNrEMnhP7swDV8JefOgvi0tAPRh1k6bxkXsr0d1/SXDhcEXS72+ovJ5DwKExiUzl33viRYzp6eO+v/+2uzXz3EyJo398wZh9tvOg+kh4YLrl0u+PqLyeQ9jBdEVtXctTQHDT7M7kEk0J3/Eg8XCr7+YjIlWVQvPyEkzEGDD7PzvOXI2g83bFPhcEG1TGZxlEUg3Qkh0ehN+mFWrP0YNHUuZZTLZBZGWQRynrseIMpBgfzDrFj7kS67dh4uaJfJLIySCOR+QmiAcw5Kjin8MCsmguOmguGCepnMoiiJQIK5az2yD7OiftbMIeezTCZ/SiJQMcg/zIowoGiqXHu2EFZaIAWKiWB5U+1QYxEgkEdohhqLAoE8QjPUWBQI5BGFDDVmgECgAoFABQKBCgQCFQgEKhAIVFRIoPO9WsRa+tT//GP6Y+fqfvTDafiKS/vTd5O+cHina1NfvupUSCDD6Ls//Fvy8+nl4yBo1bbm3MX53ob998rdXPtZHVZNoPM9q87RdCEmCRSc3Zpu3GpTTYFM4lkLOuu12ob91zwkWzaGXxr+07n6XK0W+jR43D8yGet0bfj15rd4T8lW++vKe1VJgc731ux/5jcbO8K8lQSWlnEgfakRaP3ysX1x8nh1vxWmuThUJQK1rtxN9hRvjdqvr7pBlRSoZeucSJr/vRvEgSbJTKdRUTwQaGv08eq+UaVz7di8OBXo8nGyp3hr/IJVp5oCmQonlaZlh10jpc3ZrSt3Byls39Y4w49hgooy2HAESvaUbD1icBasgEBnt8K3fCQCxa/LEqhz7Z+iDJYKFBY+yZ4GW89u1S6vehiqpkBmnidOYVHoSCPQ4GE0hYUpKXkMnz/f+804QQ2NwpI9DW1ldFZNgZIi2r7tJmysD1LYkZEr2rgRPl6aVESbOinOTkPzQMme4q220BqNa6tIJQWKh/GmTFkzpcqlv4gzlMHU0HYgZobhv/WJaBhvi+rnhorrZHQVz0Sb1yd7Sra2ZkxprwYVE0hAYtZIMMkeYjEAG4BAEwU63chqkr11tUCgCQJ11rNOfWVvXTUQCFQgEKhAIFCBQKACgUAFAoEKBAIV/w+dA+5LC+3QggAAAABJRU5ErkJggg==" /><!-- --></p>
+</div>
+<div class="section level3">
+<h3><strong>4.3 視覺化用藥歷史</strong></h3>
+<p><code>get.DispensingPlot</code>可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">get.DispensingPlot</span>(<span class="dt">df =</span> sample_data_subset, 
+                   <span class="dt">MemberIDColName =</span> MemberId,
+                   <span class="dt">DrugColName =</span> NationalDrugCode,
+                   <span class="dt">DispenseDateColName =</span> Dispensing,
+                   <span class="dt">Member =</span> <span class="dv">42</span>, 
+                   <span class="dt">TimeInterval =</span> <span class="dv">20</span>, 
+                   <span class="dt">Unit =</span> day)</code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -206,27 +206,45 @@ index_DDD <- calDDDs.range(case = sample_data_subset_atc,
 knitr::kable(index_DDD)
 ```
 
-## 四、 藥物資料及分析結果視覺化功能
+## 四、 藥物資料及分析結果視覺化功能  
+有意義的視覺化呈現資料內容，可以幫助使用者者快速了解資料內容或是呈現分析結果，pharm套件提供資料及分析結果視覺化的功能，讓使用者可以快速看出資料中藥品類別的分布狀況、呈現藥物世代分析結果以及各個病人的用藥歷史。
 
-### **4.1 ATC分布統計圖**
+### **4.1 ATC分布統計圖**  
+`get.ATC1LevelPlot`功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數`level`讓使用者可以選擇繪製ATC編碼第一階或第二階分布。
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-get.ATC1LevelPlot(sample_data_ATC1LevelPlot)
+#一階分布
+get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+                  ATCColName = ATC, 
+                  level = 1)
+
+
+#二階分布
+get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+                  ATCColName = ATC, 
+                  level = 2)
+
 ```
 
-### **4.2 藥物世代長條圖**
+### **4.2 藥物世代長條圖**  
+`get.DrugEraPlot`功能，可將以`get.DrugEra`計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-get.DrugEraPlot(sample_data_DrugEraPlot, 
+get.DrugEraPlot(df = sample_data_DrugEraPlot,
                 MemberIDColName = MemberId,
-                DrugColName = ATC)
+                DrugColName = ATC,
+                DrugEraColName = DrugEra,
+                SupplyDaysColName = SupplyDays)
 ```
 
-### **4.3 視覺化用藥歷史**
+### **4.3 視覺化用藥歷史**  
+`get.DispensingPlot`可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-get.DispensingPlot(sample_data_subset, 
-                   MemberIDColName = MemberId, 
+get.DispensingPlot(df = sample_data_subset, 
+                   MemberIDColName = MemberId,
+                   DrugColName = NationalDrugCode,
+                   DispenseDateColName = Dispensing,
                    Member = 42, 
                    TimeInterval = 20, 
                    Unit = day)
