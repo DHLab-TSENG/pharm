@@ -1,10 +1,8 @@
 #' Get NHINO based on RCFNO
 #'
-#' @import dplyr
 #' @param df data.frame include RCFNO
 #' @param RCFNoColName A colum for RCFNo of df
 #' @export
-
 get.NHINoViaRCFNo <- function(df, RCFNoColName = RCFNO){
 
   colnames(df)[colnames(df)==deparse(substitute(RCFNoColName))] <- "RCFNO1"

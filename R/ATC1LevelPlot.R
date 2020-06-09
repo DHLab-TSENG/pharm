@@ -1,7 +1,4 @@
 #' Get ATC 1 level histogram plot
-#' @import data.table
-#' @import dplyr
-#' @import ggplot2
 #' @param df data.frame include ATC code
 #' @param ATCColName A colum for ATC of df
 #' @export

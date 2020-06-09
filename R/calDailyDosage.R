@@ -1,10 +1,4 @@
 #' Calculate dailydosage for midication coding in RxNorm
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
-#' @import foreach
-#' @import doParallel
-#' @import data.table
-#' @import ggplot2
 #' @param df data.frame include ATC code
 #' @param RxCuiColName A colum for RxCui of df
 #' @param QuantityColName A colum for Quantity of df

@@ -1,7 +1,5 @@
 #' Get dispensing plot
-#' @import data.table
-#' @import dplyr
-#' @import ggplot2
+#'
 #' @param df data.frame include dispense info
 #' @param MemberIDColName A colum for memebr id
 #' @param Member A colum for the member who be plot

@@ -1,15 +1,9 @@
 #' Get RxCui based on ATC
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
-#' @import foreach
-#' @import doParallel
-#' @import dplyr
 #' @param df data.frame include ATC
 #' @param AtcColName A colum for ATC of df
 #' @param Differ_ColName if colum for NHINo of df not named "ATC"
 #' @param cores number of parallel operation
 #' @export
-
 get.RxCuiViaAtc <- function(df, AtcColName = ATC, cores=8){
 
   colnames(df)[colnames(df)==deparse(substitute(AtcColName))] <- "ATC"

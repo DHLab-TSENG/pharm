@@ -1,17 +1,11 @@
 #' Get NDC code based on RxCui
 #' WHO Collaborating Centre for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
-#' @import foreach
-#' @import dplyr
-#' @import doParallel
-#' @import data.table
+#'
 #' @param df data.frame include RxCui
 #' @param RxCuiColName A colum for RxCui of df
 #' @param cores number of parallel operation
 #' @param MatchRoute An option to mapping ingredient and route
 #' @export
-
 get.AtcViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = FALSE){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"

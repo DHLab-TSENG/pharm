@@ -1,8 +1,6 @@
 #' Get ATC code' ddd value
 #'
-#' @import dplyr
 #' @param atc data.frame include ATC code
-
 get.ddd <- function(atc){
 
   ddd <- atc%>%
