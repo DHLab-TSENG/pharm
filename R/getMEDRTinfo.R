@@ -1,14 +1,9 @@
 #' Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
-#' @import foreach
-#' @import dplyr
-#' @import doParallel
+#'
 #' @param df data.frame include RxCui
 #' @param RxCuiColName A colum for RxCui of df
 #' @param cores number of parallel operation
 #' @export
-
 get.MEDRTinfo <- function(df, RxCuiColName = RxCui, cores =8){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"

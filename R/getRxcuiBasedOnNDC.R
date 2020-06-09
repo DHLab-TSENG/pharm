@@ -1,14 +1,9 @@
 #' Get RxCui based on NDC
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
-#' @import foreach
-#' @import doParallel
-#' @import dplyr
+#'
 #' @param df data.frame include NDC
 #' @param NdcColName A colum for NDC of df
 #' @param cores number of parallel operation
 #' @export
-
 get.RxCuiViaNdc <- function(df, NdcColName = NDC, cores=8){
 
   colnames(df)[colnames(df)==deparse(substitute(NdcColName))] <- "NDC"

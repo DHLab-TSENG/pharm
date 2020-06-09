@@ -2,8 +2,6 @@
 #'
 #' This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.
 #'
-#' @import dplyr
-#' @import data.table
 #' @param df data.frame with MemberID ,Drug,DispenseDate ,DaysSupply, or with MemberID ,Drug, StartDate, EndDate
 #' @param window allowed gap between pharmacy claims, default is 30
 #' @param DrugColName A colum for drug which patient use
@@ -12,8 +10,6 @@
 #' @param StartDateColName A colum for drug start day
 #' @param EndDateColName A colum for drug end day
 #' @export
-#'
-
 get.DrugEra <- function(df, window = 30,
                         MemberIDColName = MemberID,
                         DrugColName = Drug,

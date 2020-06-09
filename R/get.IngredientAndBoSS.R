@@ -1,13 +1,8 @@
 #' Get Ingredient and Basis of strength substance (BoSS)
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
-#' @import foreach
-#' @import doParallel
 #' @param df data.frame include RxCui
 #' @param RxCuiColName A colum for RxCui of df
 #' @param cores number of parallel operation
 #' @export
-
 get.BoSSViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
   dfu <- df %>% select("wRxCui") %>% unique()

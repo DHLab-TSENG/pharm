@@ -1,11 +1,7 @@
 #' Get RxCui based on may treat
 #'
-#' @import dplyr
-#' @import stringr
-#' @import data.table
 #' @param strmaytreat A may treat
 #' @export
-
 get.RxCuiViaMaytreat <- function(strmaytreat){
 
   strmaytreat <- str_to_lower(gsub(" ","",strmaytreat))

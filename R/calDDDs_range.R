@@ -1,7 +1,5 @@
 #' Calculate subjects' ddd in a period
 #'
-#' @import dplyr
-#' @import data.table
 #' @param case data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration
 #' @param index_day observation day
 #' @param expo_range_before days before observation day
@@ -11,7 +9,6 @@
 #' @param DaysSupplyColName a colum for supply day
 #' @param DailyDosageColName a colum for daily dosage
 #' @export
-
 calDDDs.range <- function(case,
                           index_dayColName = Index_Day,
                           expo_range_before = 36000,

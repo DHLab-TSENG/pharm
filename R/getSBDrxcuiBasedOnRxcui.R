@@ -1,14 +1,9 @@
 #' Get Semantic Branded Drug RxCui  based on ingredient RxCui
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
-#' @import foreach
-#' @import dplyr
-#' @import doParallel
+#'
 #' @param df data.frame include RxCui
 #' @param RxCuiColName A colum for RxCui of df
 #' @param cores number of parallel operation
 #' @export
-
 get.SbdScdRxCuiViaRxCui <- function(df, RxCuiColName = RxCui, cores = 8){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"

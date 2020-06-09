@@ -1,10 +1,7 @@
 #' Calculate subjects' acculated ddd before last dispensing
 #'
-#' @import dplyr
-#' @import data.table
 #' @param case data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration
 #' @export
-
 calDDDs.accumulat <- function(case,
                               PatientIdColName = MemberId,
                               DispensingColName = DispenseDate,

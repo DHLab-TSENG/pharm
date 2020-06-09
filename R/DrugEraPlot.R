@@ -1,7 +1,5 @@
 #' Get drug histogram plot
-#' @import data.table
-#' @import dplyr
-#' @import ggplot2
+#'
 #' @param df data.frame include drgu era info
 #' @param MemberIDColName A colum for member id of df
 #' @param DrugColName A colum for drug og df

@@ -1,8 +1,5 @@
 #' Get RxCui based on may prevent
 #'
-#' @import dplyr
-#' @import stringr
-#' @import data.table
 #' @param strmaytreat A may prevent
 #' @export
 get.RxCuiViaMayprevent <- function(strmayprevent){
