@@ -4,8 +4,13 @@
 \alias{calDailyDosage}
 \title{Calculate dailydosage for midication coding in RxNorm}
 \usage{
-calDailyDosage(df, RxCuiColName = RxCui, QuantityColName = Quantity,
-  DaysSupplyConName = DaysSupply, cores = 4)
+calDailyDosage(
+  df,
+  RxCuiColName = RxCui,
+  QuantityColName = Quantity,
+  DaysSupplyConName = DaysSupply,
+  cores = 4
+)
 }
 \arguments{
 \item{df}{data.frame include ATC code}
@@ -18,4 +23,14 @@ calDailyDosage(df, RxCuiColName = RxCui, QuantityColName = Quantity,
 }
 \description{
 Calculate dailydosage for midication coding in RxNorm
+}
+\details{
+This function provides user to simply calculate daily dosage for drug in RxCui.
+
+The calculation model: The dosage of the drug multiplied by the number of the days of drug taken, and then divided by the number of days of drug supplied.
+}
+\examples{
+# sample of calculating daily dosage for drug in RxCui.
+sample_data_subset_atc <- calDailyDosage(df = sample_data_subset_atc, RxCuiColName = RxCui, QuantityColName = Quantity, DaysSupplyConName = DaysSupply, cores = 2)
+head(sample_data_subset_atc)
 }

@@ -1,0 +1,59 @@
+url: https://dhlab-tseng.github.io/pharm/
+
+title: pharm
+
+template:
+  params:
+    docsearch:
+    index_name: pharm
+
+articles:
+
+- title: All vignettes
+  desc: ~
+  contents:
+  - Pharm_Overview
+
+reference:
+
+- title: I. Get Drug Ingredient Via Indication
+  desc: ~
+  contents:
+  - getRxcuiViaMaytreat
+  - getRxcuiViaMayprevent
+  - getMayprevent
+  - getSbdRxcuiViaRxcui
+
+- title: II. Drug Code Integration
+  desc: ~
+  contents:
+  - getNdcViaSbdRxcui
+  - getRxcuiViaNdc
+  - getAtcViaRxcui
+  - getRxcuiViaAtc
+  - getNHINoViaRCFNo
+  - getNHINoViaHC
+  - getAtcViaNHINo
+
+- title: III. Calculate Drug Data
+  desc: ~
+  contents:
+  - getDrugEra
+  - getDDDs
+  - calDailyDosage
+  - calDDDsAccumulation
+  - calDDDsRange
+
+- title: IV. Visulization
+  desc: ~
+  contents:
+  - getAtcLevelPlot
+  - getDrugEraPlot
+  - getDispensingPlot
+
+- title: Get Info
+  desc: ~
+  contents:
+  - getRxcuiInfo
+  - getBoSSViaRxcui
+  - getMEDRTInfo

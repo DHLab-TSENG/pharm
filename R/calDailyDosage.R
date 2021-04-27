@@ -1,16 +1,24 @@
 #' Calculate dailydosage for midication coding in RxNorm
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
+#' @importFrom parallel makeCluster
+#' @importFrom parallel stopCluster
 #' @import foreach
 #' @import doParallel
-#' @import data.table
 #' @import ggplot2
 #' @param df data.frame include ATC code
 #' @param RxCuiColName A colum for RxCui of df
 #' @param QuantityColName A colum for Quantity of df
 #' @param DaysSupplyConName A colum for DaysSupply of df
-#' @export
+#' @details
+#' This function provides user to simply calculate daily dosage for drug in RxCui.
 #'
+#' The calculation model: The dosage of the drug multiplied by the number of the days of drug taken, and then divided by the number of days of drug supplied.
+#' @examples
+#' # sample of calculating daily dosage for drug in RxCui.
+#' sample_data_subset_atc <- calDailyDosage(df = sample_data_subset_atc, RxCuiColName = RxCui, QuantityColName = Quantity, DaysSupplyConName = DaysSupply, cores = 2)
+#' head(sample_data_subset_atc)
+#' @export
+#@import data.table
+
 calDailyDosage <- function(df,
                            RxCuiColName = RxCui,
                            QuantityColName = Quantity,

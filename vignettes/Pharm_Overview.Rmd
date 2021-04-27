@@ -1,0 +1,366 @@
+---
+title: "Pharm Overview"
+author: "Yeh-Yung, Chiu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chinese Version}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## 套件版本
+使用者需先安裝本套件。
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("DHLab-TSENG/pharm")
+library(pharm)
+```
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(pharm)
+library(dplyr)
+```
+
+## 範例資料  
+`sample_data`資料內容的生成方式為，先將來源資料-美國真實給藥紀錄去識別化，對原始資料的病患編碼重新編排順序，並將每筆給藥日期做時間推移。再將部份給藥紀錄中的NDC替換為相同藥物但不同的NDC，意指該藥物的NDC編碼歷史中不同的NDC編碼。最終資料結果，共產生2,747,617筆給藥紀錄，39,989筆病患編號，分別來自於不同的病人。
+
+本套件功能演示所使用的資料內容`sample_data_subset`，是由`sample_data`資料中`MemberId`病患編號 = 1 AND 42 select出的資料子集。資料欄位如下:
+
+* `MemberId` 病患編號
+* `DispenseDate` 配藥日期(時間區間為 2025-12-06 至 2038-01-25)
+* `NationalDrugCode(NDC)` 美國藥物編碼(共17,326種不同的藥物編碼)
+* `Quantity` 發放數量
+* `DaysSupply` 藥物供給天數
+
+```{r message=FALSE, warning=FALSE}
+knitr::kable(sample_data_subset)
+```
+
+## 功能演示
+### 一、適應症查尋藥物功能
+### **1.1 Get RxCui Via Maytreat**
+資料來源是從美國退伍軍人局`MED-RT`資料庫建立此功能，使用者透過輸入適應症可以取得其治療用的所有藥物成分。
+
+範例:以輸入適應症`esophagitis`食道炎為例，可以取得食道炎所有藥物成分的RxCui，並且存在`Esophagitis_List`表中。資料欄位如下:
+
+* `RxCui` 藥物RxCui
+* `Name` 藥物名稱
+* `MinCooncept.Id` 適應症Id
+* `MinConcept.Name` 適應症名稱
+
+```{r message=FALSE, warning=FALSE}
+Esophagitis_List <- getRxcuiViaMaytreat("esophagitis")
+knitr::kable(
+  head(Esophagitis_List)
+  )
+```
+
+### **1.2 Get SBD SCD RxCui Via RxCui**
+在取得`Esophagitis_List`適應症之藥物成分RxCui表後，使用者透過輸入RxCui表可以取得所有含有這些藥物成份之藥廠品牌以及臨床用藥。
+
+範例:輸入`Esophagitis_List`食道炎的適應症之藥物成分RxCui表，可以取得轉換後的SBD或SCD RxCui，並且存在`Esophagitis_SBD_SCD_List`表中。資料欄位如下:
+
+* `RxCui` 藥物RxCui
+* `Name` 藥物名稱
+* `MinCooncept.Id` 適應症Id
+* `MinConcept.Name` 適應症名稱
+* `SBD.rxcui` 藥物SBD RxCui
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_SBD_SCD_List <- getSbdScdRxcuiViaRxcui(df = Esophagitis_List[3,],
+                                                    RxCuiColName = RxCui,
+                                                    cores = 2)
+knitr::kable(
+  head(Esophagitis_SBD_SCD_List)
+  )
+```
+
+### 二、藥物編碼轉換功能
+
+本套件提供以下不同藥物詞彙表間藥物編碼轉換
+
+* U.S. National Drug Code  
+* NLM RxNorm  
+* WHO ATC
+* 台灣全民健康保險藥品編碼
+
+### **2.1 NDC 與 RxNorm 編碼轉換**
+#### **2.1.1 RxNorm 轉換為 NDC** 
+在取得`Esophagitis_SBD_SCD_List`適應症之藥物成分的SBD或SCD RxCui表後，使用者透過輸入SBD或SCD RxCui表可以取得所有含有這些藥物成份之NDC，但因為這些藥物成份中，一個藥物會因為來自不同藥廠品牌而有不同包裝和NDC，因此輸出結果大多會產生一對多，一個藥物對上多個藥廠品牌的NDC，無相對應代碼則顯示NA。
+
+範例:輸入`Esophagitis_SBD_SCD_List`食道炎的適應症之藥物成分SBD或SCD RxCui表，可以取得轉換後的NDC，並且存在`Esophagitis_NDC_List`表中。資料欄位如下:
+
+* `RxCui` 藥物RxCui
+* `Name` 藥物名稱
+* `MinCooncept.Id` 適應症Id
+* `MinConcept.Name` 適應症名稱
+* `SBD.rxcui` 藥物SBD RxCui
+* `NDC` 藥物NDC
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_NDC_List <- getNdcViaSbdRxcui(df = Esophagitis_SBD_SCD_List[1,],
+                                           SBDRxCuiColName = SBD.rxcui,
+                                           cores = 2)
+knitr::kable(
+  head(Esophagitis_NDC_List)
+  )
+```
+
+#### **2.1.2 NDC 轉換為 RxNorm** 
+在取得`sample_data_subset`表後，使用者透過輸入NDC表可以取得所有含有這些藥物之RxNorm。
+
+範例:輸入`sample_data_subset`範例資料來源，可以取得轉換後的RxNorm，並且存在`sample_data_subset_rxcui`表中。資料欄位如下:
+
+* `MemberId` 病患編號
+* `DispenseDate` 配藥日期(時間區間為 2025-12-06 至 2038-01-25)
+* `NationalDrugCode(NDC)` 美國藥物編碼(共17,326種不同的藥物編碼)
+* `Quantity` 發放數量
+* `DaysSupply` 藥物供給天數
+* `RxCui` 藥物RxCui
+* `ndcStatus` 藥物NDC狀態
+
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_rxcui <- getRxcuiViaNdc(df = sample_data_subset,
+                                            NdcColName = NationalDrugCode)
+knitr::kable(head(sample_data_subset_rxcui))
+```
+
+### **2.2 RxNorm 與 ATC 編碼轉換**
+#### **2.2.1 RxNorm 轉換為 ATC** 
+在取得`sample_data_subset_rxcui`藥物之RxCui表後，使用者透過輸入RxCui表可以取得藥物之ATC，但因為在在ATC中相同的藥物成份會有不同的用藥路徑和ATC編碼，因此本套件參考[Bodenreider et al.](https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index)的研究，加入了是否同時比對用藥路徑的參數`MatchRoute`供使用者選擇，若使用者欲同時比對用藥路徑則在該參數中填入`TRUE`，若不需要則填入`FALSE`。
+
+範例:輸入`sample_data_subset_rxcui`範例資料的RxCui表，是否同時比用藥路徑參數`MatchRoute` = `False`，可以取得轉換後的ATC，並且存在`sample_data_subset_atc`表中。資料欄位如下:
+
+* `MemberId` 病患編號
+* `DispenseDate` 配藥日期(時間區間為 2025-12-06 至 2038-01-25)
+* `NationalDrugCode(NDC)` 美國藥物編碼(共17,326種不同的藥物編碼)
+* `Quantity` 發放數量
+* `DaysSupply` 藥物供給天數
+* `RxCui` 藥物RxCui
+* `ATC` 藥物ATC
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
+```
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_atc <- getAtcViaRxcui(df = sample_data_subset_rxcui,
+                                          RxCuiColName = RxCui,
+                                          cores = 2,
+                                          MatchRoute = FALSE)
+knitr::kable(
+  head(sample_data_subset_atc)
+  )
+```
+
+#### **2.2.2 ATC 轉換為 RxNorm** 
+使用者透過輸入ATC可以取得藥物之RxCui。
+
+範例:輸入`AtcColName`的ATC，直接查詢藥物對應的RxCui，可以取得轉換後的RxCui，並且存在`sample_atc_rxcui`表中。資料欄位如下:
+
+* `RxCui` 藥物RxCui
+* `ATC` 藥物ATC
+
+```{r, warning=FALSE, message=FALSE}
+sample_atc_rxcui <- getRxcuiViaAtc(df = sample_ATC,
+                                    AtcColName = ATC,
+                                    cores = 2)
+knitr::kable(
+  head(sample_atc_rxcui)
+  )
+```
+
+### **2.3 台灣藥品編碼轉換**  
+#### **2.3.1 台灣醫院藥物編碼 轉換為 台灣健康保險藥物編碼**
+使用者透過輸入台灣任一醫院藥物編碼可以取得對應之台灣健康保險藥物編碼，若無對應之編碼則顯示`NA`。
+
+範例:輸入台灣醫院藥品編碼，可以取得轉換後的台灣健康保險藥物編碼。
+
+```{r, warning=FALSE, message=FALSE}
+# getNHINoViaHC()
+```
+
+#### **2.3.2 長庚醫院藥物編碼 轉換為 台灣健康保險藥物編碼**
+使用者透過輸入長庚醫院藥物編碼可以取得對應之台灣健康保險藥物編碼，若無對應之編碼則顯示`NA`。
+
+範例:輸入長庚醫院藥品編碼，可以取得轉換後的台灣健康保險藥物編碼。資料欄位如下:
+
+* `CGMH_CODE` 長庚醫院藥物編碼
+* `NHINO1` 台灣健康保險藥物編碼
+
+```{r, warning=FALSE, message=FALSE}
+knitr::kable(
+  head(
+    getNHINoViaRCFNo(df = sample_taiwan_drug, 
+                      RCFNoColName = CGMH_CODE)
+    )
+  )
+```
+
+#### **2.3.3 台灣健康保險藥品編碼 轉換為 ATC**  
+使用者透過輸入台灣健康保險藥物編碼可以取得對應之ATC。
+
+範例:輸入台灣健康保險藥物編碼，可以取得轉換後的ATC。資料欄位如下:
+
+* `NHINo` 台灣健康保險藥物編碼
+* `ATC_CODE` 藥物ATC
+
+```{r, warning=FALSE, message=FALSE}
+knitr::kable(
+  head(
+    getAtcViaNHINo(df = sample_nhino_code,
+                    NHINoColName = NHINo)
+    )
+  )
+```
+
+### 三、 藥物資料分析功能
+### **3.1 藥物世代計算** 
+
+藥物世代(Drug Era)的概念(Ryan, 2010)，是將連續性的處方用藥串連成單一藥物開方長度，計算方式有兩種，每次病患拿藥後，根據處方之領藥時間(Dispense Date)加上處方之藥物供給時間 (Drug Supply Days) 的時間區間為一個事件(Event)。
+
+1.若病患拿藥與拿藥事件間的時間間隔(gap)超過研究者定義之間隔(persistent window)，則將此兩事件視為不同之Drug Era。
+
+2.若小於則視為同一Drug Era。
+
+範例:如圖1所示，Event 1與Event 2小於定義之gap長度，視為為同一Drug Era；Event 2與Event 3大於定義之gap長度則視為不同Drug Era。此功能輸出每筆給藥紀錄之:  
+
+* `MemberId` 病患編號
+* `DispenseDate` 配藥日期(時間區間為 2025-12-06 至 2038-01-25)
+* `NationalDrugCode(NDC)` 美國藥物編碼(共17,326種不同的藥物編碼)
+* `Quantity` 發放數量
+* `DaysSupply` 藥物供給天數	
+* `Drug Era` 藥物世代
+* `Drug Era Start Date` 藥物世代起開始日期
+* `Drug Era End Date` 藥物世代結束日期
+* `Gap` 發藥紀錄間的時間間隔
+* `Exposure Days` 藥物世代天數
+* `Supply Days` 藥物世代中藥物的供給天數
+
+```{r, warning=FALSE, message=FALSE}
+knitr::kable(getDrugEra(MemberIDColName = MemberId,
+                         sample_data_subset,
+                         DrugColName = NationalDrugCode,
+                         DispenseDateColName = DispenseDate,
+                         DaysSupplyColName = DaysSupply))
+```
+
+### **3.2 定義每日劑量計算** 
+#### **3.2.1 計算每日服用的藥物量**
+使用者透過病患每日所服用的藥物量(Daily Dosage)，可針對藥物的RxNorm進行簡單的每日劑量計算，其計算方式為，(該藥物之劑量 * 拿藥數量) / 藥物供給天數。
+
+範例:資料欄位如下:
+
+* `MemberId` 病患編號
+* `DispenseDate` 配藥日期(時間區間為 2025-12-06 至 2038-01-25)
+* `NationalDrugCode(NDC)` 美國藥物編碼(共17,326種不同的藥物編碼)
+* `Quantity` 發放數量
+* `DaysSupply` 藥物供給天數
+* `RxCui` 藥物RxCui
+* `ATC` 藥物ATC
+* `DailyDosage` 每日服用之DDD量
+* `Unit` 單位
+
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_atc <- calDailyDosage(df = sample_data_subset_atc, 
+                                         RxCuiColName = RxCui, 
+                                         QuantityColName = Quantity, 
+                                         DaysSupplyConName = DaysSupply, 
+                                         cores = 2)
+knitr::kable(
+  head(sample_data_subset_atc)
+)
+```
+
+#### **3.2.2 計算累積服用的藥物總量**
+使用者透過`sample_data_subset_atc`，計算病患所有用藥時間所累積之DDD量。
+
+範例:資料欄位如下:
+
+* `MemberId` 病患編號
+* `DDDs` 累積之DDD總量
+
+```{r, warning=FALSE, message=FALSE}
+accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
+                                   PatientIdColName = MemberId,
+                                   DispensingColName = DispenseDate,
+                                   AtcCodeColName = ATC,
+                                   DailyDosageColName = DailyDosage,
+                                   DurationColName = DaysSupply)
+knitr::kable(accumulat_DDD)
+```
+
+#### **3.2.3 計算自訂區間服用的藥物總量**
+計算病患在特定日期前後的自訂區間所累積之DDD量，使用者選擇計算DDD的時間點`index day`，可以取得在這個時間點前後多少時間區間內所累積的DDD量。
+
+範例:資料欄位如下:
+
+* `MemberId` 病患編號
+* `Start_day` 病患用藥開始日期
+* `Index_Day` 計算DDD值的時間點
+* `End_day` 病患用藥結束日期
+* `DDDs_Before_15_Days` 計算DDD值的時間點前15天
+* `DDDs_After_30_Days` 計算DDD值的時間點後30天
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
+```
+```{r, warning=FALSE, message=FALSE}
+index_DDD <- calDDDsRange(case = sample_data_subset_atc,
+                           index_dayColName = Index_Day,
+                           expo_range_before = 15,
+                           expo_range_after = 30,
+                           idColName = MemberId,
+                           AtcCodeColName = ATC,
+                           DispenseDateColName = DispenseDate,
+                           DaysSupplyColName = DaysSupply,
+                           DailyDosageColName = DailyDosage)
+knitr::kable(index_DDD)
+```
+
+### 四、 藥物資料及分析結果視覺化功能
+視覺化呈現以上計算後的資料結果，可以幫助使用者快速了解資料內容或是分析結果，也能快速看出資料中藥物類別的分布狀況、呈現藥物世代分析結果以及個別病患的用藥歷史。
+
+### **4.1 ATC分布統計圖**  
+`get.ATC1LevelPlot`功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數`level`讓使用者可以選擇繪製ATC編碼第一階或第二階分布。
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+#一階分布
+getAtcLevelPlot(df = sample_data_ATC1LevelPlot, 
+                  ATCColName = ATC, 
+                  level = 1)
+
+
+#二階分布
+getAtcLevelPlot(df = sample_data_ATC1LevelPlot, 
+                  ATCColName = ATC, 
+                  level = 2)
+
+```
+
+### **4.2 藥物世代長條圖**  
+`get.DrugEraPlot`功能，可將以`get.DrugEra`計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+getDrugEraPlot(df = sample_data_DrugEraPlot,
+                MemberIDColName = MemberId,
+                DrugColName = ATC,
+                DrugEraColName = DrugEra,
+                SupplyDaysColName = SupplyDays)
+```
+
+### **4.3 視覺化用藥歷史**  
+`get.DispensingPlot`可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+getDispensingPlot(df = sample_data_subset, 
+                   MemberIDColName = MemberId,
+                   DrugColName = NationalDrugCode,
+                   DispenseDateColName = Dispensing,
+                   Member = 42, 
+                   TimeInterval = 20, 
+                   Unit = day)
+```
+
+
+

@@ -1,6 +1,6 @@
 #' Get may prevent based on RxCui
-#' @importFrom parallel::makeCluster()
-#' @importFrom parallel::stopCluster()
+#' @importFrom parallel makeCluster
+#' @importFrom parallel stopCluster
 #' @import foreach
 #' @import dplyr
 #' @import doParallel
@@ -9,7 +9,7 @@
 #' @param cores number of parallel operation
 #' @export
 
-get.MayPrevent <- function(df, RxCuiColName = RxCui, cores =16){
+getMayprevent <- function(df, RxCuiColName = RxCui, cores =16){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
   dfu <- df %>% select("wRxCui") %>% unique()
