@@ -1,22 +1,5 @@
-#' Get NDC code based on RxCui
-#' WHO Collaborating Centre for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018
-#' @importFrom parallel makeCluster
-#' @importFrom parallel stopCluster
-#' @import foreach
-#' @import dplyr
-#' @import doParallel
-#' @param df data.frame include RxCui
-#' @param RxCuiColName A colum for RxCui of df
-#' @param cores number of parallel operation
-#' @param MatchRoute An option to mapping ingredient and route
-#' @details
-#' This function provides user to get Anatomical Therapeutic Chemical Classification System(ATC) via RxCui. The same drug components in ATC might depend on different ATC medication route. Hence, this function also refers to the research of Bodenreider et al. and adds the parameter MatchRoute for user to consider. If user wants to consider and compare the ATC medication route, input TRUE in the parameter MatchRoute, otherwise input FALSE. # WHO Collaborating Centre for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018
-#' @examples
-#' # sample of getting ATC via RxCui.
-#' sample_data_subset_atc <- getAtcViaRxcui(df = sample_data_subset_rxcui,RxCuiColName = RxCui,cores = 2,MatchRoute = FALSE)
-#' head(sample_data_subset_atc)
+#' @rdname getAtcViaRxcui
 #' @export
-#@import data.table
 
 getAtcViaRxcui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = FALSE){
 

@@ -1,24 +1,28 @@
 Package: pharm
 Type: Package
-Title: A package mapping drug between ATC RxNorm NDC and NHINo
+Title: An open-source package tool aimed at integrating standard drug code, indication screening and definition of daily dose calculation function.
 Version: 0.1.0
-Author@R: person("Yeh-Yung", "Chiu", email = "lawrance39@gmail.com", role  = "cre")
+Author@R: c(person("Yeh-Yung", "Chiu", email = "lawrance39@gmail.com", role  = "cre"),
+            person("Yi-Ju", "Tseng", role = "aut", email = "yjtseng@mail.cgu.edu.tw"))
 Maintainer: YEHYUNG CHIU <lawrance39@gmail.com>
 Description: A health data analysis tool of electric medication record in R.
-    Mapping RxNorm, ATC, NDC, and Taiwan NHI code.
-    Providing functions for medication analysis such as Drug Era, DDD and visualization of individual medication histories.
+             Mapping RxNorm, ATC, NDC, and Taiwan NHI code.
+             Providing functions for medication analysis such as Drug Era, DDD and visualization of individual medication histories.
+BugReports: https://github.com/DHLab-TSENG/pharm/issues
+Depends: R (>= 3.4.0)
 Encoding: UTF-8
+License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 7.1.1
 Imports: doParallel,
-    data.table,
-    dplyr
-Depends: R (>= 3.4.0)
+    data.table
 Suggests: 
     testthat (>= 3.0.0),
     roxygen2,
     knitr,
     devtools,
     rmarkdown
+URL: https://dhlab-tseng.github.io/pharm/
 VignetteBuilder: knitr
-Config/testthat/edition: 3
+
+

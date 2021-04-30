@@ -91,7 +91,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DHLab-TSENG/pharm/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -133,13 +138,7 @@
         <td>
           <p><code><a href="getRxcuiViaMaytreat.html">getRxcuiViaMaytreat()</a></code> </p>
         </td>
-        <td><p>Get RxCui based on may treat</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getRxcuiViaMayprevent.html">getRxcuiViaMayprevent()</a></code> </p>
-        </td>
-        <td><p>Get RxCui based on may prevent</p></td>
+        <td><p>Get RxCui via may treat</p></td>
       </tr><tr>
         
         <td>
@@ -151,7 +150,7 @@
         <td>
           <p><code><a href="getSbdRxcuiViaRxcui.html">getSbdRxcuiViaRxcui()</a></code> </p>
         </td>
-        <td><p>Get Semantic Branded Drug RxCui  based on ingredient RxCui</p></td>
+        <td><p>Get SBD RxCui via RxCui</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -170,44 +169,43 @@
         <td>
           <p><code><a href="getNdcViaSbdRxcui.html">getNdcViaSbdRxcui()</a></code> </p>
         </td>
-        <td><p>Get NDC code based on RxCui</p></td>
+        <td><p>Get NDC via SBD RxCui</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="getRxcuiViaNdc.html">getRxcuiViaNdc()</a></code> </p>
         </td>
-        <td><p>Get RxCui based on NDC</p></td>
+        <td><p>Get RxCui via NDC</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="getAtcViaRxcui.html">getAtcViaRxcui()</a></code> </p>
         </td>
-        <td><p>Get NDC code based on RxCui
-WHO Collaborating Centre for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018</p></td>
+        <td><p>Get ATC via RxCui</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="getRxcuiViaAtc.html">getRxcuiViaAtc()</a></code> </p>
         </td>
-        <td><p>Get RxCui based on ATC</p></td>
+        <td><p>Get RxCui via ATC</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="getNHINoViaRCFNo.html">getNHINoViaRCFNo()</a></code> </p>
         </td>
-        <td><p>Get NHINO based on RCFNO</p></td>
+        <td><p>Get NHINo via RCFNo</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="getNHINoViaHC.html">getNHINoViaHC()</a></code> </p>
         </td>
-        <td><p>Get NHINO based on RCFNO</p></td>
+        <td><p>Get NHINo via HC</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="getAtcViaNHINo.html">getAtcViaNHINo()</a></code> </p>
         </td>
-        <td><p>Get ATC Code based on NHINO</p></td>
+        <td><p>Get ATC via NHINO</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -230,27 +228,21 @@ WHO Collaborating Centre for Drug Statistics Methodology, ATC classification ind
       </tr><tr>
         
         <td>
-          <p><code><a href="getDDDs.html">getDDDs()</a></code> </p>
+          <p><code><a href="calDDDsAccumulation.html">calDDDsAccumulation()</a></code> <code><a href="calDDDsAccumulation.html">getDDDs()</a></code> </p>
         </td>
-        <td><p>Get ATC DDDs value</p></td>
+        <td><p>Calculate subjects' accumulated DDDs</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="calDailyDosage.html">calDailyDosage()</a></code> </p>
         </td>
-        <td><p>Calculate dailydosage for midication coding in RxNorm</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="calDDDsAccumulation.html">calDDDsAccumulation()</a></code> </p>
-        </td>
-        <td><p>Calculate subjects' acculated ddd before last dispensing</p></td>
+        <td><p>Calculate DDDs in RxCui</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="calDDDsRange.html">calDDDsRange()</a></code> </p>
         </td>
-        <td><p>Calculate subjects' accumulated DDDs in a custom interval period</p></td>
+        <td><p>Calculate subjects' accumulated DDDs in custom interval period</p></td>
       </tr>
     </tbody><tbody>
       <tr>

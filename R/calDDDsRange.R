@@ -1,22 +1,5 @@
-#' Calculate subjects' accumulated DDDs in a custom interval period
-#'
-#' @import dplyr
-#' @param case data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration
-#' @param index_day observation day
-#' @param expo_range_before days before observation day
-#' @param expo_range_after days after observation day
-#' @param idColName a colum for subject's id
-#' @param DispenseDateColName a colum for dispensing
-#' @param DaysSupplyColName a colum for supply day
-#' @param DailyDosageColName a colum for daily dosage
-#' @details
-#' This function provides user to calculate the total amount of DDDs accumulated by the patient in a custom interval period or specific date.
-#' @examples
-#' # sample of calculating subjects' accumulated DDDs in a custom interval period
-#' index_DDD <<- calDDDsRange(case = sample_data_subset_atc,index_dayColName = Index_Day,expo_range_before = 15,expo_range_after = 30,idColName = MemberId,AtcCodeColName = ATC,DispenseDateColName = DispenseDate,DaysSupplyColName = DaysSupply,DailyDosageColName = DailyDosage)
-#' head(index_DDD)
+#' @rdname calDDDsRange
 #' @export
-#@import data.table
 
 calDDDsRange <- function(case,
                           index_dayColName = Index_Day,

@@ -1,6 +1,7 @@
 #' Get ATC level histogram plot
-#' @import dplyr
+#@import dplyr
 #' @import ggplot2
+#' @import data.table
 #' @param df data.frame include ATC code
 #' @param ATCColName A colum for ATC of df
 #' @details
@@ -11,7 +12,6 @@
 #' # sample of getting ATC level 2 histogram plot.
 #' getAtcLevelPlot(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 2)
 #' @export
-#@import data.table
 
 getAtcLevelPlot <- function(df, ATCColName = ATC, level = 1) {
 

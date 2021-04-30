@@ -1,6 +1,7 @@
 #' Get dispensing plot
-#' @import dplyr
+#@import dplyr
 #' @import ggplot2
+#' @import data.table
 #' @param df data.frame include dispense info
 #' @param MemberIDColName A colum for memebr id
 #' @param Member A colum for the member who be plot
@@ -15,7 +16,6 @@
 #' #sample of getting dispensing plot.
 #' getDispensingPlot(df = sample_data_subset, MemberIDColName = MemberId,DrugColName = NationalDrugCode,DispenseDateColName = Dispensing,Member = 42, TimeInterval = 20, Unit = day)
 #' @export
-#@import data.table
 
 getDispensingPlot <- function(df,
                                MemberIDColName = MemberID,

@@ -1,10 +1,10 @@
 ---
-title: "Pharm Overview"
+title: "Pharm_Overview"
 author: "Yeh-Yung, Chiu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Chinese Version}
+  %\VignetteIndexEntry{Pharm_Overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -28,9 +28,9 @@ library(dplyr)
 本套件功能演示所使用的資料內容`sample_data_subset`，是由`sample_data`資料中`MemberId`病患編號 = 1 AND 42 select出的資料子集。資料欄位如下:
 
 * `MemberId` 病患編號
-* `DispenseDate` 配藥日期(時間區間為 2025-12-06 至 2038-01-25)
-* `NationalDrugCode(NDC)` 美國藥物編碼(共17,326種不同的藥物編碼)
-* `Quantity` 發放數量
+* `DispenseDate` 配藥日期，時間區間為 2025-12-06 至 2038-01-25
+* `NationalDrugCode` 藥物的美國藥物編碼(NDC)，共17,326種不同的藥物編碼
+* `Quantity` 配藥數量(單位??)
 * `DaysSupply` 藥物供給天數
 
 ```{r message=FALSE, warning=FALSE}
@@ -68,7 +68,7 @@ knitr::kable(
 * `SBD.rxcui` 藥物SBD RxCui
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_SBD_SCD_List <- getSbdScdRxcuiViaRxcui(df = Esophagitis_List[3,],
+Esophagitis_SBD_SCD_List <- getSbdRxcuiViaRxcui(df = Esophagitis_List[3,],
                                                     RxCuiColName = RxCui,
                                                     cores = 2)
 knitr::kable(
@@ -113,9 +113,9 @@ knitr::kable(
 範例:輸入`sample_data_subset`範例資料來源，可以取得轉換後的RxNorm，並且存在`sample_data_subset_rxcui`表中。資料欄位如下:
 
 * `MemberId` 病患編號
-* `DispenseDate` 配藥日期(時間區間為 2025-12-06 至 2038-01-25)
-* `NationalDrugCode(NDC)` 美國藥物編碼(共17,326種不同的藥物編碼)
-* `Quantity` 發放數量
+* `DispenseDate` 配藥日期，時間區間為 2025-12-06 至 2038-01-25
+* `NationalDrugCode` 藥物的美國藥物編碼(NDC)，共17,326種不同的藥物編碼
+* `Quantity` 配藥數量(單位??)
 * `DaysSupply` 藥物供給天數
 * `RxCui` 藥物RxCui
 * `ndcStatus` 藥物NDC狀態
@@ -161,7 +161,7 @@ knitr::kable(
 * `RxCui` 藥物RxCui
 * `ATC` 藥物ATC
 
-```{r, warning=FALSE, message=FALSE}
+```{r message=FALSE, warning=FALSE}
 sample_atc_rxcui <- getRxcuiViaAtc(df = sample_ATC,
                                     AtcColName = ATC,
                                     cores = 2)

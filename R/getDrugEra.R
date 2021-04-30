@@ -1,28 +1,5 @@
-#' Generate Drug Era
-#'
-#' This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.
-#'
-#' @import dplyr
-#' @param df data.frame with MemberID ,Drug,DispenseDate ,DaysSupply, or with MemberID ,Drug, StartDate, EndDate
-#' @param window allowed gap between pharmacy claims, default is 30
-#' @param DrugColName A colum for drug which patient use
-#' @param DispenseDateColName A colum for dispense date
-#' @param DaysSupplyColName A colum for drug supply days
-#' @param StartDateColName A colum for drug start day
-#' @param EndDateColName A colum for drug end day
-#' @details
-#' This function provides user to concatenate continuous prescription medications into a single prescription length. An event of the time interval is according to the prescription's dispense date plus the prescription's drug supply days. There are two calculation models:
-#'
-#' 1.If the time interval gap between the patient taking the drug exceeds the persistent window, these two events are regarded as two different drug era.
-#'
-#' 2.If the time interval gap between the patient taking the drug less than the persistent window, these two events are regarded as same drug era.
-#'
-#' #This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.
-#' @examples
-#' #sample of calculating drug era.
-#' getDrugEra(MemberIDColName = MemberId,sample_data_subset,DrugColName = NationalDrugCode,DispenseDateColName = DispenseDate,DaysSupplyColName = DaysSupply)
+#' @rdname getDrugEra
 #' @export
-#@import data.table
 
 getDrugEra <- function(df, window = 30,
                         MemberIDColName = MemberID,

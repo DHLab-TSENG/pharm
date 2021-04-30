@@ -1,16 +1,5 @@
-#' Get RxCui based on may prevent
-#'
-#' @import dplyr
-#' @param strmaytreat A may prevent
-#' Details
-#' This function provides user to get medicine ingredient RxCui via specific indication Mayprevent.
-#' @examples
-#' # sample of searching an indication - esophagitis.
-#' Esophagitis_List <- getRxcuiViaMayprevent("esophagitis")
-#' # sample of getting RxCui list of esophagitis.
-#' head(Esophagitis_List)
-#' @export
-#@import data.table
+#@rdname getRxcuiViaMayprevent
+#@export
 
 getRxcuiViaMayprevent <- function(strmayprevent){
 

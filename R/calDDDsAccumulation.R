@@ -1,16 +1,5 @@
-#' Calculate subjects' acculated ddd before last dispensing
-#'
-#' @import dplyr
-#' @param case data.frame include subjects' id, dispensing date, drug ATC code, daily dosage, duration
-#' @details
-#' This function provides user to calculate patient`s total amount of DDDs for accumulation medication time.
-#'
-#' @examples
-#' # sample of calculating subjects' accumulated DDDs
-#' accumulat_DDD <<- calDDDsAccumulation(case = sample_data_subset_atc, PatientIdColName = MemberId,DispensingColName = DispenseDate,AtcCodeColName = ATC,DailyDosageColName = DailyDosage,DurationColName = DaysSupply)
-#' head(accumulat_DDD)
+#' @rdname calDDDsAccumulation
 #' @export
-#@import data.table
 
 calDDDsAccumulation <- function(case,
                               PatientIdColName = MemberId,

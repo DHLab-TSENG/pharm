@@ -1,18 +1,4 @@
-#' Get RxCui based on NDC
-#' @importFrom parallel makeCluster
-#' @importFrom parallel stopCluster
-#' @import foreach
-#' @import doParallel
-#' @import dplyr
-#' @param df data.frame include NDC
-#' @param NdcColName A colum for NDC of df
-#' @param cores number of parallel operation
-#' @details
-#' This function provides user to get RxCui via National Drug Code(NDC).
-#' @examples
-#' #sample of getting RxCui via NDC.
-#' sample_data_subset_rxcui <- getRxcuiViaNdc(df = sample_data_subset,NdcColName = NationalDrugCode)
-#' head(sample_data_subset_rxcui)
+#' @rdname getRxcuiViaNdc
 #' @export
 
 getRxcuiViaNdc <- function(df, NdcColName = NDC, cores=8){

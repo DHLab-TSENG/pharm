@@ -1,15 +1,6 @@
-#' Get NHINO based on RCFNO
-#'
-#' @import dplyr
-#' @param df data.frame include specific drug code
-#' @param HospitalCodeColName A colum for specific drug code
-#' @param SourceDf data.frame include mapping between specific drug code and NHINo
-#' @param Source_NhinoColName A colum for NHIno in SourceDf
-#' @param Source_HospitalCodeColName A colum for specific drug code in SourceDf
-#' @details
-#' This function provides user to get Taiwan Health Insurance drug code(NHINo) via Hospital Code(HC).
+#' @rdname getNHINoViaHC
 #' @export
-#'
+
 getNHINoViaHC <- function(df, HospitalCodeColName, SourceDf, Source_NhinoColName, Source_HospitalCodeColName){
 
   colnames(df)[colnames(df)==deparse(substitute(HospitalCodeColName))] <- "HC"

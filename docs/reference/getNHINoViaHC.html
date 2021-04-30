@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get NHINO based on RCFNO — getNHINoViaHC • pharm</title>
+<title>Get NHINo via HC — getNHINoViaHC • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get NHINO based on RCFNO — getNHINoViaHC" />
-<meta property="og:description" content="Get NHINO based on RCFNO" />
+<meta property="og:title" content="Get NHINo via HC — getNHINoViaHC" />
+<meta property="og:description" content="getNHINoViaHC is a function to get Taiwan Health Insurance drug code(NHINo) via Hospital Code(HC)" />
 
 
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DHLab-TSENG/pharm/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,13 +111,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get NHINO based on RCFNO</h1>
-    
+    <h1>Get NHINo via HC</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getNHINoViaHC.R'><code>R/getNHINoViaHC.R</code></a></small>
     <div class="hidden name"><code>getNHINoViaHC.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get NHINO based on RCFNO</p>
+    <p><code>getNHINoViaHC</code> is a function to get Taiwan Health Insurance drug code(NHINo) via Hospital Code(HC)</p>
     </div>
 
     <pre class="usage"><span class='fu'>getNHINoViaHC</span><span class='op'>(</span>
@@ -128,29 +133,34 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame include specific drug code</p></td>
+      <td><p>data.frame, the specific hospital drug code</p></td>
     </tr>
     <tr>
       <th>HospitalCodeColName</th>
-      <td><p>A colum for specific drug code</p></td>
+      <td><p>a column name for a specific hospital drug code of df</p></td>
     </tr>
     <tr>
       <th>SourceDf</th>
-      <td><p>data.frame include mapping between specific drug code and NHINo</p></td>
+      <td><p>data.frame include mapping between specific hospital drug code and NHINo</p></td>
     </tr>
     <tr>
       <th>Source_NhinoColName</th>
-      <td><p>A colum for NHIno in SourceDf</p></td>
+      <td><p>a column name for NHINo in Sourcedf</p></td>
     </tr>
     <tr>
       <th>Source_HospitalCodeColName</th>
-      <td><p>A colum for specific drug code in SourceDf</p></td>
+      <td><p>a column name for specific hospital drug code in Sourcedf</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    
+
+
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function provides user to get Taiwan Health Insurance drug code(NHINo) via Hospital Code(HC).</p>
+    <p>This function provides user to get NHINo via HC.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

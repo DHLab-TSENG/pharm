@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Generate Drug Era — getDrugEra" />
-<meta property="og:description" content="This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too." />
+<meta property="og:description" content="getDrugEra is a function to calculate the drug era" />
 
 
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DHLab-TSENG/pharm/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -107,12 +112,12 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate Drug Era</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getDrugEra.R'><code>R/getDrugEra.R</code></a></small>
     <div class="hidden name"><code>getDrugEra.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.</p>
+    <p><code>getDrugEra</code> is a function to calculate the drug era</p>
     </div>
 
     <pre class="usage"><span class='fu'>getDrugEra</span><span class='op'>(</span>
@@ -139,32 +144,48 @@
     </tr>
     <tr>
       <th>DrugColName</th>
-      <td><p>A colum for drug which patient use</p></td>
+      <td><p>a column name for drug which patient use</p></td>
     </tr>
     <tr>
       <th>DispenseDateColName</th>
-      <td><p>A colum for dispense date</p></td>
+      <td><p>a column name for dispense date</p></td>
     </tr>
     <tr>
       <th>DaysSupplyColName</th>
-      <td><p>A colum for drug supply days</p></td>
+      <td><p>A column for drug supply days</p></td>
     </tr>
     <tr>
       <th>StartDateColName</th>
-      <td><p>A colum for drug start day</p></td>
+      <td><p>a column name for patient use drug start day</p></td>
     </tr>
     <tr>
       <th>EndDateColName</th>
-      <td><p>A colum for drug end day</p></td>
+      <td><p>a column name for patient use drug end day</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A new data.table with following columns.</p>
+<p><code>MemberId</code> patient Id</p>
+<p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
+<p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
+<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
+<p><code>DaysSupply</code> days of patient`s drug supplied</p>
+<p><code>Drug Era</code> drug era</p>
+<p><code>Drug Era Start Date</code> the begin date to calculate drug era</p>
+<p><code>Drug Era End Date</code> the end date to calculate drug era</p>
+<p><code>Gap</code> the time interval of drug dispensed date</p>
+<p><code>Exposure Days</code> the date of drug era</p>
+<p><code>Supply Days</code> the days of drug era that patient`s drug supplied</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function provides user to concatenate continuous prescription medications into a single prescription length. An event of the time interval is according to the prescription's dispense date plus the prescription's drug supply days. There are two calculation models:</p>
+    <p>This can be used to merge pharmacy claims data into drug era with defined window and Exposure days will be cacluated, too.
+An event of the time interval is according to the prescription's dispense date plus the prescription's drug supply days.
+There are two calculation models:</p>
 <p>1.If the time interval gap between the patient taking the drug exceeds the persistent window, these two events are regarded as two different drug era.</p>
 <p>2.If the time interval gap between the patient taking the drug less than the persistent window, these two events are regarded as same drug era.</p>
-<p>#This can be used to merge pharmacy claims data into drug era with defined window. Exposure days will be cacluated, too.</p>
+<p>This function provides user to concatenate continuous prescription medications into a single prescription length.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#sample of calculating drug era.</span>

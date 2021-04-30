@@ -1,18 +1,4 @@
-#' Get Semantic Branded Drug RxCui  based on ingredient RxCui
-#' @importFrom parallel makeCluster
-#' @importFrom parallel stopCluster
-#' @import foreach
-#' @import dplyr
-#' @import doParallel
-#' @param df data.frame include RxCui
-#' @param RxCuiColName A colum for RxCui of df
-#' @param cores number of parallel operation
-#' @details
-#' This function provides user to get Semantic Branded Drug(SBD) and Semantic Clinical Drug(SCD) RxCui via ingredient RxCui.
-#' @examples
-#' # sample of getting Sbd Scd Rxcui via RxCui list of esophagitis.
-#' Esophagitis_SBD_SCD_List <- getSbdRxcuiViaRxcui(df = Esophagitis_List[3,],RxCuiColName = RxCui,cores = 2)
-#' head(Esophagitis_SBD_SCD_List)
+#' @rdname getSbdRxcuiViaRxcui
 #' @export
 
 getSbdRxcuiViaRxcui <- function(df, RxCuiColName = RxCui, cores = 8){

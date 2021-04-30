@@ -1,18 +1,4 @@
-#' Get NDC code based on RxCui
-#' @importFrom parallel makeCluster
-#' @importFrom parallel stopCluster
-#' @import foreach
-#' @import dplyr
-#' @import doParallel
-#' @param df data.frame include RxCui
-#' @param RxCuiColName A colum for RxCui of df
-#' @param cores number of parallel operation
-#' @details
-#' This function provides user to get National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui. There will be different NDC for the same drug type but different packaging. Hence, the output NDC of this function will be one-to-many.
-#' @examples
-#' # sample of getting NDC via SBD SCD RxCui list of esophagitis
-#' Esophagitis_NDC_List <- getNdcViaSbdRxcui(df = Esophagitis_SBD_SCD_List[1,],SBDRxCuiColName = SBD.rxcui,cores = 2)
-#' head(Esophagitis_NDC_List)
+#' @rdname getNdcViaSbdRxcui
 #' @export
 
 getNdcViaSbdRxcui <- function(df, SBDRxCuiColName = SBD.rxcui, cores = 8){

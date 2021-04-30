@@ -1,9 +1,4 @@
-#' Get ATC DDDs value
-#'
-#' @import dplyr
-#' @param atc data.frame include ATC code
-#' @export
-
+#' @name calDDDsAccumulation
 getDDDs <- function(atc){
 
   ddd <- atc%>%

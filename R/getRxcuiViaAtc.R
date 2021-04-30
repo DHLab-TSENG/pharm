@@ -1,19 +1,4 @@
-#' Get RxCui based on ATC
-#' @importFrom parallel makeCluster
-#' @importFrom parallel stopCluster
-#' @import foreach
-#' @import doParallel
-#' @import dplyr
-#' @param df data.frame include ATC
-#' @param AtcColName A colum for ATC of df
-#' @param Differ_ColName if colum for NHINo of df not named "ATC"
-#' @param cores number of parallel operation
-#' @details
-#' This function provides user to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC).
-#' @examples
-#' # sample of getting RxCui via ATC.
-#' sample_atc_rxcui <- getRxcuiViaAtc(df = sample_ATC,AtcColName = ATC,cores = 2)
-#' head(sample_data_subset_atc)
+#' @rdname getRxcuiViaAtc
 #' @export
 
 getRxcuiViaAtc <- function(df, AtcColName = ATC, cores=8){

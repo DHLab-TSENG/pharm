@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate dailydosage for midication coding in RxNorm — calDailyDosage • pharm</title>
+<title>Calculate DDDs in RxCui — calDailyDosage • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Calculate dailydosage for midication coding in RxNorm — calDailyDosage" />
-<meta property="og:description" content="Calculate dailydosage for midication coding in RxNorm" />
+<meta property="og:title" content="Calculate DDDs in RxCui — calDailyDosage" />
+<meta property="og:description" content="calDailyDosage is a function to calculate daily dosage drugs(DDDs) in RxCui" />
 
 
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DHLab-TSENG/pharm/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,13 +111,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate dailydosage for midication coding in RxNorm</h1>
-    
+    <h1>Calculate DDDs in RxCui</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/calDailyDosage.R'><code>R/calDailyDosage.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a></small>
     <div class="hidden name"><code>calDailyDosage.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculate dailydosage for midication coding in RxNorm</p>
+    <p><code>calDailyDosage</code> is a function to calculate daily dosage drugs(DDDs) in RxCui</p>
     </div>
 
     <pre class="usage"><span class='fu'>calDailyDosage</span><span class='op'>(</span>
@@ -128,29 +133,41 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame include ATC code</p></td>
+      <td><p>data.frame, a drug ingredient`s ATC of the specific indication</p></td>
     </tr>
     <tr>
       <th>RxCuiColName</th>
-      <td><p>A colum for RxCui of df</p></td>
+      <td><p>a column name for RxCui of df</p></td>
     </tr>
     <tr>
       <th>QuantityColName</th>
-      <td><p>A colum for Quantity of df</p></td>
+      <td><p>a column name for drug quantity of df</p></td>
     </tr>
     <tr>
       <th>DaysSupplyConName</th>
-      <td><p>A colum for DaysSupply of df</p></td>
+      <td><p>a column name for the days that patient`s drug supplied of df</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A new data.table <code>sample_data_subset_atc</code> with following columns.</p>
+<p><code>MemberId</code> patient Id</p>
+<p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
+<p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
+<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
+<p><code>DaysSupply</code> days of patient`s drug supplied</p>
+<p><code>RxCui</code> drug RxCui</p>
+<p><code>ATC</code> drug ATC</p>
+<p><code>DailyDosage</code> daily dosage drugs</p>
+<p><code>Unit</code> drug calculate unit</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function provides user to simply calculate daily dosage for drug in RxCui.</p>
 <p>The calculation model: The dosage of the drug multiplied by the number of the days of drug taken, and then divided by the number of days of drug supplied.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># sample of calculating daily dosage for drug in RxCui.</span>
+    <pre class="examples"><div class='input'><span class='co'># sample of calculating DDDs in RxCui.</span>
 <span class='va'>sample_data_subset_atc</span> <span class='op'>&lt;-</span> <span class='fu'>calDailyDosage</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset_atc</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, QuantityColName <span class='op'>=</span> <span class='va'>Quantity</span>, DaysSupplyConName <span class='op'>=</span> <span class='va'>DaysSupply</span>, cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='warning'>Warning: 強制變更過程中產生了 NA</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Column 'Unit' does not exist to remove</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_data_subset_atc</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;    MemberId DispenseDate NationalDrugCode Quantity DaysSupply  RxCui ndcStatus
@@ -160,13 +177,13 @@
 #&gt; 4:       42   2032-01-05      00186504031       30         30 606731    ACTIVE
 #&gt; 5:       42   2032-03-07      00186504031       30         30 606731    ACTIVE
 #&gt; 6:       42   2032-04-30      00186504031       30         30 606731    ACTIVE
-#&gt;        ATC DailyDosage Unit.x Unit.y Unit.x.x Unit.y.y
-#&gt; 1: A02BC05          NA  error  error    error    error
-#&gt; 2: A02BC05          NA  error  error    error    error
-#&gt; 3: A02BC05          NA  error  error    error    error
-#&gt; 4: A02BC05          NA  error  error    error    error
-#&gt; 5: A02BC05          NA  error  error    error    error
-#&gt; 6: A02BC05          NA  error  error    error    error</div></pre>
+#&gt;        ATC  Index_Day DailyDosage Unit.x Unit.y
+#&gt; 1: A02BC05 2032-01-29          NA  error  error
+#&gt; 2: A02BC05 2032-01-29          NA  error  error
+#&gt; 3: A02BC05 2032-01-29          NA  error  error
+#&gt; 4: A02BC05 2032-04-22          NA  error  error
+#&gt; 5: A02BC05 2032-04-22          NA  error  error
+#&gt; 6: A02BC05 2032-04-22          NA  error  error</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
