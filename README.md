@@ -18,9 +18,9 @@ This mechanism provides user visualization to overview the result of drug data a
 Using RxNorm API provided by U.S.National Library of Medicine to search drug details and MED-RT drug integration. This mechanism provides user to obtain the complete contraindications, indications and information of the drug.
 
 ## Getting start
-English:
+English: https://dhlab-tseng.github.io/pharm/articles/Eng_Overview.html
 
-Chinese: https://dhlab-tseng.github.io/pharm/articles/Pharm_Overview.html
+Chinese: https://dhlab-tseng.github.io/pharm/articles/Chi_Overview.html
 
 ## Install version
 ```r
@@ -31,7 +31,7 @@ library(dplyr)
 ```
 
 ## Overview
-(picture)
+<img src="C:/Users/88697/Documents/GitHub/pharm/image/overview.png" style="display:block; margin:auto; width:100%;">
 
 ## Data source
 * Chang Gung Medical Research Database
@@ -40,6 +40,14 @@ library(dplyr)
   * Taiwan Food and Drug Administration, 2019
 * RxNorm API
   * U.S.National Library of Medicine, 2019b
+
+## Unit Test
+|                     | the total object number of result list | Second Header |
+|-------------------- | -------------------------------------- | ------------- |
+| getRxcuiViaMaytreat | V 28 obj                               | Table Cell    |
+| getSbdRxcuiViaRxcui | -------------------------------------- |
+
+
 
 ## Getting help
 See the [GitHub issues page](<https://github.com/DHLab-TSENG/pharm/issues>) to see open issues and feature requests.

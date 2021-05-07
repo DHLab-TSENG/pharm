@@ -1,5 +1,5 @@
 ---
-title: "Pharm_Overview"
+title: "Chi_Overview"
 author: "Yeh-Yung, Chiu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -10,7 +10,7 @@ vignette: >
 ---
 
 ## 套件版本
-使用者需先安裝本套件。
+使用者請先安裝本套件的最新版本。
 
 ```{r, warning=FALSE, message=FALSE, eval=FALSE}
 install.packages("devtools")

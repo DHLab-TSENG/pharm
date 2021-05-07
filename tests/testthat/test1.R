@@ -8,6 +8,9 @@ test_that("getRxcuiViaMaytreat -> decimal Type", {expect_equal(as.character(Esop
 
 
 
+
+
+
 # check the result list value
 i <- 1
 Testdf <- data.table("RxCui" = numeric(), "Name" = numeric(), "MinConcept.Id" = numeric(), "MinConcept.Name"= numeric())

@@ -1,0 +1,439 @@
+---
+title: "Eng_Overview"
+author: "Yeh-Yung, Chiu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Chinese Version}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Development Format
+### Install Version
+Please install the latest Pharm package.
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+install.packages("devtools")
+devtools::install_github("DHLab-TSENG/pharm")
+library(pharm)
+```
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(pharm)
+library(dplyr)
+```
+
+### Sample Data  
+A sample data rda file `sample_data_subset` is included in Pharm package:
+
+The way to generate the data table `sample_data` is to de-identify the source data which is from the US real medication records.
+Then, resort the order of patient Id in the original data, and time-shift the date of each administration.
+Next, replace the NDC in part of the administration record which has the same drug but different NDC, which means that the NDC of the drug is different in the NDC history.
+As a result of the data, a total of 2,747,617 dosing records and 39,989 Id numbers from different patients were generated.
+
+The sample data `sample_data_subset` used in the function demonstration of this package is a subset of `sample_data` which is `SELECT FROM MemberId = 1 AND MemberId = 42`.
+For the field information in the data set:
+
+* `MemberId` patient Id
+* `DispenseDate` patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25
+* `NationalDrugCode` drug NDC, total of 17,326 different drug codes
+* `Quantity` quantity of patient`s drug dispensed
+* `DaysSupply` days of patient`s drug dispensed
+
+```{r message=FALSE, warning=FALSE}
+knitr::kable(sample_data_subset)
+```
+
+## I. Get Drug Ingredient Via Indication
+### **1. Get RxCui Via Maytreat**
+The source data is from the U.S. Veterans Administration's `MED-RT` database to establish this function.
+User can get the RxCui of all drug ingredients for the treatment by input the indication.
+
+Exmaple: User input the indication `esophagitis`, the RxCui of all drug ingredients for the treatment can be obtained and stored in the new data table `Esophagitis_List`.
+For the field information in the data set:
+
+* `RxCui` drug RxCui
+* `Name` drug name
+* `MinCooncept.Id` indication Id
+* `MinConcept.Name` indication name
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_List <- get.RxCuiViaMaytreat("esophagitis")
+knitr::kable(
+  head(Esophagitis_List)
+)
+```
+
+### **2. Get SBD SCD RxCui Via RxCui**
+After obtaining the data table of all drug ingredients for the treatment `Esophagitis_List`,
+user can get all the pharmaceutical brands and clinical drugs which has contained these drug ingredients by input the data table `Esophagitis_List`.
+
+Exmaple: User input the data table `Esophagitis_List`, the converted SBD or SCD RxCui can be obtained and stored in the new data table `Esophagitis_SBD_SCD_List`.
+For the field information in the data set:
+
+* `RxCui` drug RxCui
+* `Name` drug name
+* `MinCooncept.Id` indication Id
+* `MinConcept.Name` indication name
+* `SBD.rxcui` drug SBD RxCui
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_SBD_SCD_List <- get.SbdScdRxCuiViaRxCui(df = Esophagitis_List[3,],
+                                                    RxCuiColName = RxCui,
+                                                    cores = 2)
+knitr::kable(
+  head(Esophagitis_SBD_SCD_List)
+)
+```
+
+## II. Drug Code Integration
+
+Pharm package provides the following drug code conversion:
+
+* U.S. National Drug Code(NDC)
+* NLM RxNorm(RxCui)
+* Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD)
+* WHO Anatomical Therapeutic Chemical Classification System(ATC)
+* Taiwan Health Insurance drug code(NHINo)
+* Hospital Code(HC)
+* Chang Gung Medical Hospital drug code(RCFNo)
+
+### **1. NDC and RxCui conversion**
+#### **1.1. Get NDC via SBD RxCui** 
+
+After obtaining the data table of all drug ingredient SBD or SCD RxCui `Esophagitis_SBD_SCD_List`,
+user can get NDC which has contained these drug ingredients by input the data table `Esophagitis_SBD_SCD_List`.
+However, a drug will have different packaging and NDC because it comes from different pharmaceutical brands.
+There will be different NDC for the same drug type but different packaging.
+Hence, the output results will be one-to-many.
+A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corresponding NDC will be`NA`.
+This function provides user to get NDC via SBD or SCD RxCui.
+
+Exmaple: User input the data table `Esophagitis_SBD_SCD_List`, the converted NDC can be obtained and stored in the new data table `Esophagitis_NDC_List`.
+For the field information in the data set:
+
+* `RxCui` drug RxCui
+* `Name` drug name
+* `MinCooncept.Id` indication Id
+* `MinConcept.Name` indication name
+* `SBD.rxcui` drug SBD RxCui
+* `NDC` drug NDC
+
+```{r, warning=FALSE, message=FALSE}
+Esophagitis_NDC_List <- get.NdcViaSBDrxcui(df = Esophagitis_SBD_SCD_List[1,],
+                                           SBDRxCuiColName = SBD.rxcui,
+                                           cores = 2)
+knitr::kable(
+  head(Esophagitis_NDC_List)
+)
+```
+
+#### **1.2. Get RxCui via NDC** 
+
+After obtaining the data table of sample data `sample_data_subset`,
+user can get RxCui which has contained these drug ingredients by input the data table `sample_data_subset`.
+
+Exmaple: User input the data table `sample_data_subset`, the converted  RxCui can be obtained and stored in the new data table `sample_data_subset_rxcui`.
+For the field information in the data set:
+
+* `MemberId` patient Id
+* `DispenseDate` patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25
+* `NationalDrugCode` drug NDC, total of 17,326 different drug codes
+* `Quantity` quantity of patient`s drug dispensed
+* `DaysSupply` days of patient`s drug dispensed
+* `RxCui` drug RxCui
+* `ndcStatus` drug NDC status
+
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_rxcui <- get.RxCuiViaNdc(df = sample_data_subset,
+                                            NdcColName = NationalDrugCode)
+knitr::kable(head(sample_data_subset_rxcui))
+```
+
+### **2. RxCui and ATC conversion**
+#### **2.1. Get ATC via RxCui** 
+WHO Collaborating Center for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018.
+After obtaining the data table `sample_data_subset_rxcui`,
+user can get ATC which has contained these drug ingredients by input the data table `sample_data_subset_rxcui`.
+However, the same drug components in ATC might depend on different ATC medication route.
+Hence, this function also  refer to the research of [Bodenreider et al.](https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index) and adds the parameter `MatchRoute` for user to consider.
+If user wants to consider and compare the ATC medication route, input `TRUE` in the parameter MatchRoute, otherwise input `FALSE`.
+
+Exmaple: User input the data table `sample_data_subset_rxcui` and compare the drug route `MatchRoute = False`, the converted  ATC can be obtained and stored in the new data table `sample_data_subset_atc`.
+For the field information in the data set:
+
+* `MemberId` patient Id
+* `DispenseDate` patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25
+* `NationalDrugCode` drug NDC, total of 17,326 different drug codes
+* `Quantity` quantity of patient`s drug dispensed
+* `DaysSupply` days of patient`s drug dispensed
+* `RxCui` drug RxCui
+* `ATC` drug ATC
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
+```
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_atc <- get.AtcViaRxCui(df = sample_data_subset_rxcui,
+                                          RxCuiColName = RxCui,
+                                          cores = 2,
+                                          MatchRoute = FALSE)
+knitr::kable(
+  head(sample_data_subset_atc)
+)
+```
+
+#### **2.2. Get RxCui via ATC** 
+User can get RxCui which has contained these drug ingredients by input the data table `sample_ATC`.
+
+Exmaple: User input the data table `sample_ATC`, the converted  RxCui can be obtained and stored in the new data table `sample_atc_rxcui`.
+For the field information in the data set:
+
+* `RxCui` drug RxCui
+* `ATC` drug ATC
+
+```{r message=FALSE, warning=FALSE}
+sample_atc_rxcui <- get.RxCuiViaAtc(df = sample_ATC,
+                                    AtcColName = ATC,
+                                    cores = 2)
+knitr::kable(
+  head(sample_atc_rxcui)
+  )
+```
+
+
+### **3. Taiwan Drug Code conversion**  
+#### **3.1. Get NHINo via HC**
+User can get NHINo which has contained these drug ingredients by input HC, and no corresponding NHINo will be`NA`.
+
+Exmaple:
+
+```{r, warning=FALSE, message=FALSE}
+# getNHINoViaHC()
+```
+
+
+#### **3.2. Get NHINo via RCFNo**
+User can get NHINo which has contained these drug ingredients by input the data table `sample_taiwan_drug`, and no corresponding NHINo will be`NA`.
+
+Exmaple: User input the data table `sample_taiwan_drug`, the converted NHINo can be obtained.
+For the field information in the data set:
+
+* `CGMH_CODE` Chang Gung Medical Hospital drug code RCFNo
+* `NHINO1` drug NHINo
+
+```{r, warning=FALSE, message=FALSE}
+knitr::kable(
+  head(
+    get.NHINoViaRCFNo(df = sample_taiwan_drug, 
+                      RCFNoColName = CGMH_CODE)
+  )
+)
+```
+
+#### **3.3. Get ATC via NHINO**  
+User can get ATC which has contained these drug ingredients by input the data table `sample_nhino_code`, and no corresponding ATC will be`NA`.
+
+Exmaple: User input the data table `sample_nhino_code`, the converted ATC can be obtained.
+For the field information in the data set:
+
+* `NHINo` drug NHINo
+* `ATC_CODE` drug ATC
+
+```{r, warning=FALSE, message=FALSE}
+knitr::kable(
+  head(
+    get.AtcViaNHINo(df = sample_nhino_code,
+                    NHINoColName = NHINo)
+  )
+)
+```
+
+## III. Calculate Drug Data
+### **1. Generate Drug Era** 
+This can be used to merge pharmacy claims data into drug era with defined window and Exposure days will be cacluated, too.
+An event of the time interval is according to the prescription's dispense date plus the prescription's drug supply days.
+This function provides user to concatenate continuous prescription medications into a single prescription length.
+There are two calculation models:
+
+1.If the time interval gap between the patient taking the drug exceeds the persistent window, these two events are regarded as two different drug era.
+2.If the time interval gap between the patient taking the drug less than the persistent window, these two events are regarded as same drug era.
+
+Example: As the picture 1,Event 1 and Event 2 are less than the defined gap length, so they are regarded as the same Drug Era.
+In the other hand, Event 2 and Event 3 are greater than the defined gap, so the gap length is regarded as different Drug Era.
+For the field information in the data set:
+
+* `MemberId` patient Id
+* `DispenseDate` patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25
+* `NationalDrugCode` drug NDC, total of 17,326 different drug codes
+* `Quantity` quantity of patient`s drug dispensed
+* `DaysSupply` days of patient`s drug supplied
+* `Drug Era` drug era
+* `Drug Era Start Date` the begin date to calculate drug era
+* `Drug Era End Date` the end date to calculate drug era
+* `Gap` the time interval of drug dispensed date
+* `Exposure Days` the date of drug era
+* `Supply Days` the days of drug era that patient`s drug supplied
+
+```{r, warning=FALSE, message=FALSE}
+knitr::kable(get.DrugEra(MemberIDColName = MemberId,
+                         sample_data_subset,
+                         DrugColName = NationalDrugCode,
+                         DispenseDateColName = DispenseDate,
+                         DaysSupplyColName = DaysSupply))
+```
+
+### **2. Define DDDs** 
+#### **2.1. Calculate DDDs in RxCui**
+User can calculate DDDs in RxCui via the daily amount of drug taken by the patient.
+
+The calculation model:
+
+The dosage of the drug multiplied by the number of the days of drug taken, and then divided by the number of days of drug supplied.
+
+Example: User input the data table `sample_data_subset_atc`.
+For the field information in the data set:
+
+
+* `MemberId` patient Id
+* `DispenseDate` patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25
+* `NationalDrugCode` drug NDC, total of 17,326 different drug codes
+* `Quantity` quantity of patient`s drug dispensed
+* `DaysSupply` days of patient`s drug supplied
+* `RxCui` drug RxCui
+* `ATC` drug ATC
+* `DailyDosage` drug DDDs
+* `Unit` drug unit
+
+```{r, warning=FALSE, message=FALSE}
+sample_data_subset_atc <- calDailyDosage(df = sample_data_subset_atc, 
+                                         RxCuiColName = RxCui, 
+                                         QuantityColName = Quantity, 
+                                         DaysSupplyConName = DaysSupply, 
+                                         cores = 2)
+knitr::kable(
+  head(sample_data_subset_atc)
+)
+```
+
+
+#### **2.2. Calculate subjects' accumulated DDDs**
+
+User can calculate patient total amount of DDDs for accumulation medication time by input the data table `sample_data_subset_atc`.
+
+Example: User input the data table `sample_data_subset_atc`.
+For the field information in the data set:
+
+* `MemberId` patient Id
+* `DDDs` accumulated DDDs
+
+```{r, warning=FALSE, message=FALSE}
+accumulat_DDD <- calDDDs.accumulat(case = sample_data_subset_atc, 
+                                   PatientIdColName = MemberId,
+                                   DispensingColName = DispenseDate,
+                                   AtcCodeColName = ATC,
+                                   DailyDosageColName = DailyDosage,
+                                   DurationColName = DaysSupply)
+knitr::kable(accumulat_DDD)
+```
+
+#### **2.3 Calculate subjects' accumulated DDDs in custom interval period**
+User can calculate the total amount of DDDs accumulated by the patient in a custom interval period `index day` or specific date .
+
+Example: User input the data table `sample_data_subset_atc`.
+For the field information in the data set:
+
+* `MemberId` patient Id
+* `Start_day` the begin date of patient take medicine
+* `Index_Day` the begin date of calculating the DDDs
+* `End_day` the end date of patient take medicine
+* `DDDs_Before_15_Days` calculate DDDs in custom time interval before index 15 day
+* `DDDs_After_30_Days` calculate DDDs in custom time interval after index 30 day
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
+```
+```{r, warning=FALSE, message=FALSE}
+index_DDD <- calDDDs.range(case = sample_data_subset_atc,
+                           index_dayColName = Index_Day,
+                           expo_range_before = 15,
+                           expo_range_after = 30,
+                           idColName = MemberId,
+                           AtcCodeColName = ATC,
+                           DispenseDateColName = DispenseDate,
+                           DaysSupplyColName = DaysSupply,
+                           DailyDosageColName = DailyDosage)
+knitr::kable(index_DDD)
+```
+
+## IV. Visulization
+The visualization of the data analyzed results can help user quickly understand the content of the data as well as analysis results.
+In addition, plots can also quickly see the distribution of drug categories in the data, present the results of drug era analysis and the drug history of individual patients.
+
+### **1. ATC distribution plot**  
+
+User can get DDDs in ATC level 1 or 2 histogram plot.
+A parameter `level` is provided that user can choose which level to draw whether the first-order or second-order distribution of ATC.
+Then, show the plot of its distribution in bar chart.
+
+Example: User input the data table `sample_data_ATC1LevelPlot`.
+For the field information in the data set:
+
+* `count` ?
+* `ATC1Level` ATC level 1, the first-order distribution of ATC
+
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+# level 1 distribution
+get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+                  ATCColName = ATC, 
+                  level = 1)
+
+
+# level 2 distribution
+get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+                  ATCColName = ATC, 
+                  level = 2)
+
+```
+
+### **2. drug era plot**  
+
+User can get the visualized result of the drug era calculated by `get.DrugEra`.
+User has to consider different drug, drug era, supplied days, and the distribution of the dospensing drug.
+Then, show the plot that distribution of the patient`s dispensing drug times in bar chart.
+
+Example: User input the data table `sample_data_DrugEraPlot`.
+For the field information in the data set:
+
+* `Drug Era`
+* `Total Supply Days`
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+get.DrugEraPlot(df = sample_data_DrugEraPlot,
+                MemberIDColName = MemberId,
+                DrugColName = ATC,
+                DrugEraColName = DrugEra,
+                SupplyDaysColName = SupplyDays)
+```
+
+### **3. dispensing drug history plot**  
+
+User can get specific patient`s drug history plot in bar chart.
+In addition, user can also get separately sub-plots of  different drug history.
+
+Example: User input the data table `sample_data_ATC1LevelPlot`.
+For the field information in the data set:
+
+* `Dispensing Time` interval time of the patient dispensing time
+* `Date`
+
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+get.DispensingPlot(df = sample_data_subset, 
+                   MemberIDColName = MemberId,
+                   DrugColName = NationalDrugCode,
+                   DispenseDateColName = Dispensing,
+                   Member = 42, 
+                   TimeInterval = 20, 
+                   Unit = day)
+```

@@ -12,7 +12,8 @@ articles:
 - title: All vignettes
   desc: ~
   contents:
-  - Pharm_Overview
+  - pharmTest
+  - Eng_Overview
 
 reference:
 

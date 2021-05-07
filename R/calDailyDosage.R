@@ -4,7 +4,7 @@
 calDailyDosage <- function(df,
                            RxCuiColName = RxCui,
                            QuantityColName = Quantity,
-                           DaysSupplyConName = DaysSupply,
+                           DaysSupplyColName = DaysSupply,
                            cores = 4){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"

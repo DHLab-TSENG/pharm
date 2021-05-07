@@ -1,16 +1,4 @@
-#' Get ATC level histogram plot
-#@import dplyr
-#' @import ggplot2
-#' @import data.table
-#' @param df data.frame include ATC code
-#' @param ATCColName A colum for ATC of df
-#' @details
-#' This function provides user to get Anatomical Therapeutic Chemical Classification System(ATC) level 1 or 2 histogram plot.
-#' @examples
-#' # sample of getting ATC level 1 histogram plot.
-#' getAtcLevelPlot(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 1)
-#' # sample of getting ATC level 2 histogram plot.
-#' getAtcLevelPlot(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 2)
+#' @rdname getAtcLevelPlot
 #' @export
 
 getAtcLevelPlot <- function(df, ATCColName = ATC, level = 1) {

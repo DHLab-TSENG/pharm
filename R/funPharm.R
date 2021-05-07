@@ -236,7 +236,7 @@ NULL
 #'
 #' \code{CGMH_CODE} Chang Gung Medical Hospital drug code RCFNo
 #'
-#' \code{NHINO1}drug NHINo
+#' \code{NHINO1} drug NHINo
 #' @details
 #' If there is no corresponed NHINo, then display \code{NA}. This function provides user to get NHINo via RCFNo.
 #' @examples
@@ -253,6 +253,7 @@ NULL
 #' @name getAtcViaNHINo
 #' @param df data.frame include NHINO
 #' @param NHINoColName A colum for NHINo of df
+#' @return
 #' @details
 #' This function provides user to get Anatomical Therapeutic Chemical Classification System(ATC) via Taiwan Health Insurance drug code(NHINo).
 #' @examples
@@ -426,4 +427,21 @@ NULL
 NULL
 
 
+#' Get ATC level histogram plot
+#'
+#' \code{getAtcLevelPlot} is a function to get daily dosage drugs(DDDs) in Anatomical Therapeutic Chemical Classification System(ATC) level histogram plot.
+#'
+#' @name getAtcLevelPlot
+#' @import ggplot2
+#' @import data.table
+#' @param df data.frame include ATC code
+#' @param ATCColName A colum for ATC of df
+#' @details
+#' This function provides user to get ATC level 1 or 2 histogram plot.
+#' @examples
+#' # sample of getting ATC level 1 histogram plot.
+#' getAtcLevelPlot(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 1)
+#' # sample of getting ATC level 2 histogram plot.
+#' getAtcLevelPlot(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 2)
+NULL
 
