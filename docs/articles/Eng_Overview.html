@@ -100,38 +100,6 @@
 <p>A sample data rda file <code>sample_data_subset</code> is included in Pharm package:</p>
 <p>The way to generate the data table <code>sample_data</code> is to de-identify the source data which is from the US real medication records. Then, resort the order of patient Id in the original data, and time-shift the date of each administration. Next, replace the NDC in part of the administration record which has the same drug but different NDC, which means that the NDC of the drug is different in the NDC history. As a result of the data, a total of 2,747,617 dosing records and 39,989 Id numbers from different patients were generated.</p>
 <p>The sample data <code>sample_data_subset</code> used in the function demonstration of this package is a subset of <code>sample_data</code> which is <code>SELECT FROM MemberId = 1 AND MemberId = 42</code>. For the field information in the data set:</p>
-<table class="table">
-<colgroup>
-<col width="50%">
-<col width="50%">
-</colgroup>
-<thead><tr class="header">
-<th>Table Header</th>
-<th>Second Header</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td><code>MemberId</code></td>
-<td>patient Id</td>
-</tr>
-<tr class="even">
-<td><code>DispenseDate</code></td>
-<td>patient drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</td>
-</tr>
-<tr class="odd">
-<td><code>NationalDrugCode</code></td>
-<td>drug NDC, total of 17,326 different drug codes</td>
-</tr>
-<tr class="even">
-<td><code>Quantity</code></td>
-<td>quantity of patient drug dispensed</td>
-</tr>
-<tr class="odd">
-<td><code>DaysSupply</code></td>
-<td>days of patient drug dispensed</td>
-</tr>
-</tbody>
-</table>
 <ul>
 <li>
 <code>MemberId</code> patient Id</li>

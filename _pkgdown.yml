@@ -12,7 +12,7 @@ articles:
 - title: All vignettes
   desc: ~
   contents:
-  - pharmTest
+  - Chi_Overview
   - Eng_Overview
 
 reference:

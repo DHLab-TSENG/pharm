@@ -18,9 +18,9 @@ This mechanism provides user visualization to overview the result of drug data a
 Using RxNorm API provided by U.S.National Library of Medicine to search drug details and MED-RT drug integration. This mechanism provides user to obtain the complete contraindications, indications and information of the drug.
 
 ## Getting start
-English: https://dhlab-tseng.github.io/pharm/articles/Eng_Overview.html
+English: https://dhlab-tseng.github.io/pharm/docs/articles/Eng_Overview.html
 
-Chinese: https://dhlab-tseng.github.io/pharm/articles/Chi_Overview.html
+Chinese: https://dhlab-tseng.github.io/pharm/docs/articles/Chi_Overview.html
 
 ## Install version
 ```r
@@ -32,21 +32,28 @@ library(dplyr)
 
 ## Overview
 <img src="C:/Users/88697/Documents/GitHub/pharm/image/overview.png" style="display:block; margin:auto; width:100%;">
-
+```md
+<img src="https://dhlab-tseng.github.io/pharm/image/overview.png" style="display:block; margin:auto; width:100%;">
+```
 ## Data source
-* Chang Gung Medical Research Database
-  * Chang Gung Medical drug code
+* Chang Gung Medical drug code
+  * Chang Gung Medical Research Database
 * ATC Database for Classification of Drugs and Pharmacological Treatments
   * Taiwan Food and Drug Administration, 2019
 * RxNorm API
   * U.S.National Library of Medicine, 2019b
 
-## Unit Test
-|                     | the total object number of result list | Second Header |
-|-------------------- | -------------------------------------- | ------------- |
-| getRxcuiViaMaytreat | V 28 obj                               | Table Cell    |
-| getSbdRxcuiViaRxcui | -------------------------------------- |
-
+## Sample Test
+| sample Esophagitis  | total object number  | total column number | all column name | return value | return list              |
+|-------------------- | -------------------- | ------------------- | --------------- | ------------ | ------------------------ |
+| getRxcuiViaMaytreat | 28 obj               | 4 variable          | V               | V            | Esophagitis_List         |
+| getSbdRxcuiViaRxcui | 36 obj               | 5 variable          | V               | V            | Esophagitis_SBD_SCD_List |
+| getNdcViaSbdRxcui   | 28 obj               | 4 variable          | V               | V            | Esophagitis_NDC_List     |
+| getRxcuiViaNdc      | 8 obj X              | 7 variable X        | V               | V            | sample_data_subset_rxcui |
+| getAtcViaRxCui      | 8 obj X              | 8 variable X        | V               | V            | sample_data_subset_atc   |
+| getRxCuiViaAtc      | 5 obj                | 2 variable          | V               | V            | sample_atc_rxcui         |
+| getRxCuiViaAtc      | 5 obj                | 2 variable          | V               | V            | sample_atc_rxcui         |
+...
 
 
 ## Getting help

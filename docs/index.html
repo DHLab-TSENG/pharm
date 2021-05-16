@@ -99,8 +99,8 @@
 <div id="getting-start" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-start" class="anchor"></a>Getting start</h2>
-<p>English: <a href="https://dhlab-tseng.github.io/pharm/articles/Eng_Overview.html" class="uri">https://dhlab-tseng.github.io/pharm/articles/Eng_Overview.html</a></p>
-<p>Chinese: <a href="https://dhlab-tseng.github.io/pharm/articles/Chi_Overview.html" class="uri">https://dhlab-tseng.github.io/pharm/articles/Chi_Overview.html</a></p>
+<p>English: <a href="https://dhlab-tseng.github.io/pharm/docs/articles/Eng_Overview.html" class="uri">https://dhlab-tseng.github.io/pharm/docs/articles/Eng_Overview.html</a></p>
+<p>Chinese: <a href="https://dhlab-tseng.github.io/pharm/docs/articles/Chi_Overview.html" class="uri">https://dhlab-tseng.github.io/pharm/docs/articles/Chi_Overview.html</a></p>
 </div>
 <div id="install-version" class="section level2">
 <h2 class="hasAnchor">
@@ -108,44 +108,22 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"DHLab-TSENG/pharm"</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">pharm</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dhlab-tseng.github.io/pharm/">pharm</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p><img src="C:/Users/88697/Documents/GitHub/pharm/image/overview.png" style="display:block; margin:auto; width:100%;"></p>
-</div>
-<div id="unit-test" class="section level2">
-<h2 class="hasAnchor">
-<a href="#unit-test" class="anchor"></a>Unit Test</h2>
-<table class="table">
-<thead><tr class="header">
-<th></th>
-<th>the total object number of result list</th>
-<th>Second Header</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>getRxcuiViaMaytreat</td>
-<td>V 28 obj</td>
-<td>Table Cell</td>
-</tr>
-<tr class="even">
-<td>getSbdRxcuiViaRxcui</td>
-<td>————————————–</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">"https://dhlab-tseng.github.io/pharm/image/overview.png"</span><span class="ot"> style=</span><span class="st">"display:block; margin:auto; width:100%;"</span><span class="kw">&gt;</span></span></code></pre></div>
 </div>
 <div id="data-source" class="section level2">
 <h2 class="hasAnchor">
 <a href="#data-source" class="anchor"></a>Data source</h2>
 <ul>
-<li>Chang Gung Medical Research Database
+<li>Chang Gung Medical drug code
 <ul>
-<li>Chang Gung Medical drug code</li>
+<li>Chang Gung Medical Research Database</li>
 </ul>
 </li>
 <li>ATC Database for Classification of Drugs and Pharmacological Treatments
@@ -159,6 +137,87 @@
 </ul>
 </li>
 </ul>
+</div>
+<div id="sample-test" class="section level2">
+<h2 class="hasAnchor">
+<a href="#sample-test" class="anchor"></a>Sample Test</h2>
+<table class="table">
+<colgroup>
+<col width="18%">
+<col width="18%">
+<col width="17%">
+<col width="13%">
+<col width="10%">
+<col width="21%">
+</colgroup>
+<thead><tr class="header">
+<th>sample Esophagitis</th>
+<th>total object number</th>
+<th>total column number</th>
+<th>all column name</th>
+<th>return value</th>
+<th>return list</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>getRxcuiViaMaytreat</td>
+<td>28 obj</td>
+<td>4 variable</td>
+<td>V</td>
+<td>V</td>
+<td>Esophagitis_List</td>
+</tr>
+<tr class="even">
+<td>getSbdRxcuiViaRxcui</td>
+<td>36 obj</td>
+<td>5 variable</td>
+<td>V</td>
+<td>V</td>
+<td>Esophagitis_SBD_SCD_List</td>
+</tr>
+<tr class="odd">
+<td>getNdcViaSbdRxcui</td>
+<td>28 obj</td>
+<td>4 variable</td>
+<td>V</td>
+<td>V</td>
+<td>Esophagitis_NDC_List</td>
+</tr>
+<tr class="even">
+<td>getRxcuiViaNdc</td>
+<td>8 obj X</td>
+<td>7 variable X</td>
+<td>V</td>
+<td>V</td>
+<td>sample_data_subset_rxcui</td>
+</tr>
+<tr class="odd">
+<td>getAtcViaRxCui</td>
+<td>8 obj X</td>
+<td>8 variable X</td>
+<td>V</td>
+<td>V</td>
+<td>sample_data_subset_atc</td>
+</tr>
+<tr class="even">
+<td>getRxCuiViaAtc</td>
+<td>5 obj</td>
+<td>2 variable</td>
+<td>V</td>
+<td>V</td>
+<td>sample_atc_rxcui</td>
+</tr>
+<tr class="odd">
+<td>getRxCuiViaAtc</td>
+<td>5 obj</td>
+<td>2 variable</td>
+<td>V</td>
+<td>V</td>
+<td>sample_atc_rxcui</td>
+</tr>
+</tbody>
+</table>
+<p>…</p>
 </div>
 <div id="getting-help" class="section level2">
 <h2 class="hasAnchor">
