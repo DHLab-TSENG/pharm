@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Ingredient and Basis of strength substance (BoSS) — getBoSSViaRxcui • pharm</title>
+<title>Get Ingredient and Basis of Strength Substance (BoSS) information via RxCui — getBoSSViaRxCui • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get Ingredient and Basis of strength substance (BoSS) — getBoSSViaRxcui" />
-<meta property="og:description" content="Get Ingredient and Basis of strength substance (BoSS)" />
+<meta property="og:title" content="Get Ingredient and Basis of Strength Substance (BoSS) information via RxCui — getBoSSViaRxCui" />
+<meta property="og:description" content="This function can get BoSS information." />
 
 
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DHLab-TSENG/pharm/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,27 +111,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Ingredient and Basis of strength substance (BoSS)</h1>
-    
-    <div class="hidden name"><code>getBoSSViaRxcui.Rd</code></div>
+    <h1>Get Ingredient and Basis of Strength Substance (BoSS) information via RxCui</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getBoSSViaRxCui.R'><code>R/getBoSSViaRxCui.R</code></a></small>
+    <div class="hidden name"><code>getBoSSViaRxCui.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get Ingredient and Basis of strength substance (BoSS)</p>
+    <p>This function can get BoSS information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getBoSSViaRxcui</span><span class='op'>(</span><span class='va'>df</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getBoSSViaRxCui</span><span class='op'>(</span><span class='va'>df</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame include RxCui</p></td>
+      <td><p>data.frame, included RxCui</p></td>
     </tr>
     <tr>
       <th>RxCuiColName</th>
-      <td><p>A colum for RxCui of df</p></td>
+      <td><p>a column name for RxCui of df</p></td>
     </tr>
     <tr>
       <th>cores</th>

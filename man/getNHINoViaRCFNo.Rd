@@ -2,7 +2,7 @@
 % Please edit documentation in R/funPharm.R, R/getNHINoViaRCFNo.R
 \name{getNHINoViaRCFNo}
 \alias{getNHINoViaRCFNo}
-\title{Get NHINo via RCFNo}
+\title{Get Taiwan Health Insurance drug code(NHINo) via Hospital drug code(RCFNo)}
 \usage{
 getNHINoViaRCFNo(df, RCFNoColName = RCFNO)
 }
@@ -16,13 +16,14 @@ A new data.table with following columns.
 
 \code{CGMH_CODE} Chang Gung Medical Hospital drug code RCFNo
 
-\code{NHINO1}drug NHINo
+\code{NHINO1} drug NHINo
 }
 \description{
-\code{getNHINoViaRCFNo} is a function to get Taiwan Health Insurance drug code(NHINo) via Chang Gung Medical Hospital drug code(RCFNo)
+This is a function to get Taiwan Health Insurance drug code(NHINo) via Chang Gung Medical Hospital drug code(RCFNo)
 }
 \details{
-If there is no corresponed NHINo, then display \code{NA}. This function provides user to get NHINo via RCFNo.
+User can input the specific hospital drug code
+If there is no corresponed NHINo, then display \code{NA}.
 }
 \examples{
 # sample of getting NHINo via RCFNo of Chang Gung Medical Hospital.

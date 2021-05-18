@@ -2,7 +2,7 @@
 % Please edit documentation in R/funPharm.R, R/getNHINoViaHC.R
 \name{getNHINoViaHC}
 \alias{getNHINoViaHC}
-\title{Get NHINo via HC}
+\title{Get Taiwan Health Insurance drug code(NHINo) via Hospital Code(HC)}
 \usage{
 getNHINoViaHC(
   df,
@@ -23,12 +23,6 @@ getNHINoViaHC(
 
 \item{Source_HospitalCodeColName}{a column name for specific hospital drug code in Sourcedf}
 }
-\value{
-
-}
 \description{
-\code{getNHINoViaHC} is a function to get Taiwan Health Insurance drug code(NHINo) via Hospital Code(HC)
-}
-\details{
-This function provides user to get NHINo via HC.
+This is a function to get Taiwan Health Insurance drug code(NHINo) via Hospital Code(HC)
 }

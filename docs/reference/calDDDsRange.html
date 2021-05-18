@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate subjects' accumulated DDDs in custom interval period — calDDDsRange • pharm</title>
+<title>Calculate subjects' accumulated daily dosage drugs(DDDs) in custom interval period — calDDDsRange • pharm</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Calculate subjects' accumulated DDDs in custom interval period — calDDDsRange" />
-<meta property="og:description" content="calDDDsRange is a function to Calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui in custom interval period
-getDDDs is a function to get DDDs in ATC" />
+<meta property="og:title" content="Calculate subjects' accumulated daily dosage drugs(DDDs) in custom interval period — calDDDsRange" />
+<meta property="og:description" content="calDDDsRange is a function to calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui in custom interval period
+getDDDs is a function to get DDDs in ATC code" />
 
 
 
@@ -112,14 +112,14 @@ getDDDs is a function to get DDDs in ATC" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate subjects' accumulated DDDs in custom interval period</h1>
+    <h1>Calculate subjects' accumulated daily dosage drugs(DDDs) in custom interval period</h1>
     <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/calDDDsRange.R'><code>R/calDDDsRange.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a></small>
     <div class="hidden name"><code>calDDDsRange.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>calDDDsRange</code> is a function to Calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui in custom interval period
-<code>getDDDs</code> is a function to get DDDs in ATC</p>
+    <p><code>calDDDsRange</code> is a function to calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui in custom interval period
+<code>getDDDs</code> is a function to get DDDs in ATC code</p>
     </div>
 
     <pre class="usage"><span class='fu'>calDDDsRange</span><span class='op'>(</span>
@@ -182,18 +182,13 @@ getDDDs is a function to get DDDs in ATC" />
 <p><code>DDDs_After_30_Days</code> calculate DDDs in custom time interval after index 30 day</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function provides user to calculate the total amount of DDDs accumulated by the patient in a custom interval period or specific date.</p>
+    <p>User can get the total amount of DDDs accumulated of patients before and after a specific date in a custom interval period or specific date.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># sample of calculating subjects' accumulated DDDs in a custom interval period</span>
 <span class='va'>index_DDD</span> <span class='op'>&lt;-</span> <span class='fu'>calDDDsRange</span><span class='op'>(</span>case <span class='op'>=</span> <span class='va'>sample_data_subset_atc</span>,index_dayColName <span class='op'>=</span> <span class='va'>Index_Day</span>,expo_range_before <span class='op'>=</span> <span class='fl'>15</span>,expo_range_after <span class='op'>=</span> <span class='fl'>30</span>,idColName <span class='op'>=</span> <span class='va'>MemberId</span>,AtcCodeColName <span class='op'>=</span> <span class='va'>ATC</span>,DispenseDateColName <span class='op'>=</span> <span class='va'>DispenseDate</span>,DaysSupplyColName <span class='op'>=</span> <span class='va'>DaysSupply</span>,DailyDosageColName <span class='op'>=</span> <span class='va'>DailyDosage</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>index_DDD</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    MemberId  Start_day  Index_Day    End_day DDDs_Before_15_Days
-#&gt; 1:        1 2032-01-14 2032-01-29 2032-02-28                   0
-#&gt; 2:       42 2032-04-07 2032-04-22 2032-05-22                  NA
-#&gt;    DDDs_After_30_Days
-#&gt; 1:                 NA
-#&gt; 2:                 NA</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in left_join(., unique(resATC_DDD), by = c(ATC = "ATC_CODE")): 沒有這個函數 "left_join"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>index_DDD</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(index_DDD): 找不到物件 'index_DDD'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

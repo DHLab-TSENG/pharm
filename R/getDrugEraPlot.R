@@ -1,17 +1,4 @@
-#' Get drug histogram plot
-#@import dplyr
-#' @import ggplot2
-#' @import data.table
-#' @param df data.frame include drgu era info
-#' @param MemberIDColName A colum for member id of df
-#' @param DrugColName A colum for drug og df
-#' @param DrugEraColName A colum for drug era of df
-#' @param SupplyDaysColName A colum for supply days fo df
-#' @details
-#' This function provides user to get drug era histogram plot.
-#' @examples
-#' #sample of getting drug era histogram plot.
-#' getDrugEraPlot(df = sample_data_DrugEraPlot,MemberIDColName = MemberId,DrugColName = ATC,DrugEraColName = DrugEra,SupplyDaysColName = SupplyDays)
+#' @rdname getDrugEraPlot
 #' @export
 
 getDrugEraPlot <- function(df,

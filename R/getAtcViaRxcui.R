@@ -1,7 +1,7 @@
-#' @rdname getAtcViaRxcui
+#' @rdname getATCViaRxCui
 #' @export
 
-getAtcViaRxcui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = FALSE){
+getATCViaRxCui <- function(df, RxCuiColName = RxCui, cores=4, MatchRoute = FALSE){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
   dfu <- df %>% select("wRxCui") %>% unique()

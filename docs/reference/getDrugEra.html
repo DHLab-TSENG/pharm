@@ -40,7 +40,7 @@
 
 
 <meta property="og:title" content="Generate Drug Era — getDrugEra" />
-<meta property="og:description" content="getDrugEra is a function to calculate the drug era" />
+<meta property="og:description" content="This is a function to calculate the drug era" />
 
 
 
@@ -117,7 +117,7 @@
     </div>
 
     <div class="ref-description">
-    <p><code>getDrugEra</code> is a function to calculate the drug era</p>
+    <p>This is a function to calculate the drug era</p>
     </div>
 
     <pre class="usage"><span class='fu'>getDrugEra</span><span class='op'>(</span>
@@ -170,17 +170,19 @@
 <p><code>MemberId</code> patient Id</p>
 <p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
 <p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
-<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
+<p><code>Quantity</code> drug ration</p>
 <p><code>DaysSupply</code> days of patient`s drug supplied</p>
-<p><code>Drug Era</code> drug era</p>
+<p><code>Drug Era</code> the row of medicine records belongs to the drug era</p>
 <p><code>Drug Era Start Date</code> the begin date to calculate drug era</p>
 <p><code>Drug Era End Date</code> the end date to calculate drug era</p>
-<p><code>Gap</code> the time interval of drug dispensed date</p>
-<p><code>Exposure Days</code> the date of drug era</p>
+<p><code>Gap</code> interval between each drug delivery record date and the previous medication end date</p>
+<p><code>Exposure Days</code> number of days of drug era</p>
 <p><code>Supply Days</code> the days of drug era that patient`s drug supplied</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This can be used to merge pharmacy claims data into drug era with defined window and Exposure days will be cacluated, too.
+    <p>Because the patient does not seek medical treatment every time to treat a specific disease, in the medication records, the continuous drug record is not necessarily the drug for the treatment of a specific disease.
+The patient's medication records for the treatment of a particular disease are often scattered throughout the data, so the serialization of these discrete drug records into a continuous medication is an important step in the analysis.</p>
+<p>This can be used to merge pharmacy claims data into drug era with defined window and Exposure days will be cacluated, too.
 An event of the time interval is according to the prescription's dispense date plus the prescription's drug supply days.
 There are two calculation models:</p>
 <p>1.If the time interval gap between the patient taking the drug exceeds the persistent window, these two events are regarded as two different drug era.</p>
@@ -190,19 +192,7 @@ There are two calculation models:</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#sample of calculating drug era.</span>
 <span class='fu'>getDrugEra</span><span class='op'>(</span>MemberIDColName <span class='op'>=</span> <span class='va'>MemberId</span>,<span class='va'>sample_data_subset</span>,DrugColName <span class='op'>=</span> <span class='va'>NationalDrugCode</span>,DispenseDateColName <span class='op'>=</span> <span class='va'>DispenseDate</span>,DaysSupplyColName <span class='op'>=</span> <span class='va'>DaysSupply</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 8 x 11</span><span>
-#&gt;   MemberId DispenseDate NationalDrugCode Quantity DaysSupply DrugEra
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>        1 2031-12-01   00186504031            30         30       1
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>        1 2032-01-31   00186504031            30         30       2
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        1 2032-03-25   00186504031            30         30       2
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>       42 2032-03-08   00006504031            90         90       1
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>       42 2032-04-25   00006504031            90         90       1
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>       42 2032-01-05   00186504031            30         30       1
-#&gt; </span><span style='color: #BCBCBC;'>7</span><span>       42 2032-03-07   00186504031            30         30       2
-#&gt; </span><span style='color: #BCBCBC;'>8</span><span>       42 2032-04-30   00186504031            30         30       2
-#&gt; </span><span style='color: #949494;'># ... with 5 more variables: DrugEraStartDate &lt;date&gt;, DrugEraEndDate &lt;date&gt;,</span><span>
-#&gt; </span><span style='color: #949494;'>#   Gap &lt;dbl&gt;, ExposureDays &lt;drtn&gt;, SupplyDays &lt;int&gt;</span><span></div></span></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in arrange(case, MemberID, Drug, DispenseDate): 沒有這個函數 "arrange"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

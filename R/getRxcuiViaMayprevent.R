@@ -1,7 +1,7 @@
-#@rdname getRxcuiViaMayprevent
-#@export
+#' @rdname getRxCuiViaMayPrevent
+#' @export
 
-getRxcuiViaMayprevent <- function(strmayprevent){
+getRxCuiViaMayPrevent <- function(strmayprevent){
 
   strmayprevent <-  tolower(gsub(" ","",strmayprevent))
   resMayprevent[,t := grepl(strmayprevent, mayprevent)]

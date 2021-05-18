@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui — getMEDRTInfo • pharm</title>
+<title>Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information via RxCui — getMEDRTInfo • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui — getMEDRTInfo" />
-<meta property="og:description" content="Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui" />
+<meta property="og:title" content="Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information via RxCui — getMEDRTInfo" />
+<meta property="og:description" content="This function can get MED-RT information via RxCui." />
 
 
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DHLab-TSENG/pharm/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,13 +111,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui</h1>
-    
+    <h1>Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information via RxCui</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getMEDRTInfo.R'><code>R/getMEDRTInfo.R</code></a></small>
     <div class="hidden name"><code>getMEDRTInfo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get the Veterans Health Administration's Medication Reference Terminology (MED-RT) information based on RxCui</p>
+    <p>This function can get <code>MED-RT</code> information via RxCui.</p>
     </div>
 
     <pre class="usage"><span class='fu'>getMEDRTInfo</span><span class='op'>(</span><span class='va'>df</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
@@ -122,11 +127,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame include RxCui</p></td>
+      <td><p>data.frame, included RxCui</p></td>
     </tr>
     <tr>
       <th>RxCuiColName</th>
-      <td><p>A colum for RxCui of df</p></td>
+      <td><p>a column name for RxCui of df</p></td>
     </tr>
     <tr>
       <th>cores</th>

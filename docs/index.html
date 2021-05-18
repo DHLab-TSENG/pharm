@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pharm • pharm</title>
+<title>pharm • pharm</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Pharm">
+<script src="pkgdown.js"></script><meta property="og:title" content="pharm">
 <meta property="og:description" content="A health data analysis tool of electric medication record in R.
              An open-source package tool aimed at integrating standard drug code, indication screening and definition of daily dose calculation function.
              Mapping RxNorm, ATC, NDC, and Taiwan NHI code.
@@ -114,12 +114,11 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p><img src="C:/Users/88697/Documents/GitHub/pharm/image/overview.png" style="display:block; margin:auto; width:100%;"></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode md"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;img</span><span class="ot"> src=</span><span class="st">"https://dhlab-tseng.github.io/pharm/image/overview.png"</span><span class="ot"> style=</span><span class="st">"display:block; margin:auto; width:100%;"</span><span class="kw">&gt;</span></span></code></pre></div>
+<p><img src="https://dhlab-tseng.github.io/pharm/image/overview.png" style="display:block; margin:auto; width:100%;"></p>
 </div>
 <div id="data-source" class="section level2">
 <h2 class="hasAnchor">
-<a href="#data-source" class="anchor"></a>Data source</h2>
+<a href="#data-source" class="anchor"></a>Data Source</h2>
 <ul>
 <li>Chang Gung Medical drug code
 <ul>
@@ -138,90 +137,57 @@
 </li>
 </ul>
 </div>
-<div id="sample-test" class="section level2">
+<div id="function-example-data-list" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sample-test" class="anchor"></a>Sample Test</h2>
+<a href="#function-example-data-list" class="anchor"></a>Function Example Data List</h2>
 <table class="table">
-<colgroup>
-<col width="18%">
-<col width="18%">
-<col width="17%">
-<col width="13%">
-<col width="10%">
-<col width="21%">
-</colgroup>
 <thead><tr class="header">
 <th>sample Esophagitis</th>
-<th>total object number</th>
-<th>total column number</th>
-<th>all column name</th>
-<th>return value</th>
 <th>return list</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>getRxcuiViaMaytreat</td>
-<td>28 obj</td>
-<td>4 variable</td>
-<td>V</td>
-<td>V</td>
+<td>getRxCuiViaMayTreat</td>
 <td>Esophagitis_List</td>
 </tr>
 <tr class="even">
-<td>getSbdRxcuiViaRxcui</td>
-<td>36 obj</td>
-<td>5 variable</td>
-<td>V</td>
-<td>V</td>
+<td>getSBDRxCuiViaRxCui</td>
 <td>Esophagitis_SBD_SCD_List</td>
 </tr>
 <tr class="odd">
-<td>getNdcViaSbdRxcui</td>
-<td>28 obj</td>
-<td>4 variable</td>
-<td>V</td>
-<td>V</td>
+<td>getNDCViaSBDRxCui</td>
 <td>Esophagitis_NDC_List</td>
 </tr>
 <tr class="even">
-<td>getRxcuiViaNdc</td>
-<td>8 obj X</td>
-<td>7 variable X</td>
-<td>V</td>
-<td>V</td>
+<td>getRxCuiViaNDC</td>
 <td>sample_data_subset_rxcui</td>
 </tr>
 <tr class="odd">
-<td>getAtcViaRxCui</td>
-<td>8 obj X</td>
-<td>8 variable X</td>
-<td>V</td>
-<td>V</td>
+<td>getATCViaRxCui</td>
 <td>sample_data_subset_atc</td>
 </tr>
 <tr class="even">
-<td>getRxCuiViaAtc</td>
-<td>5 obj</td>
-<td>2 variable</td>
-<td>V</td>
-<td>V</td>
+<td>getRxCuiViaATC</td>
 <td>sample_atc_rxcui</td>
 </tr>
 <tr class="odd">
-<td>getRxCuiViaAtc</td>
-<td>5 obj</td>
-<td>2 variable</td>
-<td>V</td>
-<td>V</td>
-<td>sample_atc_rxcui</td>
+<td>calDailyDosage</td>
+<td>sample_data_subset_atc</td>
+</tr>
+<tr class="even">
+<td>calDDDsAccumulation</td>
+<td>accumulat_DDD</td>
+</tr>
+<tr class="odd">
+<td>calDDDsRange</td>
+<td>index_DDD</td>
 </tr>
 </tbody>
 </table>
-<p>…</p>
 </div>
 <div id="getting-help" class="section level2">
 <h2 class="hasAnchor">
-<a href="#getting-help" class="anchor"></a>Getting help</h2>
+<a href="#getting-help" class="anchor"></a>Getting Help</h2>
 <p>See the <a href="https://github.com/DHLab-TSENG/pharm/issues">GitHub issues page</a> to see open issues and feature requests.</p>
 </div>
 

@@ -39,26 +39,29 @@ A new data.table with following columns.
 
 \code{NationalDrugCode} drug NDC, total of 17,326 different drug codes
 
-\code{Quantity} quantity of patient`s drug dispensed
+\code{Quantity} drug ration
 
 \code{DaysSupply} days of patient`s drug supplied
 
-\code{Drug Era} drug era
+\code{Drug Era} the row of medicine records belongs to the drug era
 
 \code{Drug Era Start Date} the begin date to calculate drug era
 
 \code{Drug Era End Date} the end date to calculate drug era
 
-\code{Gap} the time interval of drug dispensed date
+\code{Gap} interval between each drug delivery record date and the previous medication end date
 
-\code{Exposure Days} the date of drug era
+\code{Exposure Days} number of days of drug era
 
 \code{Supply Days} the days of drug era that patient`s drug supplied
 }
 \description{
-\code{getDrugEra} is a function to calculate the drug era
+This is a function to calculate the drug era
 }
 \details{
+Because the patient does not seek medical treatment every time to treat a specific disease, in the medication records, the continuous drug record is not necessarily the drug for the treatment of a specific disease.
+The patient's medication records for the treatment of a particular disease are often scattered throughout the data, so the serialization of these discrete drug records into a continuous medication is an important step in the analysis.
+
 This can be used to merge pharmacy claims data into drug era with defined window and Exposure days will be cacluated, too.
 An event of the time interval is according to the prescription's dispense date plus the prescription's drug supply days.
 There are two calculation models:

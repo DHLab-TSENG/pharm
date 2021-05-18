@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate subjects' accumulated DDDs — calDDDsAccumulation • pharm</title>
+<title>Calculate subjects' total daily dosage drugs(DDDs) — calDDDsAccumulation • pharm</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,9 @@
 
 
 
-<meta property="og:title" content="Calculate subjects' accumulated DDDs — calDDDsAccumulation" />
-<meta property="og:description" content="calDailyDosage is a function to Calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui before last dispensed
-getDDDs is a function to get DDDs in ATC" />
+<meta property="og:title" content="Calculate subjects' total daily dosage drugs(DDDs) — calDDDsAccumulation" />
+<meta property="og:description" content="calDDDsAccumulation is a function to calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui before last dispensed.
+getDDDs is a function to get DDDs in ATC code" />
 
 
 
@@ -112,14 +112,14 @@ getDDDs is a function to get DDDs in ATC" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate subjects' accumulated DDDs</h1>
+    <h1>Calculate subjects' total daily dosage drugs(DDDs)</h1>
     <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/calDDDsAccumulation.R'><code>R/calDDDsAccumulation.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getDDDs.R'><code>R/getDDDs.R</code></a></small>
     <div class="hidden name"><code>calDDDsAccumulation.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>calDailyDosage</code> is a function to Calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui before last dispensed
-<code>getDDDs</code> is a function to get DDDs in ATC</p>
+    <p><code>calDDDsAccumulation</code> is a function to calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui before last dispensed.
+<code>getDDDs</code> is a function to get DDDs in ATC code</p>
     </div>
 
     <pre class="usage"><span class='fu'>calDDDsAccumulation</span><span class='op'>(</span>
@@ -153,15 +153,14 @@ getDDDs is a function to get DDDs in ATC" />
 <p><code>DDDs</code> accumulated DDDs</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function provides user to calculate patient`s total amount of DDDs for accumulation medication time.</p>
+    <p>User can input data frame containing the patient id, dispensing date, the drug ATC code, drug supply days, and daily dose of the drug column.
+This function will output a data frame which store DDDs accumulated by patients.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># sample of calculating subjects' accumulated DDDs</span>
 <span class='va'>accumulat_DDD</span> <span class='op'>&lt;-</span> <span class='fu'>calDDDsAccumulation</span><span class='op'>(</span>case <span class='op'>=</span> <span class='va'>sample_data_subset_atc</span>, PatientIdColName <span class='op'>=</span> <span class='va'>MemberId</span>,DispensingColName <span class='op'>=</span> <span class='va'>DispenseDate</span>,AtcCodeColName <span class='op'>=</span> <span class='va'>ATC</span>,DailyDosageColName <span class='op'>=</span> <span class='va'>DailyDosage</span>,DurationColName <span class='op'>=</span> <span class='va'>DaysSupply</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>accumulat_DDD</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    MemberId DDDs
-#&gt; 1:        1   NA
-#&gt; 2:       42   NA</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in left_join(., unique(resATC_DDD), by = c(ATC = "ATC_CODE")): 沒有這個函數 "left_join"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>accumulat_DDD</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(accumulat_DDD): 找不到物件 'accumulat_DDD'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -2,7 +2,7 @@
 % Please edit documentation in R/calDDDsRange.R, R/funPharm.R
 \name{calDDDsRange}
 \alias{calDDDsRange}
-\title{Calculate subjects' accumulated DDDs in custom interval period}
+\title{Calculate subjects' accumulated daily dosage drugs(DDDs) in custom interval period}
 \usage{
 calDDDsRange(
   case,
@@ -49,11 +49,11 @@ A new data.table \code{index_DDD} with following columns.
 \code{DDDs_After_30_Days} calculate DDDs in custom time interval after index 30 day
 }
 \description{
-\code{calDDDsRange} is a function to Calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui in custom interval period
-\code{getDDDs} is a function to get DDDs in ATC
+\code{calDDDsRange} is a function to calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui in custom interval period
+\code{getDDDs} is a function to get DDDs in ATC code
 }
 \details{
-This function provides user to calculate the total amount of DDDs accumulated by the patient in a custom interval period or specific date.
+User can get the total amount of DDDs accumulated of patients before and after a specific date in a custom interval period or specific date.
 }
 \examples{
 # sample of calculating subjects' accumulated DDDs in a custom interval period

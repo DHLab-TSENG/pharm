@@ -1,7 +1,7 @@
-#' @rdname getRxcuiViaMaytreat
+#' @rdname getRxCuiViaMayTreat
 #' @export
 
-getRxcuiViaMaytreat <- function(strmaytreat){
+getRxCuiViaMayTreat <- function(strmaytreat){
 
   strmaytreat <- tolower(gsub(" ","",strmaytreat))
   resMaytreat[,t := grepl(strmaytreat, maytreat)]

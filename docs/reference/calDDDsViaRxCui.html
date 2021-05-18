@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo) — getATCViaNHINo • pharm</title>
+<title>Calculate total daily dosage drugs(DDDs) in RxCui — calDDDsViaRxCui • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo) — getATCViaNHINo" />
-<meta property="og:description" content="This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo)" />
+<meta property="og:title" content="Calculate total daily dosage drugs(DDDs) in RxCui — calDDDsViaRxCui" />
+<meta property="og:description" content="This is a function to calculate daily dosage drugs(DDDs) in RxCui" />
 
 
 
@@ -111,44 +111,74 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getATCViaNHINo.R'><code>R/getATCViaNHINo.R</code></a></small>
-    <div class="hidden name"><code>getATCViaNHINo.Rd</code></div>
+    <h1>Calculate total daily dosage drugs(DDDs) in RxCui</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/calDDDsViaRxCui.R'><code>R/calDDDsViaRxCui.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a></small>
+    <div class="hidden name"><code>calDDDsViaRxCui.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo)</p>
+    <p>This is a function to calculate daily dosage drugs(DDDs) in RxCui</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getATCViaNHINo</span><span class='op'>(</span><span class='va'>df</span>, NHINoColName <span class='op'>=</span> <span class='va'>NHINo</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>calDDDsViaRxCui</span><span class='op'>(</span>
+  <span class='va'>df</span>,
+  RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>,
+  QuantityColName <span class='op'>=</span> <span class='va'>Quantity</span>,
+  DaysSupplyColName <span class='op'>=</span> <span class='va'>DaysSupply</span>,
+  cores <span class='op'>=</span> <span class='fl'>4</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame include NHINO</p></td>
+      <td><p>data.frame, a drug ingredient`s ATC of the specific indication</p></td>
     </tr>
     <tr>
-      <th>NHINoColName</th>
-      <td><p>A colum for NHINo of df</p></td>
+      <th>RxCuiColName</th>
+      <td><p>a column name for RxCui of df</p></td>
+    </tr>
+    <tr>
+      <th>QuantityColName</th>
+      <td><p>a column name for drug quantity of df</p></td>
+    </tr>
+    <tr>
+      <th>DaysSupplyConName</th>
+      <td><p>a column name for the days that patient`s drug supplied of df</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>A new data.table <code>sample_data_subset_atc</code> with following columns.</p>
+<p><code>MemberId</code> patient Id</p>
+<p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
+<p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
+<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
+<p><code>DaysSupply</code> days of patient`s drug supplied</p>
+<p><code>RxCui</code> drug RxCui</p>
+<p><code>ATC</code> drug ATC</p>
+<p><code>DailyDosage</code> daily dosage drugs</p>
+<p><code>Unit</code> drug calculate unit</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function filter the patient to be analyzed with the target indication drug, which encode in RxCui and be converted to ATC code by the function <code><a href='getATCViaRxCui.html'>getATCViaRxCui()</a></code>.
-User inputs the data frame with drug column which encoded in NHINo, then the output will add a column named ATC in the original input data frame.</p>
+    <p>The calculation model: The dosage of the drug multiplied by the number of the days of drug taken, and then divided by the number of days of drug supplied.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># sample of getting ATC code via NHINo.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>getATCViaNHINo</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_nhino_code</span>,NHINoColName <span class='op'>=</span> <span class='va'>NHINo</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in left_join(., resATC, by = c(NHINo = "nhino")): 沒有這個函數 "left_join"</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># sample of calculating DDDs in RxCui.</span>
+<span class='va'>sample_data_subset_atc</span> <span class='op'>&lt;-</span> <span class='fu'>calDDDsViaRxCui</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset_atc</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, QuantityColName <span class='op'>=</span> <span class='va'>Quantity</span>, DaysSupplyConName <span class='op'>=</span> <span class='va'>DaysSupply</span>, cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in calDDDsViaRxCui(df = sample_data_subset_atc, RxCuiColName = RxCui,     QuantityColName = Quantity, DaysSupplyConName = DaysSupply,     cores = 2): unused argument (DaysSupplyConName = DaysSupply)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_data_subset_atc</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 8</span><span>
+#&gt;   MemberId DispenseDate NationalDrugCode Quantity DaysSupply RxCui  ndcStatus
+#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>        1 2031-12-01   00186504031            30         30 606731 ACTIVE   
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>        1 2032-01-31   00186504031            30         30 606731 ACTIVE   
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        1 2032-03-25   00186504031            30         30 606731 ACTIVE   
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>       42 2032-01-05   00186504031            30         30 606731 ACTIVE   
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>       42 2032-03-07   00186504031            30         30 606731 ACTIVE   
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>       42 2032-04-30   00186504031            30         30 606731 ACTIVE   
+#&gt; </span><span style='color: #949494;'># ... with 1 more variable: ATC &lt;chr&gt;</span><span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

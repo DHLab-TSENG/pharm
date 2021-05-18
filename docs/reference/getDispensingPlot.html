@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get dispensing plot — getDispensingPlot • pharm</title>
+<title>Get specific medication history dispensing plot — getDispensingPlot • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get dispensing plot — getDispensingPlot" />
-<meta property="og:description" content="Get dispensing plot" />
+<meta property="og:title" content="Get specific medication history dispensing plot — getDispensingPlot" />
+<meta property="og:description" content="This function provides user to select specific patient to visualize their medication history in a custom interval period or specific date." />
 
 
 
@@ -92,7 +92,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/DHLab-TSENG/pharm/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -106,13 +111,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get dispensing plot</h1>
-    
+    <h1>Get specific medication history dispensing plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getDispensingPlot.R'><code>R/getDispensingPlot.R</code></a></small>
     <div class="hidden name"><code>getDispensingPlot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get dispensing plot</p>
+    <p>This function provides user to select specific patient to visualize their medication history in a custom interval period or specific date.</p>
     </div>
 
     <pre class="usage"><span class='fu'>getDispensingPlot</span><span class='op'>(</span>
@@ -131,46 +136,46 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame include dispense info</p></td>
+      <td><p>data.frame, include dispensed info</p></td>
     </tr>
     <tr>
       <th>MemberIDColName</th>
-      <td><p>A colum for memebr id</p></td>
+      <td><p>a column name for member id of df</p></td>
     </tr>
     <tr>
       <th>Member</th>
-      <td><p>A colum for the member who be plot</p></td>
+      <td><p>a column name for the member name of plot</p></td>
     </tr>
     <tr>
       <th>DrugColName</th>
-      <td><p>A colum for drug name</p></td>
+      <td><p>a column name for drug name of df</p></td>
     </tr>
     <tr>
       <th>DispenseDateColName</th>
-      <td><p>A colum for dispense date</p></td>
+      <td><p>a column name for dispensed date of df</p></td>
     </tr>
     <tr>
       <th>DaysSupplyColName</th>
-      <td><p>A colum for day supplys</p></td>
+      <td><p>a column name for day supplied of df</p></td>
     </tr>
     <tr>
       <th>TimeInterval</th>
-      <td><p>A colum for time interval</p></td>
+      <td><p>a column name for time interval of df</p></td>
     </tr>
     <tr>
       <th>Unit</th>
-      <td><p>A colum for time unit</p></td>
+      <td><p>a column name for time unit of df</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function provides user to selecting specific patients may visualize their medication history in a custom interval period or specific date.</p>
+    <p>In addition to visualize the results of the drug era for all patients in the data, user can also select a single patient to see the medication history of the patient's specific drug, and mark the length of each medication record and the time interval between each medication record.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#sample of getting dispensing plot.</span>
 <span class='fu'>getDispensingPlot</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset</span>, MemberIDColName <span class='op'>=</span> <span class='va'>MemberId</span>,DrugColName <span class='op'>=</span> <span class='va'>NationalDrugCode</span>,DispenseDateColName <span class='op'>=</span> <span class='va'>Dispensing</span>,Member <span class='op'>=</span> <span class='fl'>42</span>, TimeInterval <span class='op'>=</span> <span class='fl'>20</span>, Unit <span class='op'>=</span> <span class='va'>day</span><span class='op'>)</span>
-</div><div class='img'><img src='getDispensingPlot-1.png' alt='' width='700' height='433' /></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in filter(df, MemberID == Member): 找不到物件 'MemberID'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

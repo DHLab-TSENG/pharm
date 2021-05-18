@@ -31,11 +31,9 @@ library(dplyr)
 ```
 
 ## Overview
-<img src="C:/Users/88697/Documents/GitHub/pharm/image/overview.png" style="display:block; margin:auto; width:100%;">
-```md
 <img src="https://dhlab-tseng.github.io/pharm/image/overview.png" style="display:block; margin:auto; width:100%;">
-```
-## Data source
+
+## Data Source
 * Chang Gung Medical drug code
   * Chang Gung Medical Research Database
 * ATC Database for Classification of Drugs and Pharmacological Treatments
@@ -43,18 +41,19 @@ library(dplyr)
 * RxNorm API
   * U.S.National Library of Medicine, 2019b
 
-## Sample Test
-| sample Esophagitis  | total object number  | total column number | all column name | return value | return list              |
-|-------------------- | -------------------- | ------------------- | --------------- | ------------ | ------------------------ |
-| getRxcuiViaMaytreat | 28 obj               | 4 variable          | V               | V            | Esophagitis_List         |
-| getSbdRxcuiViaRxcui | 36 obj               | 5 variable          | V               | V            | Esophagitis_SBD_SCD_List |
-| getNdcViaSbdRxcui   | 28 obj               | 4 variable          | V               | V            | Esophagitis_NDC_List     |
-| getRxcuiViaNdc      | 8 obj X              | 7 variable X        | V               | V            | sample_data_subset_rxcui |
-| getAtcViaRxCui      | 8 obj X              | 8 variable X        | V               | V            | sample_data_subset_atc   |
-| getRxCuiViaAtc      | 5 obj                | 2 variable          | V               | V            | sample_atc_rxcui         |
-| getRxCuiViaAtc      | 5 obj                | 2 variable          | V               | V            | sample_atc_rxcui         |
-...
+## Function Example Data List
+| sample Esophagitis  | return list              |
+|-------------------- | ------------------------ |
+| getRxCuiViaMayTreat | Esophagitis_List         |
+| getSBDRxCuiViaRxCui | Esophagitis_SBD_SCD_List |
+| getNDCViaSBDRxCui   | Esophagitis_NDC_List     |
+| getRxCuiViaNDC      | sample_data_subset_rxcui |
+| getATCViaRxCui      | sample_data_subset_atc   |
+| getRxCuiViaATC      | sample_atc_rxcui         |
+| calDailyDosage      | sample_data_subset_atc   |
+| calDDDsAccumulation | accumulat_DDD            |
+| calDDDsRange        | index_DDD                |
 
 
-## Getting help
+## Getting Help
 See the [GitHub issues page](<https://github.com/DHLab-TSENG/pharm/issues>) to see open issues and feature requests.

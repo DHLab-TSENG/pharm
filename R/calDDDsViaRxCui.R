@@ -1,7 +1,7 @@
-#' @rdname calDailyDosage
+#' @rdname calDDDsViaRxCui
 #' @export
 
-calDailyDosage <- function(df,
+calDDDsViaRxCui <- function(df,
                            RxCuiColName = RxCui,
                            QuantityColName = Quantity,
                            DaysSupplyColName = DaysSupply,

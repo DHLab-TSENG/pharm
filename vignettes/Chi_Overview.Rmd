@@ -363,5 +363,22 @@ get.DispensingPlot(df = sample_data_subset,
                    Unit = day)
 ```
 
+## Reference
+**Bodenreider et al.** https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index
+
+**RxNorm API**
+In addition to providing RxNav which can use on the web, National Library of Medicine (NLM) also provides APIs for users to obtain specific drug-related information which in NLM's integrated drug vocabulary.
+
+* U.S.National Library of Medicine(2019-2021): https://rxnav.nlm.nih.gov/RxNormAPIs.html
+
+**ATC Database for Classification of Drugs and Pharmacological Treatments**
+
+* WHO Collaborating Center for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018: https://www.whocc.no/atc_ddd_index/
+
+* Taiwan Food and Drug Administration(2019):
+
+**Chang Gung Medical drug code**
+
+* Chang Gung Medical Research Database
 
 

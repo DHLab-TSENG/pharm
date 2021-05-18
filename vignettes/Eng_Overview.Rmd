@@ -371,7 +371,6 @@ The visualization of the data analyzed results can help user quickly understand 
 In addition, plots can also quickly see the distribution of drug categories in the data, present the results of drug era analysis and the drug history of individual patients.
 
 ### **1. ATC distribution plot**  
-
 User can get DDDs in ATC level 1 or 2 histogram plot.
 A parameter `level` is provided that user can choose which level to draw whether the first-order or second-order distribution of ATC.
 Then, show the plot of its distribution in bar chart.
@@ -398,7 +397,6 @@ get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot,
 ```
 
 ### **2. drug era plot**  
-
 User can get the visualized result of the drug era calculated by `get.DrugEra`.
 User has to consider different drug, drug era, supplied days, and the distribution of the dospensing drug.
 Then, show the plot that distribution of the patient`s dispensing drug times in bar chart.
@@ -418,7 +416,6 @@ get.DrugEraPlot(df = sample_data_DrugEraPlot,
 ```
 
 ### **3. dispensing drug history plot**  
-
 User can get specific patient`s drug history plot in bar chart.
 In addition, user can also get separately sub-plots of  different drug history.
 
@@ -437,3 +434,21 @@ get.DispensingPlot(df = sample_data_subset,
                    TimeInterval = 20, 
                    Unit = day)
 ```
+
+## Reference
+**Bodenreider et al.** https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index
+
+**RxNorm API**
+In addition to providing RxNav which can use on the web, National Library of Medicine (NLM) also provides APIs for users to obtain specific drug-related information which in NLM's integrated drug vocabulary.
+
+* U.S.National Library of Medicine(2019-2021): https://rxnav.nlm.nih.gov/RxNormAPIs.html
+
+**ATC Database for Classification of Drugs and Pharmacological Treatments**
+
+* WHO Collaborating Center for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018: https://www.whocc.no/atc_ddd_index/
+
+* Taiwan Food and Drug Administration(2019):
+
+**Chang Gung Medical drug code**
+
+* Chang Gung Medical Research Database

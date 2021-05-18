@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get NHINo via RCFNo — getNHINoViaRCFNo • pharm</title>
+<title>Get Taiwan Health Insurance drug code(NHINo) via Hospital drug code(RCFNo) — getNHINoViaRCFNo • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get NHINo via RCFNo — getNHINoViaRCFNo" />
-<meta property="og:description" content="getNHINoViaRCFNo is a function to get Taiwan Health Insurance drug code(NHINo) via Chang Gung Medical Hospital drug code(RCFNo)" />
+<meta property="og:title" content="Get Taiwan Health Insurance drug code(NHINo) via Hospital drug code(RCFNo) — getNHINoViaRCFNo" />
+<meta property="og:description" content="This is a function to get Taiwan Health Insurance drug code(NHINo) via Chang Gung Medical Hospital drug code(RCFNo)" />
 
 
 
@@ -111,13 +111,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get NHINo via RCFNo</h1>
+    <h1>Get Taiwan Health Insurance drug code(NHINo) via Hospital drug code(RCFNo)</h1>
     <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getNHINoViaRCFNo.R'><code>R/getNHINoViaRCFNo.R</code></a></small>
     <div class="hidden name"><code>getNHINoViaRCFNo.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>getNHINoViaRCFNo</code> is a function to get Taiwan Health Insurance drug code(NHINo) via Chang Gung Medical Hospital drug code(RCFNo)</p>
+    <p>This is a function to get Taiwan Health Insurance drug code(NHINo) via Chang Gung Medical Hospital drug code(RCFNo)</p>
     </div>
 
     <pre class="usage"><span class='fu'>getNHINoViaRCFNo</span><span class='op'>(</span><span class='va'>df</span>, RCFNoColName <span class='op'>=</span> <span class='va'>RCFNO</span><span class='op'>)</span></pre>
@@ -139,21 +139,16 @@
 
     <p>A new data.table with following columns.</p>
 <p><code>CGMH_CODE</code> Chang Gung Medical Hospital drug code RCFNo</p>
-<p><code>NHINO1</code>drug NHINo</p>
+<p><code>NHINO1</code> drug NHINo</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If there is no corresponed NHINo, then display <code>NA</code>. This function provides user to get NHINo via RCFNo.</p>
+    <p>User can input the specific hospital drug code
+If there is no corresponed NHINo, then display <code>NA</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># sample of getting NHINo via RCFNo of Chang Gung Medical Hospital.</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>getNHINoViaRCFNo</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_taiwan_drug</span>, RCFNoColName <span class='op'>=</span> <span class='va'>CGMH_CODE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    CGMH_CODE     NHINO1
-#&gt; 1:   P6A780M BC26139100
-#&gt; 2:   P6A022E       &lt;NA&gt;
-#&gt; 3:   P6A741M       &lt;NA&gt;
-#&gt; 4:   P6A674M       &lt;NA&gt;
-#&gt; 5:   PBA024P N002967209
-#&gt; 6:   PBA024P A010784209</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in select(., RCFNO1): 沒有這個函數 "select"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -4,7 +4,7 @@
 \name{calDDDsAccumulation}
 \alias{calDDDsAccumulation}
 \alias{getDDDs}
-\title{Calculate subjects' accumulated DDDs}
+\title{Calculate subjects' total daily dosage drugs(DDDs)}
 \usage{
 calDDDsAccumulation(
   case,
@@ -30,11 +30,12 @@ A new data.table \code{accumulat_DDD} with following columns.
 \code{DDDs} accumulated DDDs
 }
 \description{
-\code{calDailyDosage} is a function to Calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui before last dispensed
-\code{getDDDs} is a function to get DDDs in ATC
+\code{calDDDsAccumulation} is a function to calculate subjects' accumulated daily dosage drugs(DDDs) in RxCui before last dispensed.
+\code{getDDDs} is a function to get DDDs in ATC code
 }
 \details{
-This function provides user to calculate patient`s total amount of DDDs for accumulation medication time.
+User can input data frame containing the patient id, dispensing date, the drug ATC code, drug supply days, and daily dose of the drug column.
+This function will output a data frame which store DDDs accumulated by patients.
 }
 \examples{
 # sample of calculating subjects' accumulated DDDs
