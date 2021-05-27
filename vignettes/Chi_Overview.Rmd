@@ -31,6 +31,7 @@ library(dplyr)
 * `DaysSupply` 藥物供給天數
 
 ```{r message=FALSE, warning=FALSE}
+load("~/GitHub/pharm/data/sample_data_subset.rda")
 knitr::kable(sample_data_subset)
 ```
 
@@ -46,7 +47,7 @@ knitr::kable(sample_data_subset)
 * `MinConcept.Name` 適應症名稱
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
+Esophagitis_List <- getRxCuiViaMayTreatTest1("esophagitis")
 knitr::kable(
   head(Esophagitis_List)
 )
