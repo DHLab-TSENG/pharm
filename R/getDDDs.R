@@ -1,4 +1,5 @@
 #' @name calDDDsAccumulation
+#' @export
 getDDDs <- function(atc){
 
   ddd <- atc%>%

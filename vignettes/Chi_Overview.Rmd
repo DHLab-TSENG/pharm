@@ -47,7 +47,7 @@ knitr::kable(sample_data_subset)
 * `MinConcept.Name` 適應症名稱
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_List <- getRxCuiViaMayTreatTest1("esophagitis")
+Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
 knitr::kable(
   head(Esophagitis_List)
 )
@@ -137,9 +137,6 @@ knitr::kable(head(sample_data_subset_rxcui))
 * `RxCui` 藥物RxCui
 * `ATC` 藥物ATC
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
-sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
-```
 ```{r, warning=FALSE, message=FALSE}
 sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,
                                           RxCuiColName = RxCui,
@@ -172,10 +169,6 @@ knitr::kable(
 使用者透過輸入台灣任一醫院藥物編碼可以取得對應之台灣健康保險藥物編碼，若無對應之編碼則顯示`NA`。
 
 範例:輸入台灣醫院藥品編碼，可以取得轉換後的台灣健康保險藥物編碼。
-
-```{r, warning=FALSE, message=FALSE}
-# getNHINoViaHC()
-```
 
 #### **4.2. 長庚醫院藥物編碼 轉換為 台灣健康保險藥物編碼**
 使用者透過輸入長庚醫院藥物編碼可以取得對應之台灣健康保險藥物編碼，若無對應之編碼則顯示`NA`。
@@ -261,10 +254,10 @@ knitr::kable(getDrugEra(MemberIDColName = MemberId,
 * `Unit` 單位
 
 ```{r, warning=FALSE, message=FALSE}
-sample_data_subset_atc <- calDailyDosage(df = sample_data_subset_atc, 
+sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, 
                                          RxCuiColName = RxCui, 
                                          QuantityColName = Quantity, 
-                                         DaysSupplyConName = DaysSupply, 
+                                         DaysSupplyColName = DaysSupply, 
                                          cores = 2)
 knitr::kable(
   head(sample_data_subset_atc)

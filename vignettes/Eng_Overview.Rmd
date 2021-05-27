@@ -38,6 +38,7 @@ For the field information in the data set:
 * `DaysSupply` days of patient`s drug dispensed
 
 ```{r message=FALSE, warning=FALSE}
+load("~/GitHub/pharm/data/sample_data_subset.rda")
 knitr::kable(sample_data_subset)
 ```
 
@@ -168,7 +169,7 @@ For the field information in the data set:
 * `ATC` drug ATC
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
+#sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
 ```
 ```{r, warning=FALSE, message=FALSE}
 sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,
@@ -202,13 +203,6 @@ knitr::kable(
 ### **3. Taiwan Drug Code conversion**  
 #### **3.1. Get NHINo via HC**
 User can get NHINo which has contained these drug ingredients by input HC, and no corresponding NHINo will be`NA`.
-
-Exmaple:
-
-```{r, warning=FALSE, message=FALSE}
-# getNHINoViaHC()
-```
-
 
 #### **3.2. Get NHINo via RCFNo**
 User can get NHINo which has contained these drug ingredients by input the data table `sample_taiwan_drug`, and no corresponding NHINo will be`NA`.
