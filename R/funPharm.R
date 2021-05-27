@@ -476,7 +476,7 @@ NULL
 #'
 #' \code{getAtcLevelPlot} is a function to get daily dosage drugs(DDDs) in Anatomical Therapeutic Chemical Classification System(ATC) code level histogram plot.
 #'
-#' @name getATCLevelPlot
+#' @name getATCLevelPlotTest1
 #' @import ggplot2
 #' @import data.table
 #' @param df data.frame, include ATC code
