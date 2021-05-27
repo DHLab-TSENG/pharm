@@ -20,7 +20,7 @@ reference:
 - title: I. Get Drug Ingredient Via Indication
   desc: ~
   contents:
-  - getRxCuiViaMayTreatTest1
+  - getRxCuiViaMayTreat
   - getRxCuiViaMayPrevent
   - getMayPrevent
   - getSBDRxCuiViaRxCui

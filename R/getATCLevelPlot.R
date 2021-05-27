@@ -1,4 +1,4 @@
-#' @rdname getATCLevelPlotTest1
+#' @rdname getATCLevelPlot
 #' @export
 
 getATCLevelPlot <- function(df, ATCColName = ATC, level = 1) {

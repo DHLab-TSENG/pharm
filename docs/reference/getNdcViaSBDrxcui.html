@@ -112,7 +112,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getNDCViaSBDRxCuiTest1.R'><code>R/getNDCViaSBDRxCuiTest1.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getNDCViaSBDRxCui.R'><code>R/getNDCViaSBDRxCui.R</code></a></small>
     <div class="hidden name"><code>getNDCViaSBDRxCui.Rd</code></div>
     </div>
 
@@ -153,7 +153,7 @@
     <p>User can screen out the patient who has the record of receiving these drugs in the medication data, but not all medication data are encoded in RxNorm.
 In the United States, for example, the drug code commonly used in medical data is NDC code.
 NDC code cannot be directly filtered with RxNorm coded data.
-Therefore, user can input the data.frame from <code>getRxCuiViaMayTreat()</code>, then convert to NDC code and screen out a new data.frame.</p>
+Therefore, user can input the data.frame from <code><a href='getRxCuiViaMayTreat.html'>getRxCuiViaMayTreat()</a></code>, then convert to NDC code and screen out a new data.frame.</p>
 <p>However, a drug will have different packaging and NDC because it comes from different pharmaceutical brands.
 There will be different NDC for the same drug type but different packaging. Hence, the output results will be one-to-many.
 A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corresponding NDC will be <code>NA</code>.</p>

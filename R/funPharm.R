@@ -2,7 +2,7 @@
 #'
 #' This function provides user to get drug ingredient RxCui of the specific indication may treat.
 #'
-#' @name getRxCuiViaMayTreatTest1
+#' @name getRxCuiViaMayTreat
 #' @import data.table
 #' @param strmaytreat user can input an indication name
 #' @return
@@ -23,7 +23,7 @@
 #' Establish a function for finding drugs from contraindications and indications.
 #' @examples
 #' # sample of searching an indication esophagitis may treat.
-#' Esophagitis_List <- getRxCuiViaMayTreatTest1("esophagitis")
+#' Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
 #' # sample of getting drug ingredient RxCui list of esophagitis.
 #' head(Esophagitis_List)
 NULL
@@ -476,7 +476,7 @@ NULL
 #'
 #' \code{getAtcLevelPlot} is a function to get daily dosage drugs(DDDs) in Anatomical Therapeutic Chemical Classification System(ATC) code level histogram plot.
 #'
-#' @name getATCLevelPlotTest1
+#' @name getATCLevelPlot
 #' @import ggplot2
 #' @import data.table
 #' @param df data.frame, include ATC code
