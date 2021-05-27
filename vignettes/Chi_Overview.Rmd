@@ -12,12 +12,9 @@ vignette: >
 ### 套件版本
 使用者請先安裝本套件的最新版本。
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("DHLab-TSENG/pharm")
-library(pharm)
-```
-```{r message=FALSE, warning=FALSE, include=FALSE}
 library(pharm)
 library(dplyr)
 ```
@@ -49,7 +46,7 @@ knitr::kable(sample_data_subset)
 * `MinConcept.Name` 適應症名稱
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_List <- get.RxCuiViaMaytreat("esophagitis")
+Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
 knitr::kable(
   head(Esophagitis_List)
 )
@@ -76,7 +73,7 @@ knitr::kable(
 * `SBD.rxcui` 藥物SBD RxCui
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_SBD_SCD_List <- get.SbdScdRxCuiViaRxCui(df = Esophagitis_List[3,],
+Esophagitis_SBD_SCD_List <- getSBDRxCuiViaRxCui(df = Esophagitis_List[3,],
                                                     RxCuiColName = RxCui,
                                                     cores = 2)
 knitr::kable(
@@ -98,7 +95,7 @@ knitr::kable(
 * `NDC` 藥物NDC
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_NDC_List <- get.NdcViaSBDrxcui(df = Esophagitis_SBD_SCD_List[1,],
+Esophagitis_NDC_List <- getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1,],
                                            SBDRxCuiColName = SBD.rxcui,
                                            cores = 2)
 knitr::kable(
@@ -120,7 +117,7 @@ knitr::kable(
 * `ndcStatus` 藥物NDC狀態
 
 ```{r, warning=FALSE, message=FALSE}
-sample_data_subset_rxcui <- get.RxCuiViaNdc(df = sample_data_subset,
+sample_data_subset_rxcui <- getRxCuiViaNDC(df = sample_data_subset,
                                             NdcColName = NationalDrugCode)
 knitr::kable(head(sample_data_subset_rxcui))
 ```
@@ -143,7 +140,7 @@ knitr::kable(head(sample_data_subset_rxcui))
 sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
 ```
 ```{r, warning=FALSE, message=FALSE}
-sample_data_subset_atc <- get.AtcViaRxCui(df = sample_data_subset_rxcui,
+sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,
                                           RxCuiColName = RxCui,
                                           cores = 2,
                                           MatchRoute = FALSE)
@@ -161,7 +158,7 @@ knitr::kable(
 * `ATC` 藥物ATC
 
 ```{r message=FALSE, warning=FALSE}
-sample_atc_rxcui <- get.RxCuiViaAtc(df = sample_ATC,
+sample_atc_rxcui <- getRxCuiViaATC(df = sample_ATC,
                                     AtcColName = ATC,
                                     cores = 2)
 knitr::kable(
@@ -190,7 +187,7 @@ knitr::kable(
 ```{r, warning=FALSE, message=FALSE}
 knitr::kable(
   head(
-    get.NHINoViaRCFNo(df = sample_taiwan_drug, 
+    getNHINoViaRCFNo(df = sample_taiwan_drug, 
                       RCFNoColName = CGMH_CODE)
   )
 )
@@ -207,7 +204,7 @@ knitr::kable(
 ```{r, warning=FALSE, message=FALSE}
 knitr::kable(
   head(
-    get.AtcViaNHINo(df = sample_nhino_code,
+    getATCViaNHINo(df = sample_nhino_code,
                     NHINoColName = NHINo)
   )
 )
@@ -237,7 +234,7 @@ knitr::kable(
 * `Supply Days` 藥物世代中藥物的供給天數
 
 ```{r, warning=FALSE, message=FALSE}
-knitr::kable(get.DrugEra(MemberIDColName = MemberId,
+knitr::kable(getDrugEra(MemberIDColName = MemberId,
                          sample_data_subset,
                          DrugColName = NationalDrugCode,
                          DispenseDateColName = DispenseDate,
@@ -282,7 +279,7 @@ knitr::kable(
 * `DDDs` 累積之DDD總量
 
 ```{r, warning=FALSE, message=FALSE}
-accumulat_DDD <- calDDDs.accumulat(case = sample_data_subset_atc, 
+accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
                                    PatientIdColName = MemberId,
                                    DispensingColName = DispenseDate,
                                    AtcCodeColName = ATC,
@@ -307,7 +304,7 @@ knitr::kable(accumulat_DDD)
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
 ```{r, warning=FALSE, message=FALSE}
-index_DDD <- calDDDs.range(case = sample_data_subset_atc,
+index_DDD <- calDDDsRange(case = sample_data_subset_atc,
                            index_dayColName = Index_Day,
                            expo_range_before = 15,
                            expo_range_after = 30,
@@ -327,7 +324,7 @@ knitr::kable(index_DDD)
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 # 一階分布
-get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 1)
 
@@ -343,7 +340,7 @@ get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot,
 `get.DrugEraPlot`功能，可將以`get.DrugEra`計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-get.DrugEraPlot(df = sample_data_DrugEraPlot,
+getDrugEraPlot(df = sample_data_DrugEraPlot,
                 MemberIDColName = MemberId,
                 DrugColName = ATC,
                 DrugEraColName = DrugEra,
@@ -354,7 +351,7 @@ get.DrugEraPlot(df = sample_data_DrugEraPlot,
 `get.DispensingPlot`可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-get.DispensingPlot(df = sample_data_subset, 
+getDispensingPlot(df = sample_data_subset, 
                    MemberIDColName = MemberId,
                    DrugColName = NationalDrugCode,
                    DispenseDateColName = Dispensing,

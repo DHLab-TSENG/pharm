@@ -26,6 +26,6 @@ Suggests:
     devtools,
     rmarkdown
 URL: https://dhlab-tseng.github.io/pharm/
-VignetteBuilder: knitr
+
 
 

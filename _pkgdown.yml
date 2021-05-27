@@ -58,3 +58,4 @@ reference:
   - getRxCuiInfo
   - getBoSSViaRxCui
   - getMEDRTInfo
+  - getIngredientAndBoSSViaRxCui

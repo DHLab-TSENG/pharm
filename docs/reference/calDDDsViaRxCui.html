@@ -169,16 +169,7 @@
     <pre class="examples"><div class='input'><span class='co'># sample of calculating DDDs in RxCui.</span>
 <span class='va'>sample_data_subset_atc</span> <span class='op'>&lt;-</span> <span class='fu'>calDDDsViaRxCui</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset_atc</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, QuantityColName <span class='op'>=</span> <span class='va'>Quantity</span>, DaysSupplyConName <span class='op'>=</span> <span class='va'>DaysSupply</span>, cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='error'>Error in calDDDsViaRxCui(df = sample_data_subset_atc, RxCuiColName = RxCui,     QuantityColName = Quantity, DaysSupplyConName = DaysSupply,     cores = 2): unused argument (DaysSupplyConName = DaysSupply)</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_data_subset_atc</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 8</span><span>
-#&gt;   MemberId DispenseDate NationalDrugCode Quantity DaysSupply RxCui  ndcStatus
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>        1 2031-12-01   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>        1 2032-01-31   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        1 2032-03-25   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>       42 2032-01-05   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>       42 2032-03-07   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>       42 2032-04-30   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #949494;'># ... with 1 more variable: ATC &lt;chr&gt;</span><span></div></span></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(sample_data_subset_atc): 找不到物件 'sample_data_subset_atc'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

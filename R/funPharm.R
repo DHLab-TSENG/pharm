@@ -53,9 +53,6 @@ NULL
 #' @param df data.frame, a drug ingredient RxCui
 #' @param RxCuiColName a column name for RxCui of df
 #' @param cores number of parallel operation
-#' @return ??
-#' @details ??
-#' @examples ??
 NULL
 
 

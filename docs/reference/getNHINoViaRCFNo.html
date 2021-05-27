@@ -148,7 +148,7 @@ If there is no corresponed NHINo, then display <code>NA</code>.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># sample of getting NHINo via RCFNo of Chang Gung Medical Hospital.</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>getNHINoViaRCFNo</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_taiwan_drug</span>, RCFNoColName <span class='op'>=</span> <span class='va'>CGMH_CODE</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in select(., RCFNO1): 沒有這個函數 "select"</span></div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in df %&gt;% select(RCFNO1) %&gt;% as.data.table(): 沒有這個函數 "%&gt;%"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

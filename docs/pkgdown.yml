@@ -2,9 +2,9 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  Chi_Overview: Chi_Overview
-  Eng_Overview: Eng_Overview
-last_built: 2021-04-25T03:40Z
+  Chi_Overview: Chi_Overview.html
+  Eng_Overview: Eng_Overview.html
+last_built: 2021-05-27T03:55Z
 urls:
   reference: https://dhlab-tseng.github.io/pharm//reference
   article: https://dhlab-tseng.github.io/pharm//articles

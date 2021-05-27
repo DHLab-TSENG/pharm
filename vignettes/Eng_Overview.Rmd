@@ -13,12 +13,9 @@ vignette: >
 ### Install Version
 Please install the latest Pharm package.
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("DHLab-TSENG/pharm")
-library(pharm)
-```
-```{r message=FALSE, warning=FALSE, include=FALSE}
 library(pharm)
 library(dplyr)
 ```
@@ -58,7 +55,7 @@ For the field information in the data set:
 * `MinConcept.Name` indication name
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_List <- get.RxCuiViaMaytreat("esophagitis")
+Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
 knitr::kable(
   head(Esophagitis_List)
 )
@@ -78,7 +75,7 @@ For the field information in the data set:
 * `SBD.rxcui` drug SBD RxCui
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_SBD_SCD_List <- get.SbdScdRxCuiViaRxCui(df = Esophagitis_List[3,],
+Esophagitis_SBD_SCD_List <- getSBDRxCuiViaRxCui(df = Esophagitis_List[3,],
                                                     RxCuiColName = RxCui,
                                                     cores = 2)
 knitr::kable(
@@ -120,7 +117,7 @@ For the field information in the data set:
 * `NDC` drug NDC
 
 ```{r, warning=FALSE, message=FALSE}
-Esophagitis_NDC_List <- get.NdcViaSBDrxcui(df = Esophagitis_SBD_SCD_List[1,],
+Esophagitis_NDC_List <- getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1,],
                                            SBDRxCuiColName = SBD.rxcui,
                                            cores = 2)
 knitr::kable(
@@ -145,7 +142,7 @@ For the field information in the data set:
 * `ndcStatus` drug NDC status
 
 ```{r, warning=FALSE, message=FALSE}
-sample_data_subset_rxcui <- get.RxCuiViaNdc(df = sample_data_subset,
+sample_data_subset_rxcui <- getRxCuiViaNDC(df = sample_data_subset,
                                             NdcColName = NationalDrugCode)
 knitr::kable(head(sample_data_subset_rxcui))
 ```
@@ -174,7 +171,7 @@ For the field information in the data set:
 sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
 ```
 ```{r, warning=FALSE, message=FALSE}
-sample_data_subset_atc <- get.AtcViaRxCui(df = sample_data_subset_rxcui,
+sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,
                                           RxCuiColName = RxCui,
                                           cores = 2,
                                           MatchRoute = FALSE)
@@ -193,7 +190,7 @@ For the field information in the data set:
 * `ATC` drug ATC
 
 ```{r message=FALSE, warning=FALSE}
-sample_atc_rxcui <- get.RxCuiViaAtc(df = sample_ATC,
+sample_atc_rxcui <- getRxCuiViaATC(df = sample_ATC,
                                     AtcColName = ATC,
                                     cores = 2)
 knitr::kable(
@@ -225,7 +222,7 @@ For the field information in the data set:
 ```{r, warning=FALSE, message=FALSE}
 knitr::kable(
   head(
-    get.NHINoViaRCFNo(df = sample_taiwan_drug, 
+    getNHINoViaRCFNo(df = sample_taiwan_drug, 
                       RCFNoColName = CGMH_CODE)
   )
 )
@@ -243,7 +240,7 @@ For the field information in the data set:
 ```{r, warning=FALSE, message=FALSE}
 knitr::kable(
   head(
-    get.AtcViaNHINo(df = sample_nhino_code,
+    getATCViaNHINo(df = sample_nhino_code,
                     NHINoColName = NHINo)
   )
 )
@@ -276,7 +273,7 @@ For the field information in the data set:
 * `Supply Days` the days of drug era that patient`s drug supplied
 
 ```{r, warning=FALSE, message=FALSE}
-knitr::kable(get.DrugEra(MemberIDColName = MemberId,
+knitr::kable(getDrugEra(MemberIDColName = MemberId,
                          sample_data_subset,
                          DrugColName = NationalDrugCode,
                          DispenseDateColName = DispenseDate,
@@ -328,7 +325,7 @@ For the field information in the data set:
 * `DDDs` accumulated DDDs
 
 ```{r, warning=FALSE, message=FALSE}
-accumulat_DDD <- calDDDs.accumulat(case = sample_data_subset_atc, 
+accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
                                    PatientIdColName = MemberId,
                                    DispensingColName = DispenseDate,
                                    AtcCodeColName = ATC,
@@ -354,7 +351,7 @@ For the field information in the data set:
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
 ```{r, warning=FALSE, message=FALSE}
-index_DDD <- calDDDs.range(case = sample_data_subset_atc,
+index_DDD <- calDDDsRange(case = sample_data_subset_atc,
                            index_dayColName = Index_Day,
                            expo_range_before = 15,
                            expo_range_after = 30,
@@ -384,13 +381,13 @@ For the field information in the data set:
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 # level 1 distribution
-get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 1)
 
 
 # level 2 distribution
-get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 2)
 
@@ -408,7 +405,7 @@ For the field information in the data set:
 * `Total Supply Days`
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-get.DrugEraPlot(df = sample_data_DrugEraPlot,
+getDrugEraPlot(df = sample_data_DrugEraPlot,
                 MemberIDColName = MemberId,
                 DrugColName = ATC,
                 DrugEraColName = DrugEra,
@@ -426,7 +423,7 @@ For the field information in the data set:
 * `Date`
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-get.DispensingPlot(df = sample_data_subset, 
+getDispensingPlot(df = sample_data_subset, 
                    MemberIDColName = MemberId,
                    DrugColName = NationalDrugCode,
                    DispenseDateColName = Dispensing,

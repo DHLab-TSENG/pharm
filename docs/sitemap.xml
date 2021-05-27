@@ -4,37 +4,25 @@
     <loc>https://dhlab-tseng.github.io/pharm//index.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/calDailyDosage.html</loc>
-  </url>
-  <url>
     <loc>https://dhlab-tseng.github.io/pharm//reference/calDDDsAccumulation.html</loc>
   </url>
   <url>
     <loc>https://dhlab-tseng.github.io/pharm//reference/calDDDsRange.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/get.BoSSViaRxCui.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/calDDDsViaRxCui.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/get.ddd.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getATCLevelPlot.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/get.MEDRTinfo.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getATCViaNHINo.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/get.rxinfo.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getATCViaRxCui.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getAtc1LevelPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getAtcViaNHINo.html</loc>
-  </url>
-  <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getAtcViaRxcui.html</loc>
-  </url>
-  <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getDDDs.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getBoSSViaRxCui.html</loc>
   </url>
   <url>
     <loc>https://dhlab-tseng.github.io/pharm//reference/getDispensingPlot.html</loc>
@@ -49,10 +37,13 @@
     <loc>https://dhlab-tseng.github.io/pharm//reference/getIngredientAndBoSSViaRxCui.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getMayprevent.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getMayPrevent.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getNdcViaSbdRxcui.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getMEDRTInfo.html</loc>
+  </url>
+  <url>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getNDCViaSBDRxCui.html</loc>
   </url>
   <url>
     <loc>https://dhlab-tseng.github.io/pharm//reference/getNHINoViaHC.html</loc>
@@ -61,24 +52,27 @@
     <loc>https://dhlab-tseng.github.io/pharm//reference/getNHINoViaRCFNo.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxcuiViaAtc.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxCuiInfo.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxcuiViaMayprevent.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxCuiViaATC.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxcuiViaMaytreat.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxCuiViaMayPrevent.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxCuiViaNdc.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxCuiViaMayTreat.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//reference/getSbdRxCuiViaRxCui.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getRxCuiViaNDC.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//articles/pharm-overview.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//reference/getSBDRxCuiViaRxCui.html</loc>
   </url>
   <url>
-    <loc>https://dhlab-tseng.github.io/pharm//articles/Pharm_Overview.html</loc>
+    <loc>https://dhlab-tseng.github.io/pharm//articles/Chi_Overview.html</loc>
+  </url>
+  <url>
+    <loc>https://dhlab-tseng.github.io/pharm//articles/Eng_Overview.html</loc>
   </url>
 </urlset>

@@ -13,15 +13,6 @@ getMayPrevent(df, RxCuiColName = RxCui, cores = 16)
 
 \item{cores}{number of parallel operation}
 }
-\value{
-??
-}
 \description{
 This function provides user to get the specific indication may prevent via drug RxCui.
-}
-\details{
-??
-}
-\examples{
-??
 }
