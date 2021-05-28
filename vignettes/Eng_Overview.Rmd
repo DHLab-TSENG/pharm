@@ -13,11 +13,12 @@ vignette: >
 ### Install Version
 Please install the latest Pharm package.
 
-```{r setup, echo = FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 install.packages("devtools")
 devtools::install_github("DHLab-TSENG/pharm")
 library(pharm)
 library(dplyr)
+library(devtools)
 ```
 
 ### Sample Data  
@@ -38,7 +39,6 @@ For the field information in the data set:
 * `DaysSupply` days of patient`s drug dispensed
 
 ```{r message=FALSE, warning=FALSE}
-load("~/GitHub/pharm/data/sample_data_subset.rda")
 knitr::kable(sample_data_subset)
 ```
 
@@ -168,10 +168,7 @@ For the field information in the data set:
 * `RxCui` drug RxCui
 * `ATC` drug ATC
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
-#sample_data_subset_rxcui <- select(sample_data_subset_rxcui, -ndcStatus)
-```
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,
                                           RxCuiColName = RxCui,
                                           cores = 2,
@@ -296,11 +293,12 @@ For the field information in the data set:
 * `DailyDosage` drug DDDs
 * `Unit` drug unit
 
-```{r, warning=FALSE, message=FALSE}
-sample_data_subset_atc <- calDailyDosage(df = sample_data_subset_atc, 
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+
+sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, 
                                          RxCuiColName = RxCui, 
                                          QuantityColName = Quantity, 
-                                         DaysSupplyConName = DaysSupply, 
+                                         DaysSupplyColName = DaysSupply, 
                                          cores = 2)
 knitr::kable(
   head(sample_data_subset_atc)
@@ -318,7 +316,7 @@ For the field information in the data set:
 * `MemberId` patient Id
 * `DDDs` accumulated DDDs
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
                                    PatientIdColName = MemberId,
                                    DispensingColName = DispenseDate,
@@ -341,10 +339,10 @@ For the field information in the data set:
 * `DDDs_Before_15_Days` calculate DDDs in custom time interval before index 15 day
 * `DDDs_After_30_Days` calculate DDDs in custom time interval after index 30 day
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 index_DDD <- calDDDsRange(case = sample_data_subset_atc,
                            index_dayColName = Index_Day,
                            expo_range_before = 15,
@@ -373,15 +371,15 @@ For the field information in the data set:
 * `ATC1Level` ATC level 1, the first-order distribution of ATC
 
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-# level 1 distribution
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
+# 一階分布
 getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 1)
 
 
-# level 2 distribution
-getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
+# 二階分布
+get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 2)
 
@@ -398,7 +396,7 @@ For the field information in the data set:
 * `Drug Era`
 * `Total Supply Days`
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
 getDrugEraPlot(df = sample_data_DrugEraPlot,
                 MemberIDColName = MemberId,
                 DrugColName = ATC,
@@ -416,7 +414,7 @@ For the field information in the data set:
 * `Dispensing Time` interval time of the patient dispensing time
 * `Date`
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
 getDispensingPlot(df = sample_data_subset, 
                    MemberIDColName = MemberId,
                    DrugColName = NationalDrugCode,

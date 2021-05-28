@@ -12,11 +12,12 @@ vignette: >
 ### 套件版本
 使用者請先安裝本套件的最新版本。
 
-```{r setup, echo = FALSE, warning=FALSE, message=FALSE, eval=FALSE}
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 install.packages("devtools")
 devtools::install_github("DHLab-TSENG/pharm")
 library(pharm)
 library(dplyr)
+library(devtools)
 ```
 
 ### 範例資料  
@@ -31,7 +32,6 @@ library(dplyr)
 * `DaysSupply` 藥物供給天數
 
 ```{r message=FALSE, warning=FALSE}
-load("~/GitHub/pharm/data/sample_data_subset.rda")
 knitr::kable(sample_data_subset)
 ```
 
@@ -137,7 +137,7 @@ knitr::kable(head(sample_data_subset_rxcui))
 * `RxCui` 藥物RxCui
 * `ATC` 藥物ATC
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,
                                           RxCuiColName = RxCui,
                                           cores = 2,
@@ -253,7 +253,8 @@ knitr::kable(getDrugEra(MemberIDColName = MemberId,
 * `DailyDosage` 每日服用之DDD量
 * `Unit` 單位
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+
 sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, 
                                          RxCuiColName = RxCui, 
                                          QuantityColName = Quantity, 
@@ -272,7 +273,7 @@ knitr::kable(
 * `MemberId` 病患編號
 * `DDDs` 累積之DDD總量
 
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
                                    PatientIdColName = MemberId,
                                    DispensingColName = DispenseDate,
@@ -294,10 +295,10 @@ knitr::kable(accumulat_DDD)
 * `DDDs_Before_15_Days` 計算DDD值的時間點前15天
 * `DDDs_After_30_Days` 計算DDD值的時間點後30天
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
-```{r, warning=FALSE, message=FALSE}
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
 index_DDD <- calDDDsRange(case = sample_data_subset_atc,
                            index_dayColName = Index_Day,
                            expo_range_before = 15,
@@ -316,7 +317,7 @@ knitr::kable(index_DDD)
 ### **1. ATC分布統計圖**  
 `get.ATC1LevelPlot`功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數`level`讓使用者可以選擇繪製ATC編碼第一階或第二階分布。
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
 # 一階分布
 getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
@@ -333,7 +334,7 @@ get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot,
 ### **2. 藥物世代長條圖**  
 `get.DrugEraPlot`功能，可將以`get.DrugEra`計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
 getDrugEraPlot(df = sample_data_DrugEraPlot,
                 MemberIDColName = MemberId,
                 DrugColName = ATC,
@@ -344,7 +345,7 @@ getDrugEraPlot(df = sample_data_DrugEraPlot,
 ### **3. 視覺化用藥歷史**  
 `get.DispensingPlot`可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
 getDispensingPlot(df = sample_data_subset, 
                    MemberIDColName = MemberId,
                    DrugColName = NationalDrugCode,

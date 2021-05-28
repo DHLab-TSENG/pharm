@@ -161,9 +161,8 @@ A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corres
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># sample of getting NDC via SBD SCD RxCui list of esophagitis</span>
 <span class='va'>Esophagitis_NDC_List</span> <span class='op'>&lt;-</span> <span class='fu'>getNDCViaSBDRxCui</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>Esophagitis_SBD_SCD_List</span><span class='op'>[</span><span class='fl'>1</span>,<span class='op'>]</span>,SBDRxCuiColName <span class='op'>=</span> <span class='va'>SBD.rxcui</span>,cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>Esophagitis_NDC_List</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    RxCui       Name MinConcept.Id MinConcept.Name SBD.rxcui NDC
-#&gt; 1:  7646 Omeprazole       D004941     Esophagitis   2262026  NA</div></pre>
+</div><div class='output co'>#&gt; <span class='error'>Error in getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1, ], SBDRxCuiColName = SBD.rxcui,     cores = 2): 找不到物件 'Esophagitis_SBD_SCD_List'</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>Esophagitis_NDC_List</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in head(Esophagitis_NDC_List): 找不到物件 'Esophagitis_NDC_List'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
