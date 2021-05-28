@@ -28,7 +28,7 @@ library(devtools)
 * `MemberId` 病患編號
 * `DispenseDate` 配藥日期，時間區間為 2025-12-06 至 2038-01-25
 * `NationalDrugCode` 藥物的美國藥物編碼(NDC)，共17,326種不同的藥物編碼
-* `Quantity` 配藥數量(單位??)
+* `Quantity` 配藥數量
 * `DaysSupply` 藥物供給天數
 
 ```{r message=FALSE, warning=FALSE}

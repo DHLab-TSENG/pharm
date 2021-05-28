@@ -130,6 +130,42 @@
 <div id="套件版本" class="section level3">
 <h3>套件版本</h3>
 <p>使用者請先安裝本套件的最新版本。</p>
+<pre><code>## 
+##   
+  
+  
+   checking for file &#39;C:\Users\88697\AppData\Local\Temp\RtmpeeNARW\remotes4ab8170e7de9\DHLab-TSENG-pharm-84d8153/DESCRIPTION&#39; ...
+  
+v  checking for file &#39;C:\Users\88697\AppData\Local\Temp\RtmpeeNARW\remotes4ab8170e7de9\DHLab-TSENG-pharm-84d8153/DESCRIPTION&#39; (417ms)
+## 
+  
+  
+  
+-  preparing &#39;pharm&#39;: (8.4s)
+##    checking DESCRIPTION meta-information ...
+  
+   checking DESCRIPTION meta-information ... 
+  
+v  checking DESCRIPTION meta-information
+## 
+  
+  
+  
+-  checking for LF line-endings in source and make files and shell scripts (587ms)
+## 
+  
+  
+  
+-  checking for empty or unneeded directories
+## 
+  
+  
+  
+-  building &#39;pharm_0.1.0.tar.gz&#39;
+## 
+  
+   
+## </code></pre>
 </div>
 <div id="範例資料" class="section level3">
 <h3>範例資料</h3>
@@ -139,10 +175,10 @@
 <li><code>MemberId</code> 病患編號</li>
 <li><code>DispenseDate</code> 配藥日期，時間區間為 2025-12-06 至 2038-01-25</li>
 <li><code>NationalDrugCode</code> 藥物的美國藥物編碼(NDC)，共17,326種不同的藥物編碼</li>
-<li><code>Quantity</code> 配藥數量(單位??)</li>
+<li><code>Quantity</code> 配藥數量</li>
 <li><code>DaysSupply</code> 藥物供給天數</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(sample_data_subset)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(sample_data_subset)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -226,10 +262,10 @@
 <li><code>MinCooncept.Id</code> 適應症Id</li>
 <li><code>MinConcept.Name</code> 適應症名稱</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Esophagitis_List <span class="ot">&lt;-</span> <span class="fu">getRxCuiViaMayTreat</span>(<span class="st">&quot;esophagitis&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(Esophagitis_List)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Esophagitis_List <span class="ot">&lt;-</span> <span class="fu">getRxCuiViaMayTreat</span>(<span class="st">&quot;esophagitis&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(Esophagitis_List)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -302,12 +338,12 @@
 <li><code>MinConcept.Name</code> 適應症名稱</li>
 <li><code>SBD.rxcui</code> 藥物SBD RxCui</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Esophagitis_SBD_SCD_List <span class="ot">&lt;-</span> <span class="fu">getSBDRxCuiViaRxCui</span>(<span class="at">df =</span> Esophagitis_List[<span class="dv">3</span>,],</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">RxCuiColName =</span> RxCui,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(Esophagitis_SBD_SCD_List)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Esophagitis_SBD_SCD_List <span class="ot">&lt;-</span> <span class="fu">getSBDRxCuiViaRxCui</span>(<span class="at">df =</span> Esophagitis_List[<span class="dv">3</span>,],</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">RxCuiColName =</span> RxCui,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                                    <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(Esophagitis_SBD_SCD_List)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -378,12 +414,12 @@
 <li><code>SBD.rxcui</code> 藥物SBD RxCui</li>
 <li><code>NDC</code> 藥物NDC</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Esophagitis_NDC_List <span class="ot">&lt;-</span> <span class="fu">getNDCViaSBDRxCui</span>(<span class="at">df =</span> Esophagitis_SBD_SCD_List[<span class="dv">1</span>,],</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">SBDRxCuiColName =</span> SBD.rxcui,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(Esophagitis_NDC_List)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Esophagitis_NDC_List <span class="ot">&lt;-</span> <span class="fu">getNDCViaSBDRxCui</span>(<span class="at">df =</span> Esophagitis_SBD_SCD_List[<span class="dv">1</span>,],</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">SBDRxCuiColName =</span> SBD.rxcui,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                           <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(Esophagitis_NDC_List)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -420,9 +456,9 @@
 <li><code>RxCui</code> 藥物RxCui</li>
 <li><code>ndcStatus</code> 藥物NDC狀態</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sample_data_subset_rxcui <span class="ot">&lt;-</span> <span class="fu">getRxCuiViaNDC</span>(<span class="at">df =</span> sample_data_subset,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">NdcColName =</span> NationalDrugCode)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(sample_data_subset_rxcui))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_data_subset_rxcui <span class="ot">&lt;-</span> <span class="fu">getRxCuiViaNDC</span>(<span class="at">df =</span> sample_data_subset,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                            <span class="at">NdcColName =</span> NationalDrugCode)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(sample_data_subset_rxcui))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -509,13 +545,13 @@
 <li><code>RxCui</code> 藥物RxCui</li>
 <li><code>ATC</code> 藥物ATC</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sample_data_subset_atc <span class="ot">&lt;-</span> <span class="fu">getATCViaRxCui</span>(<span class="at">df =</span> sample_data_subset_rxcui,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">RxCuiColName =</span> RxCui,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cores =</span> <span class="dv">2</span>,</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">MatchRoute =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(sample_data_subset_atc)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sample_data_subset_atc <span class="ot">&lt;-</span> <span class="fu">getATCViaRxCui</span>(<span class="at">df =</span> sample_data_subset_rxcui,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">RxCuiColName =</span> RxCui,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">cores =</span> <span class="dv">2</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                          <span class="at">MatchRoute =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(sample_data_subset_atc)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="atc-轉換為-rxnorm" class="section level4">
 <h4><strong>3.2. ATC 轉換為 RxNorm</strong></h4>
@@ -525,12 +561,12 @@
 <li><code>RxCui</code> 藥物RxCui</li>
 <li><code>ATC</code> 藥物ATC</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sample_atc_rxcui <span class="ot">&lt;-</span> <span class="fu">getRxCuiViaATC</span>(<span class="at">df =</span> sample_ATC,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">AtcColName =</span> ATC,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(sample_atc_rxcui)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sample_atc_rxcui <span class="ot">&lt;-</span> <span class="fu">getRxCuiViaATC</span>(<span class="at">df =</span> sample_ATC,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">AtcColName =</span> ATC,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(sample_atc_rxcui)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -578,12 +614,12 @@
 <li><code>CGMH_CODE</code> 長庚醫院藥物編碼</li>
 <li><code>NHINO1</code> 台灣健康保險藥物編碼</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getNHINoViaRCFNo</span>(<span class="at">df =</span> sample_taiwan_drug, </span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">RCFNoColName =</span> CGMH_CODE)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getNHINoViaRCFNo</span>(<span class="at">df =</span> sample_taiwan_drug, </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">RCFNoColName =</span> CGMH_CODE)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -627,12 +663,12 @@
 <li><code>NHINo</code> 台灣健康保險藥物編碼</li>
 <li><code>ATC_CODE</code> 藥物ATC</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getATCViaNHINo</span>(<span class="at">df =</span> sample_nhino_code,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">NHINoColName =</span> NHINo)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getATCViaNHINo</span>(<span class="at">df =</span> sample_nhino_code,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">NHINoColName =</span> NHINo)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -694,11 +730,11 @@
 <li><code>Exposure Days</code> 藥物世代天數</li>
 <li><code>Supply Days</code> 藥物世代中藥物的供給天數</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">getDrugEra</span>(<span class="at">MemberIDColName =</span> MemberId,</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                         sample_data_subset,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">DrugColName =</span> NationalDrugCode,</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">DispenseDateColName =</span> DispenseDate,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">DaysSupplyColName =</span> DaysSupply))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">getDrugEra</span>(<span class="at">MemberIDColName =</span> MemberId,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                         sample_data_subset,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">DrugColName =</span> NationalDrugCode,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">DispenseDateColName =</span> DispenseDate,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">DaysSupplyColName =</span> DaysSupply))</span></code></pre></div>
 <table style="width:100%;">
 <colgroup>
 <col width="7%" />
@@ -854,14 +890,14 @@
 <li><code>DailyDosage</code> 每日服用之DDD量</li>
 <li><code>Unit</code> 單位</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>sample_data_subset_atc <span class="ot">&lt;-</span> <span class="fu">calDDDsViaRxCui</span>(<span class="at">df =</span> sample_data_subset_atc, </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">RxCuiColName =</span> RxCui, </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">QuantityColName =</span> Quantity, </span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">DaysSupplyColName =</span> DaysSupply, </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">cores =</span> <span class="dv">2</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(sample_data_subset_atc)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sample_data_subset_atc <span class="ot">&lt;-</span> <span class="fu">calDDDsViaRxCui</span>(<span class="at">df =</span> sample_data_subset_atc, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">RxCuiColName =</span> RxCui, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">QuantityColName =</span> Quantity, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">DaysSupplyColName =</span> DaysSupply, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">cores =</span> <span class="dv">2</span>)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(sample_data_subset_atc)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div id="計算累積服用的藥物總量" class="section level4">
 <h4><strong>2.2. 計算累積服用的藥物總量</strong></h4>
@@ -871,13 +907,13 @@
 <li><code>MemberId</code> 病患編號</li>
 <li><code>DDDs</code> 累積之DDD總量</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>accumulat_DDD <span class="ot">&lt;-</span> <span class="fu">calDDDsAccumulation</span>(<span class="at">case =</span> sample_data_subset_atc, </span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">PatientIdColName =</span> MemberId,</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">DispensingColName =</span> DispenseDate,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">AtcCodeColName =</span> ATC,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">DailyDosageColName =</span> DailyDosage,</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">DurationColName =</span> DaysSupply)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(accumulat_DDD)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>accumulat_DDD <span class="ot">&lt;-</span> <span class="fu">calDDDsAccumulation</span>(<span class="at">case =</span> sample_data_subset_atc, </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">PatientIdColName =</span> MemberId,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">DispensingColName =</span> DispenseDate,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">AtcCodeColName =</span> ATC,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">DailyDosageColName =</span> DailyDosage,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                   <span class="at">DurationColName =</span> DaysSupply)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(accumulat_DDD)</span></code></pre></div>
 </div>
 <div id="計算自訂區間服用的藥物總量" class="section level4">
 <h4><strong>2.3. 計算自訂區間服用的藥物總量</strong></h4>
@@ -891,16 +927,16 @@
 <li><code>DDDs_Before_15_Days</code> 計算DDD值的時間點前15天</li>
 <li><code>DDDs_After_30_Days</code> 計算DDD值的時間點後30天</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>index_DDD <span class="ot">&lt;-</span> <span class="fu">calDDDsRange</span>(<span class="at">case =</span> sample_data_subset_atc,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">index_dayColName =</span> Index_Day,</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">expo_range_before =</span> <span class="dv">15</span>,</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">expo_range_after =</span> <span class="dv">30</span>,</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">idColName =</span> MemberId,</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">AtcCodeColName =</span> ATC,</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">DispenseDateColName =</span> DispenseDate,</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">DaysSupplyColName =</span> DaysSupply,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">DailyDosageColName =</span> DailyDosage)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(index_DDD)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>index_DDD <span class="ot">&lt;-</span> <span class="fu">calDDDsRange</span>(<span class="at">case =</span> sample_data_subset_atc,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">index_dayColName =</span> Index_Day,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">expo_range_before =</span> <span class="dv">15</span>,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">expo_range_after =</span> <span class="dv">30</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                           <span class="at">idColName =</span> MemberId,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">AtcCodeColName =</span> ATC,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">DispenseDateColName =</span> DispenseDate,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">DaysSupplyColName =</span> DaysSupply,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                           <span class="at">DailyDosageColName =</span> DailyDosage)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(index_DDD)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -910,36 +946,36 @@
 <div id="atc分布統計圖" class="section level3">
 <h3><strong>1. ATC分布統計圖</strong></h3>
 <p><code>get.ATC1LevelPlot</code>功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數<code>level</code>讓使用者可以選擇繪製ATC編碼第一階或第二階分布。</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 一階分布</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getATCLevelPlot</span>(<span class="at">df =</span> sample_data_ATC1LevelPlot, </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ATCColName =</span> ATC, </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">level =</span> <span class="dv">1</span>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 二階分布</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="fu">get.ATC1LevelPlot</span>(<span class="at">df =</span> sample_data_ATC1LevelPlot, </span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ATCColName =</span> ATC, </span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">level =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 一階分布</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getATCLevelPlot</span>(<span class="at">df =</span> sample_data_ATC1LevelPlot, </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ATCColName =</span> ATC, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">level =</span> <span class="dv">1</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 二階分布</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">get.ATC1LevelPlot</span>(<span class="at">df =</span> sample_data_ATC1LevelPlot, </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ATCColName =</span> ATC, </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">level =</span> <span class="dv">2</span>)</span></code></pre></div>
 </div>
 <div id="藥物世代長條圖" class="section level3">
 <h3><strong>2. 藥物世代長條圖</strong></h3>
 <p><code>get.DrugEraPlot</code>功能，可將以<code>get.DrugEra</code>計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getDrugEraPlot</span>(<span class="at">df =</span> sample_data_DrugEraPlot,</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">MemberIDColName =</span> MemberId,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">DrugColName =</span> ATC,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">DrugEraColName =</span> DrugEra,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">SupplyDaysColName =</span> SupplyDays)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getDrugEraPlot</span>(<span class="at">df =</span> sample_data_DrugEraPlot,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">MemberIDColName =</span> MemberId,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">DrugColName =</span> ATC,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">DrugEraColName =</span> DrugEra,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                <span class="at">SupplyDaysColName =</span> SupplyDays)</span></code></pre></div>
 </div>
 <div id="視覺化用藥歷史" class="section level3">
 <h3><strong>3. 視覺化用藥歷史</strong></h3>
 <p><code>get.DispensingPlot</code>可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getDispensingPlot</span>(<span class="at">df =</span> sample_data_subset, </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MemberIDColName =</span> MemberId,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">DrugColName =</span> NationalDrugCode,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">DispenseDateColName =</span> Dispensing,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Member =</span> <span class="dv">42</span>, </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">TimeInterval =</span> <span class="dv">20</span>, </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Unit =</span> day)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getDispensingPlot</span>(<span class="at">df =</span> sample_data_subset, </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">MemberIDColName =</span> MemberId,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">DrugColName =</span> NationalDrugCode,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">DispenseDateColName =</span> Dispensing,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Member =</span> <span class="dv">42</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">TimeInterval =</span> <span class="dv">20</span>, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">Unit =</span> day)</span></code></pre></div>
 </div>
 </div>
 <div id="reference" class="section level2">

@@ -18,9 +18,9 @@ This mechanism provides user visualization to overview the result of drug data a
 Using RxNorm API provided by U.S.National Library of Medicine to search drug details and MED-RT drug integration. This mechanism provides user to obtain the complete contraindications, indications and information of the drug.
 
 ## Getting start
-English: https://dhlab-tseng.github.io/pharm/articles/Eng_Overview.html
+English version: https://dhlab-tseng.github.io/pharm//articles/Eng_Overview.html
 
-Chinese: https://dhlab-tseng.github.io/pharm/articles/Chi_Overview.html
+Chinese version: https://dhlab-tseng.github.io/pharm//articles/Chi_Overview.html
 
 ## Install version
 ```r
