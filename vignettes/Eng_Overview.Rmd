@@ -4,7 +4,7 @@ author: "Yeh-Yung, Chiu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Chinese Version}
+  %\VignetteIndexEntry{Eng_Overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,14 +13,17 @@ vignette: >
 ### Install Version
 Please install the latest Pharm package.
 
-```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+```{r,  warning=FALSE, message=FALSE, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("DHLab-TSENG/pharm")
 library(pharm)
 library(dplyr)
-library(devtools)
 ```
 
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+library(pharm)
+library(dplyr)
+```
 ### Sample Data  
 A sample data rda file `sample_data_subset` is included in Pharm package:
 
@@ -38,7 +41,7 @@ For the field information in the data set:
 * `Quantity` quantity of patient`s drug dispensed
 * `DaysSupply` days of patient`s drug dispensed
 
-```{r message=FALSE, warning=FALSE}
+```{r}
 knitr::kable(sample_data_subset)
 ```
 
@@ -55,7 +58,7 @@ For the field information in the data set:
 * `MinCooncept.Id` indication Id
 * `MinConcept.Name` indication name
 
-```{r, warning=FALSE, message=FALSE}
+```{r}
 Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
 knitr::kable(
   head(Esophagitis_List)
@@ -293,7 +296,7 @@ For the field information in the data set:
 * `DailyDosage` drug DDDs
 * `Unit` drug unit
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE,eval=FALSE}
 
 sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, 
                                          RxCuiColName = RxCui, 
@@ -316,7 +319,7 @@ For the field information in the data set:
 * `MemberId` patient Id
 * `DDDs` accumulated DDDs
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE,eval=FALSE}
 accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
                                    PatientIdColName = MemberId,
                                    DispensingColName = DispenseDate,
@@ -342,7 +345,7 @@ For the field information in the data set:
 ```{r message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE,eval=FALSE}
 index_DDD <- calDDDsRange(case = sample_data_subset_atc,
                            index_dayColName = Index_Day,
                            expo_range_before = 15,
@@ -371,18 +374,15 @@ For the field information in the data set:
 * `ATC1Level` ATC level 1, the first-order distribution of ATC
 
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
-# 一階分布
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+# level distribution 1
 getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 1)
-
-
-# 二階分布
-get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+# level distribution 2
+getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 2)
-
 ```
 
 ### **2. drug era plot**  
@@ -396,7 +396,7 @@ For the field information in the data set:
 * `Drug Era`
 * `Total Supply Days`
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDrugEraPlot(df = sample_data_DrugEraPlot,
                 MemberIDColName = MemberId,
                 DrugColName = ATC,
@@ -414,7 +414,7 @@ For the field information in the data set:
 * `Dispensing Time` interval time of the patient dispensing time
 * `Date`
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDispensingPlot(df = sample_data_subset, 
                    MemberIDColName = MemberId,
                    DrugColName = NationalDrugCode,
@@ -425,19 +425,34 @@ getDispensingPlot(df = sample_data_subset,
 ```
 
 ## Reference
-**Bodenreider et al.** https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index
+**I. Get Drug Ingredient Via Indication**
 
-**RxNorm API**
-In addition to providing RxNav which can use on the web, National Library of Medicine (NLM) also provides APIs for users to obtain specific drug-related information which in NLM's integrated drug vocabulary.
+衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119 [10 July 2019].
 
-* U.S.National Library of Medicine(2019-2021): https://rxnav.nlm.nih.gov/RxNormAPIs.html
+WHO(2019d), ATC/DDD Index 2018. available at https://www.whocc.no/atc_ddd_index/ [10 July 2019].
 
-**ATC Database for Classification of Drugs and Pharmacological Treatments**
+U.S. National Library of Medicine(2019b), RxNorm API. available at https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html# [10 July 2019].
 
-* WHO Collaborating Center for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018: https://www.whocc.no/atc_ddd_index/
+MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264 [10 July 2019].
 
-* Taiwan Food and Drug Administration(2019):
+**II. Drug Code Integration**
 
-**Chang Gung Medical drug code**
+衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則.
 
-* Chang Gung Medical Research Database
+Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm [10 July 2019].
+
+U.S. National Library of Medicine(2019c), RxNav. available at https://mor.nlm.nih.gov/RxNav/ [10 July 2019].
+
+Bodenreider et al. (2014), Analyzing U.S. Prescription Lists with RxNorm and the ATC/DDD Index. AMIA ... Annual Symposium proceedings. AMIA Symposium, 2014: 297–306. https://pubmed.ncbi.nlm.nih.gov/25954332/
+
+**III. Calculate Drug Data**
+
+WHO(2019c), Guidelines for ATC Classification and DDD Assignment 2018. https://www.whocc.no/atc_ddd_index_and_guidelines/guidelines/
+
+Vollmer et al.(2012), Comparison of Pharmacy-Based Measures of Medication Adherence. BMC Health Services Research, 12(1): https://pubmed.ncbi.nlm.nih.gov/22691240/
+
+Dima et al. (2017), Computation of Adherence to Medication and Visualization of Medication Histories in R with AdhereR: Towards Transparent and Reproducible Use of Electronic Healthcare Data. PLoS ONE, 12(4): 1–14. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174426
+
+R Foundation (2019), R. available at https://www.r-project.org/
+
+Bender et al. (2015), Pragmatic Trial of Health Care Technologies to Improve Adherence to Pediatric Asthma Treatment a Randomized Clinical Trial. JAMA Pediatrics, 169(4): 317–323. https://pubmed.ncbi.nlm.nih.gov/25664620/

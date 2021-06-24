@@ -4,20 +4,24 @@ author: "Yeh-Yung, Chiu"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Chinese Version}
+  %\VignetteIndexEntry{Chi_Overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
 ## 使用手冊
 ### 套件版本
 使用者請先安裝本套件的最新版本。
-
-```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+```{r,  warning=FALSE, message=FALSE, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("DHLab-TSENG/pharm")
 library(pharm)
 library(dplyr)
-library(devtools)
+```
+
+```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
+library(pharm)
+library(dplyr)
 ```
 
 ### 範例資料  
@@ -32,6 +36,7 @@ library(devtools)
 * `DaysSupply` 藥物供給天數
 
 ```{r message=FALSE, warning=FALSE}
+load("~/GitHub/pharm/data/sample_data_subset.rda")
 knitr::kable(sample_data_subset)
 ```
 
@@ -137,7 +142,7 @@ knitr::kable(head(sample_data_subset_rxcui))
 * `RxCui` 藥物RxCui
 * `ATC` 藥物ATC
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE}
 sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,
                                           RxCuiColName = RxCui,
                                           cores = 2,
@@ -253,13 +258,12 @@ knitr::kable(getDrugEra(MemberIDColName = MemberId,
 * `DailyDosage` 每日服用之DDD量
 * `Unit` 單位
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
-
+```{r, warning=FALSE, message=FALSE,eval=FALSE}
 sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, 
                                          RxCuiColName = RxCui, 
                                          QuantityColName = Quantity, 
                                          DaysSupplyColName = DaysSupply, 
-                                         cores = 2)
+                                         cores = 4)
 knitr::kable(
   head(sample_data_subset_atc)
 )
@@ -273,7 +277,7 @@ knitr::kable(
 * `MemberId` 病患編號
 * `DDDs` 累積之DDD總量
 
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE,eval = FALSE}
 accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
                                    PatientIdColName = MemberId,
                                    DispensingColName = DispenseDate,
@@ -295,10 +299,10 @@ knitr::kable(accumulat_DDD)
 * `DDDs_Before_15_Days` 計算DDD值的時間點前15天
 * `DDDs_After_30_Days` 計算DDD值的時間點後30天
 
-```{r message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE}
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
-```{r, warning=FALSE, message=FALSE, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, eval = FALSE}
 index_DDD <- calDDDsRange(case = sample_data_subset_atc,
                            index_dayColName = Index_Day,
                            expo_range_before = 15,
@@ -317,24 +321,21 @@ knitr::kable(index_DDD)
 ### **1. ATC分布統計圖**  
 `get.ATC1LevelPlot`功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數`level`讓使用者可以選擇繪製ATC編碼第一階或第二階分布。
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
-# 一階分布
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
+# level distribution 1
 getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 1)
-
-
-# 二階分布
-get.ATC1LevelPlot(df = sample_data_ATC1LevelPlot, 
+# level distribution 2
+getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 2)
-
 ```
 
 ### **2. 藥物世代長條圖**  
 `get.DrugEraPlot`功能，可將以`get.DrugEra`計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDrugEraPlot(df = sample_data_DrugEraPlot,
                 MemberIDColName = MemberId,
                 DrugColName = ATC,
@@ -345,7 +346,7 @@ getDrugEraPlot(df = sample_data_DrugEraPlot,
 ### **3. 視覺化用藥歷史**  
 `get.DispensingPlot`可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。
 
-```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4, eval=FALSE}
+```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDispensingPlot(df = sample_data_subset, 
                    MemberIDColName = MemberId,
                    DrugColName = NationalDrugCode,
@@ -356,21 +357,34 @@ getDispensingPlot(df = sample_data_subset,
 ```
 
 ## Reference
-**Bodenreider et al.** https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index
+**一、適應症查詢藥物功能**
 
-**RxNorm API**
-In addition to providing RxNav which can use on the web, National Library of Medicine (NLM) also provides APIs for users to obtain specific drug-related information which in NLM's integrated drug vocabulary.
+衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119 [10 July 2019].
 
-* U.S.National Library of Medicine(2019-2021): https://rxnav.nlm.nih.gov/RxNormAPIs.html
+WHO(2019d), ATC/DDD Index 2018. available at https://www.whocc.no/atc_ddd_index/ [10 July 2019].
 
-**ATC Database for Classification of Drugs and Pharmacological Treatments**
+U.S. National Library of Medicine(2019b), RxNorm API. available at https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html# [10 July 2019].
 
-* WHO Collaborating Center for Drug Statistics Methodology, ATC classification index with DDDs, 2019. Oslo, Norway 2018: https://www.whocc.no/atc_ddd_index/
+MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264 [10 July 2019].
 
-* Taiwan Food and Drug Administration(2019):
+**二、藥物編碼轉換功能**
 
-**Chang Gung Medical drug code**
+衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則.
 
-* Chang Gung Medical Research Database
+Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm [10 July 2019].
 
+U.S. National Library of Medicine(2019c), RxNav. available at https://mor.nlm.nih.gov/RxNav/ [10 July 2019].
 
+Bodenreider et al. (2014), Analyzing U.S. Prescription Lists with RxNorm and the ATC/DDD Index. AMIA ... Annual Symposium proceedings. AMIA Symposium, 2014: 297–306. https://pubmed.ncbi.nlm.nih.gov/25954332/
+
+**三、 藥物資料分析功能**
+
+WHO(2019c), Guidelines for ATC Classification and DDD Assignment 2018. https://www.whocc.no/atc_ddd_index_and_guidelines/guidelines/
+
+Vollmer et al.(2012), Comparison of Pharmacy-Based Measures of Medication Adherence. BMC Health Services Research, 12(1): https://pubmed.ncbi.nlm.nih.gov/22691240/
+
+Dima et al. (2017), Computation of Adherence to Medication and Visualization of Medication Histories in R with AdhereR: Towards Transparent and Reproducible Use of Electronic Healthcare Data. PLoS ONE, 12(4): 1–14. https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0174426
+
+R Foundation (2019), R. available at https://www.r-project.org/
+
+Bender et al. (2015), Pragmatic Trial of Health Care Technologies to Improve Adherence to Pediatric Asthma Treatment a Randomized Clinical Trial. JAMA Pediatrics, 169(4): 317–323. https://pubmed.ncbi.nlm.nih.gov/25664620/
