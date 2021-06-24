@@ -31,7 +31,7 @@ library(dplyr)
 ```
 
 ## Overview
-<img src="https://github.com/DHLab-TSENG/pharm/blob/master/image/overview.png" style="display:block; margin:auto; width:100%;">
+<img src="https://raw.githubusercontent.com/DHLab-TSENG/pharm/master/image/overview.png" style="display:block; margin:auto; width:100%;">
 
 ## Data Source
 * Chang Gung Medical drug code
