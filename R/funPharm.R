@@ -23,7 +23,7 @@
 #' Establish a function for finding drugs from contraindications and indications.
 #' @examples
 #' # sample of searching an indication esophagitis may treat.
-#' Esophagitis_List <<- getRxCuiViaMayTreat("esophagitis")
+#' Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
 #' # sample of getting drug ingredient RxCui list of esophagitis.
 #' head(Esophagitis_List)
 NULL
@@ -85,7 +85,7 @@ NULL
 #' The content is to add a column named \code{SBD.rxcui} in the original input data frame, stores the result of converting ingredient to brand drug and clinical drug containing a specific drug component.
 #' @examples
 #' # sample of getting SBD or SCD Rxcui list of esophagitis.
-#' Esophagitis_SBD_SCD_List <<- getSBDRxCuiViaRxCui(df = Esophagitis_List[3,],RxCuiColName = RxCui,cores = 2)
+#' Esophagitis_SBD_SCD_List <- getSBDRxCuiViaRxCui(df = Esophagitis_List[3,],RxCuiColName = RxCui,cores = 2)
 #' head(Esophagitis_SBD_SCD_List)
 NULL
 
@@ -128,7 +128,7 @@ NULL
 #' A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corresponding NDC will be \code{NA}.
 #' @examples
 #' # sample of getting NDC via SBD SCD RxCui list of esophagitis
-#' Esophagitis_NDC_List <<- getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1,],SBDRxCuiColName = SBD.rxcui,cores = 2)
+#' Esophagitis_NDC_List <- getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1,],SBDRxCuiColName = SBD.rxcui,cores = 2)
 #' head(Esophagitis_NDC_List)
 NULL
 
@@ -168,7 +168,7 @@ NULL
 #' The column \code{ndcStatus} is to show whether the converted NDC is now used.
 #' @examples
 #' #sample of getting RxCui via NDC.
-#' sample_data_subset_rxcui <<- getRxCuiViaNDC(df = sample_data_subset, NdcColName = NationalDrugCode)
+#' sample_data_subset_rxcui <- getRxCuiViaNDC(df = sample_data_subset, NdcColName = NationalDrugCode)
 #' head(sample_data_subset_rxcui)
 NULL
 
@@ -215,7 +215,7 @@ NULL
 #' If the input RxCui is a drug combination package, the field output result will be filled in GPCK or BPCK.
 #' @examples
 #' # sample of getting ATC via RxCui.
-#' sample_data_subset_atc <<- getATCViaRxCui(df = sample_data_subset_rxcui,RxCuiColName = RxCui,cores = 2,MatchRoute = FALSE)
+#' sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,RxCuiColName = RxCui,cores = 2,MatchRoute = FALSE)
 #' head(sample_data_subset_atc)
 NULL
 
@@ -245,7 +245,7 @@ NULL
 #' User inputs the data frame with drug column which encoded in ATC code, then the output will add a column named RxCui in the original input data frame.
 #' @examples
 #' # sample of getting RxCui via ATC.
-#' sample_atc_rxcui <<- getRxCuiViaATC(df = sample_ATC,AtcColName = ATC,cores = 2)
+#' sample_atc_rxcui <- getRxCuiViaATC(df = sample_ATC,AtcColName = ATC,cores = 2)
 #' head(sample_atc_rxcui)
 NULL
 
@@ -402,7 +402,7 @@ NULL
 #' The calculation model: The dosage of the drug multiplied by the number of the days of drug taken, and then divided by the number of days of drug supplied.
 #' @examples
 #' # sample of calculating DDDs in RxCui.
-#' sample_data_subset_atc <<- calDDDsViaRxCui(df = sample_data_subset_atc, RxCuiColName = RxCui, QuantityColName = Quantity, DaysSupplyConName = DaysSupply, cores = 2)
+#' sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, RxCuiColName = RxCui, QuantityColName = Quantity, DaysSupplyConName = DaysSupply, cores = 2)
 #' head(sample_data_subset_atc)
 NULL
 
@@ -428,7 +428,7 @@ NULL
 #' This function will output a data frame which store DDDs accumulated by patients.
 #' @examples
 #' # sample of calculating subjects' accumulated DDDs
-#' accumulat_DDD <<- calDDDsAccumulation(case = sample_data_subset_atc, PatientIdColName = MemberId,DispensingColName = DispenseDate,AtcCodeColName = ATC,DailyDosageColName = DailyDosage,DurationColName = DaysSupply)
+#' accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, PatientIdColName = MemberId,DispensingColName = DispenseDate,AtcCodeColName = ATC,DailyDosageColName = DailyDosage,DurationColName = DaysSupply)
 #' head(accumulat_DDD)
 NULL
 
@@ -467,7 +467,7 @@ NULL
 #' User can get the total amount of DDDs accumulated of patients before and after a specific date in a custom interval period or specific date.
 #' @examples
 #' # sample of calculating subjects' accumulated DDDs in a custom interval period
-#' index_DDD <<- calDDDsRange(case = sample_data_subset_atc,index_dayColName = Index_Day,expo_range_before = 15,expo_range_after = 30,idColName = MemberId,AtcCodeColName = ATC,DispenseDateColName = DispenseDate,DaysSupplyColName = DaysSupply,DailyDosageColName = DailyDosage)
+#' index_DDD <- calDDDsRange(case = sample_data_subset_atc,index_dayColName = Index_Day,expo_range_before = 15,expo_range_after = 30,idColName = MemberId,AtcCodeColName = ATC,DispenseDateColName = DispenseDate,DaysSupplyColName = DaysSupply,DailyDosageColName = DailyDosage)
 #' head(index_DDD)
 NULL
 

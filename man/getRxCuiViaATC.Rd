@@ -31,6 +31,6 @@ User inputs the data frame with drug column which encoded in ATC code, then the 
 }
 \examples{
 # sample of getting RxCui via ATC.
-sample_atc_rxcui <<- getRxCuiViaATC(df = sample_ATC,AtcColName = ATC,cores = 2)
+sample_atc_rxcui <- getRxCuiViaATC(df = sample_ATC,AtcColName = ATC,cores = 2)
 head(sample_atc_rxcui)
 }

@@ -57,6 +57,6 @@ User can get the total amount of DDDs accumulated of patients before and after a
 }
 \examples{
 # sample of calculating subjects' accumulated DDDs in a custom interval period
-index_DDD <<- calDDDsRange(case = sample_data_subset_atc,index_dayColName = Index_Day,expo_range_before = 15,expo_range_after = 30,idColName = MemberId,AtcCodeColName = ATC,DispenseDateColName = DispenseDate,DaysSupplyColName = DaysSupply,DailyDosageColName = DailyDosage)
+index_DDD <- calDDDsRange(case = sample_data_subset_atc,index_dayColName = Index_Day,expo_range_before = 15,expo_range_after = 30,idColName = MemberId,AtcCodeColName = ATC,DispenseDateColName = DispenseDate,DaysSupplyColName = DaysSupply,DailyDosageColName = DailyDosage)
 head(index_DDD)
 }

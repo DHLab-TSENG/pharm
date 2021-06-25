@@ -47,6 +47,6 @@ If the input RxCui is a drug combination package, the field output result will b
 }
 \examples{
 # sample of getting ATC via RxCui.
-sample_data_subset_atc <<- getATCViaRxCui(df = sample_data_subset_rxcui,RxCuiColName = RxCui,cores = 2,MatchRoute = FALSE)
+sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,RxCuiColName = RxCui,cores = 2,MatchRoute = FALSE)
 head(sample_data_subset_atc)
 }
