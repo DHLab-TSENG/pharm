@@ -50,6 +50,6 @@ The calculation model: The dosage of the drug multiplied by the number of the da
 }
 \examples{
 # sample of calculating DDDs in RxCui.
-sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, RxCuiColName = RxCui, QuantityColName = Quantity, DaysSupplyConName = DaysSupply, cores = 2)
+sample_data_subset_atc <<- calDDDsViaRxCui(df = sample_data_subset_atc, RxCuiColName = RxCui, QuantityColName = Quantity, DaysSupplyConName = DaysSupply, cores = 2)
 head(sample_data_subset_atc)
 }

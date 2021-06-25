@@ -43,6 +43,6 @@ A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corres
 }
 \examples{
 # sample of getting NDC via SBD SCD RxCui list of esophagitis
-Esophagitis_NDC_List <- getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1,],SBDRxCuiColName = SBD.rxcui,cores = 2)
+Esophagitis_NDC_List <<- getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1,],SBDRxCuiColName = SBD.rxcui,cores = 2)
 head(Esophagitis_NDC_List)
 }

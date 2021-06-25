@@ -40,6 +40,6 @@ The column \code{ndcStatus} is to show whether the converted NDC is now used.
 }
 \examples{
 #sample of getting RxCui via NDC.
-sample_data_subset_rxcui <- getRxCuiViaNDC(df = sample_data_subset, NdcColName = NationalDrugCode)
+sample_data_subset_rxcui <<- getRxCuiViaNDC(df = sample_data_subset, NdcColName = NationalDrugCode)
 head(sample_data_subset_rxcui)
 }

@@ -35,6 +35,6 @@ The content is to add a column named \code{SBD.rxcui} in the original input data
 }
 \examples{
 # sample of getting SBD or SCD Rxcui list of esophagitis.
-Esophagitis_SBD_SCD_List <- getSBDRxCuiViaRxCui(df = Esophagitis_List[3,],RxCuiColName = RxCui,cores = 2)
+Esophagitis_SBD_SCD_List <<- getSBDRxCuiViaRxCui(df = Esophagitis_List[3,],RxCuiColName = RxCui,cores = 2)
 head(Esophagitis_SBD_SCD_List)
 }

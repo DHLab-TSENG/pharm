@@ -39,6 +39,6 @@ This function will output a data frame which store DDDs accumulated by patients.
 }
 \examples{
 # sample of calculating subjects' accumulated DDDs
-accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, PatientIdColName = MemberId,DispensingColName = DispenseDate,AtcCodeColName = ATC,DailyDosageColName = DailyDosage,DurationColName = DaysSupply)
+accumulat_DDD <<- calDDDsAccumulation(case = sample_data_subset_atc, PatientIdColName = MemberId,DispensingColName = DispenseDate,AtcCodeColName = ATC,DailyDosageColName = DailyDosage,DurationColName = DaysSupply)
 head(accumulat_DDD)
 }

@@ -32,7 +32,7 @@ Establish a function for finding drugs from contraindications and indications.
 }
 \examples{
 # sample of searching an indication esophagitis may treat.
-Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
+Esophagitis_List <<- getRxCuiViaMayTreat("esophagitis")
 # sample of getting drug ingredient RxCui list of esophagitis.
 head(Esophagitis_List)
 }

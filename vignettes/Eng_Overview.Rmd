@@ -22,6 +22,7 @@ library(dplyr)
 
 ```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 library(pharm)
+library(magrittr)
 library(dplyr)
 ```
 ### Sample Data  
@@ -435,7 +436,7 @@ getDispensingPlot(df = sample_data_subset,
 ## Reference
 **I. Get Drug Ingredient Via Indication**
 
-衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119
+National Health Insurance Administration(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119
 
 WHO(2019d), ATC/DDD Index 2018. available at https://www.whocc.no/atc_ddd_index/
 
@@ -445,7 +446,7 @@ MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.
 
 **II. Drug Code Integration**
 
-衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則.
+National Health Insurance Administration(2019), 全民健康保險藥品編碼原則. https://reurl.cc/R0qkZn
 
 Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm
 

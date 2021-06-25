@@ -21,6 +21,7 @@ library(dplyr)
 
 ```{r setup, echo = FALSE, warning=FALSE, message=FALSE}
 library(pharm)
+library(magrittr)
 library(dplyr)
 ```
 
@@ -385,7 +386,7 @@ MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.
 
 **二、藥物編碼轉換功能**
 
-衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則.
+衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則. https://reurl.cc/R0qkZn
 
 Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm
 
