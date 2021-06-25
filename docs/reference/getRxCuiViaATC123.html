@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui — getATCViaRxCui • pharm</title>
+<title>Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code — getRxCuiViaATC123 • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui — getATCViaRxCui" />
-<meta property="og:description" content="This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui" />
+<meta property="og:title" content="Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code — getRxCuiViaATC123" />
+<meta property="og:description" content="This is a function to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code" />
 
 
 
@@ -111,63 +111,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getATCViaRxCui.R'><code>R/getATCViaRxCui.R</code></a></small>
-    <div class="hidden name"><code>getATCViaRxCui.Rd</code></div>
+    <h1>Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiViaATC123.R'><code>R/getRxCuiViaATC123.R</code></a></small>
+    <div class="hidden name"><code>getRxCuiViaATC123.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui</p>
+    <p>This is a function to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getATCViaRxCui</span><span class='op'>(</span><span class='va'>df</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, cores <span class='op'>=</span> <span class='fl'>4</span>, MatchRoute <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getRxCuiViaATC123</span><span class='op'>(</span><span class='va'>df</span>, AtcColName <span class='op'>=</span> <span class='va'>ATC</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame, a drug ingredient`s RxCui of the specific indication</p></td>
+      <td><p>data.frame, a drug ingredient ATC code of the specific indication</p></td>
+    </tr>
+    <tr>
+      <th>AtcColName</th>
+      <td><p>a column name for ATC code of df</p></td>
     </tr>
     <tr>
       <th>cores</th>
       <td><p>number of parallel operation</p></td>
     </tr>
     <tr>
-      <th>MatchRoute</th>
-      <td><p>an option to mapping drug ingredient and route</p></td>
-    </tr>
-    <tr>
-      <th>RxCuiColNamea</th>
-      <td><p>a column name for RxCui of df</p></td>
+      <th>Differ_ColName</th>
+      <td><p>if colum for NHINo of df is not named ATC</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A new data.table <code>sample_data_subset_atc</code> with following columns.</p>
-<p><code>MemberId</code> patient Id</p>
-<p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
-<p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
-<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
-<p><code>DaysSupply</code> days of patient`s drug dispensed</p>
+    <p>A new data.table <code>sample_atc_rxcui</code> with following columns.</p>
 <p><code>RxCui</code> drug RxCui</p>
 <p><code>ATC</code> drug ATC code</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>User can input the data.frame with drug column which encoded in RxCui, and to add the result of converting column named ATC.</p>
-<p>The same drug components in ATC might depend on different ATC medication route.
-Hence, this function also refer to the research of <code>Bodenreider et al.</code>(https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index) and adds the parameter <code>MatchRoute</code> for user to consider.
-If user wants to compare the ATC medication route, input <code>TRUE</code> in the parameter <code>MatchRoute</code>, otherwise input <code>FALSE</code>.
-Because RxCui is slightly different from the ATC drug vocabulary, not every RxCui has a corresponding ATC code.
-Therefore, if RxCui does not have a corresponding ATC code, this field will display <code>NA</code>, and pharm does not provide the code conversion of the clinical drug and brand drug combination package, such as birth control pills.
-If the input RxCui is a drug combination package, the field output result will be filled in GPCK or BPCK.</p>
+    <p>Users can obtain additional drug information via other drug integrated by RxCui, such as the contraindications and indications for drugs available in the MED-RT database of the US Veterans Bureau integrated by RxNorm.
+User inputs the data frame with drug column which encoded in ATC code, then the output will add a column named RxCui in the original input data frame.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># sample of getting ATC via RxCui.</span>
-<span class='va'>sample_data_subset_atc</span> <span class='op'>&lt;-</span> <span class='fu'>getATCViaRxCui</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset_rxcui</span>,RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>,cores <span class='op'>=</span> <span class='fl'>2</span>,MatchRoute <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in getATCViaRxCui(df = sample_data_subset_rxcui, RxCuiColName = RxCui,     cores = 2, MatchRoute = FALSE): 找不到物件 'sample_data_subset_rxcui'</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_data_subset_atc</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in head(sample_data_subset_atc): 找不到物件 'sample_data_subset_atc'</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># sample of getting RxCui via ATC.</span>
+<span class='va'>sample_atc_rxcui</span> <span class='op'>&lt;-</span> <span class='fu'>getRxCuiViaATC123</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_ATC</span>,AtcColName <span class='op'>=</span> <span class='va'>ATC</span>,cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_atc_rxcui</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       ATC  RxCui
+#&gt; 1 G04BX06   8120
+#&gt; 2 D06AX02   2348
+#&gt; 3 C01DA02   4917
+#&gt; 4 G03AB01   &lt;NA&gt;
+#&gt; 5 A12CC05 142131</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

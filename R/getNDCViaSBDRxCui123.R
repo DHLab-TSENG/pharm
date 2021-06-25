@@ -1,7 +1,7 @@
-#' @rdname getNDCViaSBDRxCui
+#' @rdname getNDCViaSBDRxCui123
 #' @export
 
-getNDCViaSBDRxCui <- function(df, SBDRxCuiColName = SBD.rxcui, cores = 8){
+getNDCViaSBDRxCui123 <- function(df, SBDRxCuiColName = SBD.rxcui, cores = 8){
 
   colnames(df)[colnames(df)==deparse(substitute(SBDRxCuiColName))] <- "SBD.rxcui"
   dfu <- df %>% select("SBD.rxcui") %>% unique()

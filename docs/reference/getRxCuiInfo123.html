@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get RxCui via U.S National Drug Code(NDC) — getRxCuiViaNDC • pharm</title>
+<title>Get RxCui information — getRxCuiInfo123 • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get RxCui via U.S National Drug Code(NDC) — getRxCuiViaNDC" />
-<meta property="og:description" content="This is a function to get RxCui via National Drug Code(NDC)" />
+<meta property="og:title" content="Get RxCui information — getRxCuiInfo123" />
+<meta property="og:description" content="This function can get the information of RxCui" />
 
 
 
@@ -111,27 +111,27 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get RxCui via U.S National Drug Code(NDC)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiViaNDC.R'><code>R/getRxCuiViaNDC.R</code></a></small>
-    <div class="hidden name"><code>getRxCuiViaNDC.Rd</code></div>
+    <h1>Get RxCui information</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiInfo123.R'><code>R/getRxCuiInfo123.R</code></a></small>
+    <div class="hidden name"><code>getRxCuiInfo123.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a function to get RxCui via National Drug Code(NDC)</p>
+    <p>This function can get the information of RxCui</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getRxCuiViaNDC</span><span class='op'>(</span><span class='va'>df</span>, NdcColName <span class='op'>=</span> <span class='va'>NDC</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getRxCuiInfo123</span><span class='op'>(</span><span class='va'>df</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame, a drug ingredient`s NDC of the specific indication</p></td>
+      <td><p>data.frame, included RxCui</p></td>
     </tr>
     <tr>
-      <th>NdcColName</th>
-      <td><p>a column name for NDC of df</p></td>
+      <th>RxCuiColName</th>
+      <td><p>a column name for RxCui of df</p></td>
     </tr>
     <tr>
       <th>cores</th>
@@ -139,27 +139,7 @@
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A new data.table <code>sample_data_subset_rxcui</code> with following columns.</p>
-<p><code>MemberId</code> patient Id</p>
-<p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
-<p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
-<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
-<p><code>DaysSupply</code> days of patient`s drug dispensed</p>
-<p><code>RxCui</code> drug code for the drug in the RxNorm drug vocabulary</p>
-<p><code>ndcStatus</code> NDC status</p>
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>User can input the data.frame with drug column which encoded in NDC.
-The content is to add a column named RxCui in the original input data frame, storing the result of converting NDC to RxNorm in this column.
-The column <code>ndcStatus</code> is to show whether the converted NDC is now used.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#sample of getting RxCui via NDC.</span>
-<span class='va'>sample_data_subset_rxcui</span> <span class='op'>&lt;-</span> <span class='fu'>getRxCuiViaNDC</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset</span>, NdcColName <span class='op'>=</span> <span class='va'>NationalDrugCode</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in df %&gt;% select("NDC") %&gt;% unique(): 沒有這個函數 "%&gt;%"</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_data_subset_rxcui</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in head(sample_data_subset_rxcui): 找不到物件 'sample_data_subset_rxcui'</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

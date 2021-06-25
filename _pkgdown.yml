@@ -20,21 +20,21 @@ reference:
 - title: I. Get Drug Ingredient Via Indication
   desc: ~
   contents:
-  - getRxCuiViaMayTreat
-  - getRxCuiViaMayPrevent
+  - getRxCuiViaMayTreat123
+  - getRxCuiViaMayPrevent123
   - getMayPrevent
-  - getSBDRxCuiViaRxCui
+  - getSBDRxCuiViaRxCui123
 
 - title: II. Drug Code Integration
   desc: ~
   contents:
-  - getNDCViaSBDRxCui
-  - getRxCuiViaNDC
-  - getATCViaRxCui
-  - getRxCuiViaATC
+  - getNDCViaSBDRxCui123
+  - getRxCuiViaNDC123
+  - getATCViaRxCui123
+  - getRxCuiViaATC123
   - getNHINoViaRCFNo
   - getNHINoViaHC
-  - getATCViaNHINo
+  - getATCViaNHINo123
 
 - title: III. Calculate Drug Data
   desc: ~
@@ -48,14 +48,14 @@ reference:
 - title: IV. Visulization
   desc: ~
   contents:
-  - getATCLevelPlot
+  - getATCLevelPlot123
   - getDrugEraPlot
   - getDispensingPlot
 
 - title: Get Info
   desc: ~
   contents:
-  - getRxCuiInfo
+  - getRxCuiInfo123
   - getBoSSViaRxCui
   - getMEDRTInfo
   - getIngredientAndBoSSViaRxCui

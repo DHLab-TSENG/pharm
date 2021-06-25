@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get RxCui information — getRxCuiInfo • pharm</title>
+<title>Get ingredient RxCui via specific indication — getRxCuiViaMayTreat123 • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get RxCui information — getRxCuiInfo" />
-<meta property="og:description" content="This function can get the information of RxCui" />
+<meta property="og:title" content="Get ingredient RxCui via specific indication — getRxCuiViaMayTreat123" />
+<meta property="og:description" content="This function provides user to get drug ingredient RxCui of the specific indication may treat." />
 
 
 
@@ -111,35 +111,53 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get RxCui information</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiInfo.R'><code>R/getRxCuiInfo.R</code></a></small>
-    <div class="hidden name"><code>getRxCuiInfo.Rd</code></div>
+    <h1>Get ingredient RxCui via specific indication</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiViaMayTreat123.R'><code>R/getRxCuiViaMayTreat123.R</code></a></small>
+    <div class="hidden name"><code>getRxCuiViaMayTreat123.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function can get the information of RxCui</p>
+    <p>This function provides user to get drug ingredient RxCui of the specific indication may treat.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getRxCuiInfo</span><span class='op'>(</span><span class='va'>df</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getRxCuiViaMayTreat123</span><span class='op'>(</span><span class='va'>strmaytreat</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>data.frame, included RxCui</p></td>
-    </tr>
-    <tr>
-      <th>RxCuiColName</th>
-      <td><p>a column name for RxCui of df</p></td>
-    </tr>
-    <tr>
-      <th>cores</th>
-      <td><p>number of parallel operation</p></td>
+      <th>strmaytreat</th>
+      <td><p>user can input an indication name</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A new data.table <code>maytreat_List</code> with following columns.</p>
+<p><code>RxCui</code> drug RxCui</p>
+<p><code>Name</code> drug name</p>
+<p><code>MinConcept.Id</code> indication Id</p>
+<p><code>MinConcept.Name</code> indication name</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The data source is from the U.S. Veterans Administration's <code>MED-RT</code> database.
+Since RxNorm integrates the US Veterans Administration MED-RT drug vocabulary and provides API (/rxclass/relaSources) that mediates RxCui into the drug vocabulary.
+Therefore, we establishes a function through this API, so that users can obtain complete contraindications, indications and other information in the MED-RT vocabulary through the drug RxCui.
+In addition to drug contraindications and indications for RxNorm coding, this study also uses web crawler technology to crawl information on contraindications and indications for all drugs in the MED-RT data sheet.
+Establish a function for finding drugs from contraindications and indications.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># sample of searching an indication esophagitis may treat.</span>
+<span class='va'>Esophagitis_List</span> <span class='op'>&lt;-</span> <span class='fu'>getRxCuiViaMayTreat123</span><span class='op'>(</span><span class='st'>"esophagitis"</span><span class='op'>)</span>
+<span class='co'># sample of getting drug ingredient RxCui list of esophagitis.</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>Esophagitis_List</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;      RxCui                 Name MinConcept.Id MinConcept.Name
+#&gt; 1: 1792108    Omeprazole Sodium       D004941     Esophagitis
+#&gt; 2:  236486 Omeprazole magnesium       D004941     Esophagitis
+#&gt; 3:    7646           Omeprazole       D004941     Esophagitis
+#&gt; 4:   10156           Sucralfate       D004941     Esophagitis
+#&gt; 5: 1487143    sucralfate malate       D004941     Esophagitis
+#&gt; 6:   17128         lansoprazole       D004941     Esophagitis</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
