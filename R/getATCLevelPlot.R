@@ -1,7 +1,7 @@
-#' @rdname getATCLevelPlot123
+#' @rdname getATCLevelPlot
 #' @export
 
-getATCLevelPlot123 <- function(df, ATCColName = ATC, level = 1) {
+getATCLevelPlot <- function(df, ATCColName = ATC, level = 1) {
 
   colnames(df)[colnames(df) == deparse(substitute(ATCColName))] <-
     "ATC"

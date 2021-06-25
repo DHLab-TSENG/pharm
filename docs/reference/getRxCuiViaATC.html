@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get RxCui via U.S National Drug Code(NDC) — getRxCuiViaNDC123 • pharm</title>
+<title>Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code — getRxCuiViaATC • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get RxCui via U.S National Drug Code(NDC) — getRxCuiViaNDC123" />
-<meta property="og:description" content="This is a function to get RxCui via National Drug Code(NDC)" />
+<meta property="og:title" content="Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code — getRxCuiViaATC" />
+<meta property="og:description" content="This is a function to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code" />
 
 
 
@@ -111,63 +111,58 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get RxCui via U.S National Drug Code(NDC)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiViaNDC123.R'><code>R/getRxCuiViaNDC123.R</code></a></small>
-    <div class="hidden name"><code>getRxCuiViaNDC123.Rd</code></div>
+    <h1>Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiViaATC.R'><code>R/getRxCuiViaATC.R</code></a></small>
+    <div class="hidden name"><code>getRxCuiViaATC.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a function to get RxCui via National Drug Code(NDC)</p>
+    <p>This is a function to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getRxCuiViaNDC123</span><span class='op'>(</span><span class='va'>df</span>, NdcColName <span class='op'>=</span> <span class='va'>NDC</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getRxCuiViaATC</span><span class='op'>(</span><span class='va'>df</span>, AtcColName <span class='op'>=</span> <span class='va'>ATC</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame, a drug ingredient`s NDC of the specific indication</p></td>
+      <td><p>data.frame, a drug ingredient ATC code of the specific indication</p></td>
     </tr>
     <tr>
-      <th>NdcColName</th>
-      <td><p>a column name for NDC of df</p></td>
+      <th>AtcColName</th>
+      <td><p>a column name for ATC code of df</p></td>
     </tr>
     <tr>
       <th>cores</th>
       <td><p>number of parallel operation</p></td>
     </tr>
+    <tr>
+      <th>Differ_ColName</th>
+      <td><p>if colum for NHINo of df is not named ATC</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A new data.table <code>sample_data_subset_rxcui</code> with following columns.</p>
-<p><code>MemberId</code> patient Id</p>
-<p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
-<p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
-<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
-<p><code>DaysSupply</code> days of patient`s drug dispensed</p>
-<p><code>RxCui</code> drug code for the drug in the RxNorm drug vocabulary</p>
-<p><code>ndcStatus</code> NDC status</p>
+    <p>A new data.table <code>sample_atc_rxcui</code> with following columns.</p>
+<p><code>RxCui</code> drug RxCui</p>
+<p><code>ATC</code> drug ATC code</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>User can input the data.frame with drug column which encoded in NDC.
-The content is to add a column named RxCui in the original input data frame, storing the result of converting NDC to RxNorm in this column.
-The column <code>ndcStatus</code> is to show whether the converted NDC is now used.</p>
+    <p>Users can obtain additional drug information via other drug integrated by RxCui, such as the contraindications and indications for drugs available in the MED-RT database of the US Veterans Bureau integrated by RxNorm.
+User inputs the data frame with drug column which encoded in ATC code, then the output will add a column named RxCui in the original input data frame.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>#sample of getting RxCui via NDC.</span>
-<span class='va'>sample_data_subset_rxcui</span> <span class='op'>&lt;-</span> <span class='fu'>getRxCuiViaNDC123</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset</span>, NdcColName <span class='op'>=</span> <span class='va'>NationalDrugCode</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_data_subset_rxcui</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 7</span><span>
-#&gt;   MemberId DispenseDate NationalDrugCode Quantity DaysSupply RxCui  ndcStatus
-#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>    
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>        1 2031-12-01   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>        1 2032-01-31   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        1 2032-03-25   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>       42 2032-01-05   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>       42 2032-03-07   00186504031            30         30 606731 ACTIVE   
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>       42 2032-04-30   00186504031            30         30 606731 ACTIVE   </div></span></pre>
+    <pre class="examples"><div class='input'><span class='co'># sample of getting RxCui via ATC.</span>
+<span class='va'>sample_atc_rxcui</span> <span class='op'>&lt;-</span> <span class='fu'>getRxCuiViaATC</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_ATC</span>,AtcColName <span class='op'>=</span> <span class='va'>ATC</span>,cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_atc_rxcui</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;       ATC  RxCui
+#&gt; 1 G04BX06   8120
+#&gt; 2 D06AX02   2348
+#&gt; 3 C01DA02   4917
+#&gt; 4 G03AB01   &lt;NA&gt;
+#&gt; 5 A12CC05 142131</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

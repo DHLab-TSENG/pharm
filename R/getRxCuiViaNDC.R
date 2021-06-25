@@ -1,7 +1,7 @@
-#' @rdname getRxCuiViaNDC123
+#' @rdname getRxCuiViaNDC
 #' @export
 
-getRxCuiViaNDC123 <- function(df, NdcColName = NDC, cores=8){
+getRxCuiViaNDC <- function(df, NdcColName = NDC, cores=8){
 
   colnames(df)[colnames(df)==deparse(substitute(NdcColName))] <- "NDC"
   dfu <- df %>% select("NDC") %>% unique()

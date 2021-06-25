@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo) — getATCViaNHINo123 • pharm</title>
+<title>Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo) — getATCViaNHINo • pharm</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo) — getATCViaNHINo123" />
+<meta property="og:title" content="Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo) — getATCViaNHINo" />
 <meta property="og:description" content="This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo)" />
 
 
@@ -112,15 +112,15 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getATCViaNHINo123.R'><code>R/getATCViaNHINo123.R</code></a></small>
-    <div class="hidden name"><code>getATCViaNHINo123.Rd</code></div>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getATCViaNHINo.R'><code>R/getATCViaNHINo.R</code></a></small>
+    <div class="hidden name"><code>getATCViaNHINo.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getATCViaNHINo123</span><span class='op'>(</span><span class='va'>df</span>, NHINoColName <span class='op'>=</span> <span class='va'>NHINo</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getATCViaNHINo</span><span class='op'>(</span><span class='va'>df</span>, NHINoColName <span class='op'>=</span> <span class='va'>NHINo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -142,12 +142,12 @@
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>This function filter the patient to be analyzed with the target indication drug, which encode in RxCui and be converted to ATC code by the function <code>getATCViaRxCui()</code>.
+    <p>This function filter the patient to be analyzed with the target indication drug, which encode in RxCui and be converted to ATC code by the function <code><a href='getATCViaRxCui.html'>getATCViaRxCui()</a></code>.
 User inputs the data frame with drug column which encoded in NHINo, then the output will add a column named ATC in the original input data frame.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># sample of getting ATC code via NHINo.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>getATCViaNHINo123</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_nhino_code</span>,NHINoColName <span class='op'>=</span> <span class='va'>NHINo</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='fu'>getATCViaNHINo</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_nhino_code</span>,NHINoColName <span class='op'>=</span> <span class='va'>NHINo</span><span class='op'>)</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;        NHINo ATC_CODE
 #&gt; 1 BC26139100  L02BX03
 #&gt; 2 A014118335  D07XB01

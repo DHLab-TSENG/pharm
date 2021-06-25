@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get ingredient RxCui via specific indication — getRxCuiViaMayPrevent123 • pharm</title>
+<title>Get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui — getNDCViaSBDRxCui • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get ingredient RxCui via specific indication — getRxCuiViaMayPrevent123" />
-<meta property="og:description" content="This function provides user to get drug ingredient RxCui of the specific indication may prevent." />
+<meta property="og:title" content="Get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui — getNDCViaSBDRxCui" />
+<meta property="og:description" content="This function provides user tO get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) RxCui or Semantic Clinical Drug(SCD) RxCui contained these drug ingredients." />
 
 
 
@@ -111,27 +111,59 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get ingredient RxCui via specific indication</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiViaMayPrevent123.R'><code>R/getRxCuiViaMayPrevent123.R</code></a></small>
-    <div class="hidden name"><code>getRxCuiViaMayPrevent123.Rd</code></div>
+    <h1>Get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getNDCViaSBDRxCui.R'><code>R/getNDCViaSBDRxCui.R</code></a></small>
+    <div class="hidden name"><code>getNDCViaSBDRxCui.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function provides user to get drug ingredient RxCui of the specific indication may prevent.</p>
+    <p>This function provides user tO get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) RxCui or Semantic Clinical Drug(SCD) RxCui contained these drug ingredients.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getRxCuiViaMayPrevent123</span><span class='op'>(</span><span class='va'>strmayprevent</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getNDCViaSBDRxCui</span><span class='op'>(</span><span class='va'>df</span>, SBDRxCuiColName <span class='op'>=</span> <span class='va'>SBD.rxcui</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>strmayprevent</th>
-      <td><p>user can input an indication name</p></td>
+      <th>df</th>
+      <td><p>data.frame, a drug ingredient SBD or SCD RxCui of the specific indication</p></td>
+    </tr>
+    <tr>
+      <th>cores</th>
+      <td><p>number of parallel operation</p></td>
+    </tr>
+    <tr>
+      <th>RxCuiColName</th>
+      <td><p>a column name for RxCui of df</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A new data.table <code>maytreat_NDC_List</code> with following columns.</p>
+<p><code>RxCui</code> drug RxCui</p>
+<p><code>Name</code> drug name</p>
+<p><code>MinConcept.Id</code> indication Id</p>
+<p><code>MinConcept.Name</code> indication name</p>
+<p><code>SBD.rxcui</code> drug SBD RxCui</p>
+<p><code>NDC</code> drug NDC</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>User can screen out the patient who has the record of receiving these drugs in the medication data, but not all medication data are encoded in RxNorm.
+In the United States, for example, the drug code commonly used in medical data is NDC code.
+NDC code cannot be directly filtered with RxNorm coded data.
+Therefore, user can input the data.frame from <code><a href='getRxCuiViaMayTreat.html'>getRxCuiViaMayTreat()</a></code>, then convert to NDC code and screen out a new data.frame.</p>
+<p>However, a drug will have different packaging and NDC because it comes from different pharmaceutical brands.
+There will be different NDC for the same drug type but different packaging. Hence, the output results will be one-to-many.
+A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corresponding NDC will be <code>NA</code>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># sample of getting NDC via SBD SCD RxCui list of esophagitis</span>
+<span class='va'>Esophagitis_NDC_List</span> <span class='op'>&lt;-</span> <span class='fu'>getNDCViaSBDRxCui</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>Esophagitis_SBD_SCD_List</span><span class='op'>[</span><span class='fl'>1</span>,<span class='op'>]</span>,SBDRxCuiColName <span class='op'>=</span> <span class='va'>SBD.rxcui</span>,cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>Esophagitis_NDC_List</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    RxCui       Name MinConcept.Id MinConcept.Name SBD.rxcui NDC
+#&gt; 1:  7646 Omeprazole       D004941     Esophagitis   2262026  NA</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

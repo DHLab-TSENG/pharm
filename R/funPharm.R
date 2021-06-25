@@ -2,7 +2,7 @@
 #'
 #' This function provides user to get drug ingredient RxCui of the specific indication may treat.
 #'
-#' @name getRxCuiViaMayTreat123
+#' @name getRxCuiViaMayTreat
 #' @import data.table
 #' @param strmaytreat user can input an indication name
 #' @return
@@ -23,7 +23,7 @@
 #' Establish a function for finding drugs from contraindications and indications.
 #' @examples
 #' # sample of searching an indication esophagitis may treat.
-#' Esophagitis_List <- getRxCuiViaMayTreat123("esophagitis")
+#' Esophagitis_List <- getRxCuiViaMayTreat("esophagitis")
 #' # sample of getting drug ingredient RxCui list of esophagitis.
 #' head(Esophagitis_List)
 NULL
@@ -34,7 +34,7 @@ NULL
 #'
 #' This function provides user to get drug ingredient RxCui of the specific indication may prevent.
 #'
-#' @name getRxCuiViaMayPrevent123
+#' @name getRxCuiViaMayPrevent
 #' @import data.table
 #' @param strmayprevent user can input an indication name
 NULL
@@ -60,7 +60,7 @@ NULL
 #'
 #' This function provides user to get Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui via ingredient RxCui.
 #'
-#' @name getSBDRxCuiViaRxCui123
+#' @name getSBDRxCuiViaRxCui
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
 #' @import foreach
@@ -85,7 +85,7 @@ NULL
 #' The content is to add a column named \code{SBD.rxcui} in the original input data frame, stores the result of converting ingredient to brand drug and clinical drug containing a specific drug component.
 #' @examples
 #' # sample of getting SBD or SCD Rxcui list of esophagitis.
-#' Esophagitis_SBD_SCD_List <- getSBDRxCuiViaRxCui123(df = Esophagitis_List[3,],RxCuiColName = RxCui,cores = 2)
+#' Esophagitis_SBD_SCD_List <- getSBDRxCuiViaRxCui(df = Esophagitis_List[3,],RxCuiColName = RxCui,cores = 2)
 #' head(Esophagitis_SBD_SCD_List)
 NULL
 
@@ -95,7 +95,7 @@ NULL
 #'
 #' This function provides user tO get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) RxCui or Semantic Clinical Drug(SCD) RxCui contained these drug ingredients.
 #'
-#' @name getNDCViaSBDRxCui123
+#' @name getNDCViaSBDRxCui
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
 #' @import foreach
@@ -128,7 +128,7 @@ NULL
 #' A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corresponding NDC will be \code{NA}.
 #' @examples
 #' # sample of getting NDC via SBD SCD RxCui list of esophagitis
-#' Esophagitis_NDC_List <- getNDCViaSBDRxCui123(df = Esophagitis_SBD_SCD_List[1,],SBDRxCuiColName = SBD.rxcui,cores = 2)
+#' Esophagitis_NDC_List <- getNDCViaSBDRxCui(df = Esophagitis_SBD_SCD_List[1,],SBDRxCuiColName = SBD.rxcui,cores = 2)
 #' head(Esophagitis_NDC_List)
 NULL
 
@@ -138,7 +138,7 @@ NULL
 #'
 #' This is a function to get RxCui via National Drug Code(NDC)
 #'
-#' @name getRxCuiViaNDC123
+#' @name getRxCuiViaNDC
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
 #' @import foreach
@@ -168,7 +168,7 @@ NULL
 #' The column \code{ndcStatus} is to show whether the converted NDC is now used.
 #' @examples
 #' #sample of getting RxCui via NDC.
-#' sample_data_subset_rxcui <- getRxCuiViaNDC123(df = sample_data_subset, NdcColName = NationalDrugCode)
+#' sample_data_subset_rxcui <- getRxCuiViaNDC(df = sample_data_subset, NdcColName = NationalDrugCode)
 #' head(sample_data_subset_rxcui)
 NULL
 
@@ -178,7 +178,7 @@ NULL
 #'
 #' This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui
 #'
-#' @name getATCViaRxCui123
+#' @name getATCViaRxCui
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
 #' @import foreach
@@ -215,7 +215,7 @@ NULL
 #' If the input RxCui is a drug combination package, the field output result will be filled in GPCK or BPCK.
 #' @examples
 #' # sample of getting ATC via RxCui.
-#' sample_data_subset_atc <- getATCViaRxCui123(df = sample_data_subset_rxcui,RxCuiColName = RxCui,cores = 2,MatchRoute = FALSE)
+#' sample_data_subset_atc <- getATCViaRxCui(df = sample_data_subset_rxcui,RxCuiColName = RxCui,cores = 2,MatchRoute = FALSE)
 #' head(sample_data_subset_atc)
 NULL
 
@@ -225,7 +225,7 @@ NULL
 #'
 #' This is a function to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code
 #'
-#' @name getRxCuiViaATC123
+#' @name getRxCuiViaATC
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
 #' @import foreach
@@ -245,7 +245,7 @@ NULL
 #' User inputs the data frame with drug column which encoded in ATC code, then the output will add a column named RxCui in the original input data frame.
 #' @examples
 #' # sample of getting RxCui via ATC.
-#' sample_atc_rxcui <- getRxCuiViaATC123(df = sample_ATC,AtcColName = ATC,cores = 2)
+#' sample_atc_rxcui <- getRxCuiViaATC(df = sample_ATC,AtcColName = ATC,cores = 2)
 #' head(sample_atc_rxcui)
 NULL
 
@@ -292,7 +292,7 @@ NULL
 #'
 #' This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via Taiwan Health Insurance drug code(NHINo)
 #'
-#' @name getATCViaNHINo123
+#' @name getATCViaNHINo
 #' @param df data.frame include NHINO
 #' @param NHINoColName A colum for NHINo of df
 #' @return
@@ -301,7 +301,7 @@ NULL
 #' User inputs the data frame with drug column which encoded in NHINo, then the output will add a column named ATC in the original input data frame.
 #' @examples
 #' # sample of getting ATC code via NHINo.
-#' head(getATCViaNHINo123(df = sample_nhino_code,NHINoColName = NHINo))
+#' head(getATCViaNHINo(df = sample_nhino_code,NHINoColName = NHINo))
 NULL
 
 
@@ -476,7 +476,7 @@ NULL
 #'
 #' \code{getAtcLevelPlot} is a function to get daily dosage drugs(DDDs) in Anatomical Therapeutic Chemical Classification System(ATC) code level histogram plot.
 #'
-#' @name getATCLevelPlot123
+#' @name getATCLevelPlot
 #' @import ggplot2
 #' @import data.table
 #' @param df data.frame, include ATC code
@@ -486,9 +486,9 @@ NULL
 #' Because before having a complicated or rigorous analysis, user must have more knowledge of the data to determine the direction of the data analysis.
 #' @examples
 #' # sample of getting ATC first-level code distribution bar chart
-#' getATCLevelPlot123(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 1)
+#' getATCLevelPlot(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 1)
 #' # sample of getting ATC second-level code distribution bar chart
-#' getATCLevelPlot123(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 2)
+#' getATCLevelPlot(df = sample_data_ATC1LevelPlot, ATCColName = ATC, level = 2)
 NULL
 
 
@@ -543,7 +543,7 @@ NULL
 #'
 #' This function can get the information of RxCui
 #'
-#' @name getRxCuiInfo123
+#' @name getRxCuiInfo
 #' @importFrom parallel makeCluster
 #' @importFrom parallel stopCluster
 #' @import foreach

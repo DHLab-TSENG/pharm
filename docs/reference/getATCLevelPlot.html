@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code — getRxCuiViaATC123 • pharm</title>
+<title>Get  Anatomical Therapeutic Chemical Classification System(ATC) code level code distribution histogram plot — getATCLevelPlot • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code — getRxCuiViaATC123" />
-<meta property="og:description" content="This is a function to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code" />
+<meta property="og:title" content="Get  Anatomical Therapeutic Chemical Classification System(ATC) code level code distribution histogram plot — getATCLevelPlot" />
+<meta property="og:description" content="getAtcLevelPlot is a function to get daily dosage drugs(DDDs) in Anatomical Therapeutic Chemical Classification System(ATC) code level histogram plot." />
 
 
 
@@ -111,58 +111,41 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getRxCuiViaATC123.R'><code>R/getRxCuiViaATC123.R</code></a></small>
-    <div class="hidden name"><code>getRxCuiViaATC123.Rd</code></div>
+    <h1>Get  Anatomical Therapeutic Chemical Classification System(ATC) code level code distribution histogram plot</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getATCLevelPlot.R'><code>R/getATCLevelPlot.R</code></a></small>
+    <div class="hidden name"><code>getATCLevelPlot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This is a function to get RxCui via Anatomical Therapeutic Chemical Classification System(ATC) code</p>
+    <p><code>getAtcLevelPlot</code> is a function to get daily dosage drugs(DDDs) in Anatomical Therapeutic Chemical Classification System(ATC) code level histogram plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getRxCuiViaATC123</span><span class='op'>(</span><span class='va'>df</span>, AtcColName <span class='op'>=</span> <span class='va'>ATC</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getATCLevelPlot</span><span class='op'>(</span><span class='va'>df</span>, ATCColName <span class='op'>=</span> <span class='va'>ATC</span>, level <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame, a drug ingredient ATC code of the specific indication</p></td>
+      <td><p>data.frame, include ATC code</p></td>
     </tr>
     <tr>
-      <th>AtcColName</th>
+      <th>ATCColName</th>
       <td><p>a column name for ATC code of df</p></td>
-    </tr>
-    <tr>
-      <th>cores</th>
-      <td><p>number of parallel operation</p></td>
-    </tr>
-    <tr>
-      <th>Differ_ColName</th>
-      <td><p>if colum for NHINo of df is not named ATC</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A new data.table <code>sample_atc_rxcui</code> with following columns.</p>
-<p><code>RxCui</code> drug RxCui</p>
-<p><code>ATC</code> drug ATC code</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Users can obtain additional drug information via other drug integrated by RxCui, such as the contraindications and indications for drugs available in the MED-RT database of the US Veterans Bureau integrated by RxNorm.
-User inputs the data frame with drug column which encoded in ATC code, then the output will add a column named RxCui in the original input data frame.</p>
+    <p>If the amount of drug information obtained by the user is large and messy, the user can first visualize the data using basic statistical tools, explore the characteristics of the data, and obtain the information, structure and features contained in the data.
+Because before having a complicated or rigorous analysis, user must have more knowledge of the data to determine the direction of the data analysis.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># sample of getting RxCui via ATC.</span>
-<span class='va'>sample_atc_rxcui</span> <span class='op'>&lt;-</span> <span class='fu'>getRxCuiViaATC123</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_ATC</span>,AtcColName <span class='op'>=</span> <span class='va'>ATC</span>,cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_atc_rxcui</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;       ATC  RxCui
-#&gt; 1 G04BX06   8120
-#&gt; 2 D06AX02   2348
-#&gt; 3 C01DA02   4917
-#&gt; 4 G03AB01   &lt;NA&gt;
-#&gt; 5 A12CC05 142131</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># sample of getting ATC first-level code distribution bar chart</span>
+<span class='fu'>getATCLevelPlot</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_ATC1LevelPlot</span>, ATCColName <span class='op'>=</span> <span class='va'>ATC</span>, level <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+</div><div class='img'><img src='getATCLevelPlot-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># sample of getting ATC second-level code distribution bar chart</span>
+<span class='fu'>getATCLevelPlot</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_ATC1LevelPlot</span>, ATCColName <span class='op'>=</span> <span class='va'>ATC</span>, level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+</div><div class='img'><img src='getATCLevelPlot-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

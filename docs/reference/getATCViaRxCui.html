@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui — getNDCViaSBDRxCui123 • pharm</title>
+<title>Get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui — getATCViaRxCui • pharm</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui — getNDCViaSBDRxCui123" />
-<meta property="og:description" content="This function provides user tO get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) RxCui or Semantic Clinical Drug(SCD) RxCui contained these drug ingredients." />
+<meta property="og:title" content="Get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui — getATCViaRxCui" />
+<meta property="og:description" content="This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui" />
 
 
 
@@ -111,59 +111,71 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) or Semantic Clinical Drug(SCD) RxCui</h1>
-    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getNDCViaSBDRxCui123.R'><code>R/getNDCViaSBDRxCui123.R</code></a></small>
-    <div class="hidden name"><code>getNDCViaSBDRxCui123.Rd</code></div>
+    <h1>Get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui</h1>
+    <small class="dont-index">Source: <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/funPharm.R'><code>R/funPharm.R</code></a>, <a href='https://github.com/DHLab-TSENG/pharm/blob/master/R/getATCViaRxCui.R'><code>R/getATCViaRxCui.R</code></a></small>
+    <div class="hidden name"><code>getATCViaRxCui.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function provides user tO get U.S National Drug Code(NDC) via Semantic Branded Drug(SBD) RxCui or Semantic Clinical Drug(SCD) RxCui contained these drug ingredients.</p>
+    <p>This is a function to get Anatomical Therapeutic Chemical Classification System(ATC) code via RxCui</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getNDCViaSBDRxCui123</span><span class='op'>(</span><span class='va'>df</span>, SBDRxCuiColName <span class='op'>=</span> <span class='va'>SBD.rxcui</span>, cores <span class='op'>=</span> <span class='fl'>8</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getATCViaRxCui</span><span class='op'>(</span><span class='va'>df</span>, RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>, cores <span class='op'>=</span> <span class='fl'>4</span>, MatchRoute <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame, a drug ingredient SBD or SCD RxCui of the specific indication</p></td>
+      <td><p>data.frame, a drug ingredient`s RxCui of the specific indication</p></td>
     </tr>
     <tr>
       <th>cores</th>
       <td><p>number of parallel operation</p></td>
     </tr>
     <tr>
-      <th>RxCuiColName</th>
+      <th>MatchRoute</th>
+      <td><p>an option to mapping drug ingredient and route</p></td>
+    </tr>
+    <tr>
+      <th>RxCuiColNamea</th>
       <td><p>a column name for RxCui of df</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A new data.table <code>maytreat_NDC_List</code> with following columns.</p>
+    <p>A new data.table <code>sample_data_subset_atc</code> with following columns.</p>
+<p><code>MemberId</code> patient Id</p>
+<p><code>DispenseDate</code> patient`s drug dispensed date, and the time interval is from 2025-12-06 to 2038-01-25</p>
+<p><code>NationalDrugCode</code> drug NDC, total of 17,326 different drug codes</p>
+<p><code>Quantity</code> quantity of patient`s drug dispensed</p>
+<p><code>DaysSupply</code> days of patient`s drug dispensed</p>
 <p><code>RxCui</code> drug RxCui</p>
-<p><code>Name</code> drug name</p>
-<p><code>MinConcept.Id</code> indication Id</p>
-<p><code>MinConcept.Name</code> indication name</p>
-<p><code>SBD.rxcui</code> drug SBD RxCui</p>
-<p><code>NDC</code> drug NDC</p>
+<p><code>ATC</code> drug ATC code</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>User can screen out the patient who has the record of receiving these drugs in the medication data, but not all medication data are encoded in RxNorm.
-In the United States, for example, the drug code commonly used in medical data is NDC code.
-NDC code cannot be directly filtered with RxNorm coded data.
-Therefore, user can input the data.frame from <code>getRxCuiViaMayTreat()</code>, then convert to NDC code and screen out a new data.frame.</p>
-<p>However, a drug will have different packaging and NDC because it comes from different pharmaceutical brands.
-There will be different NDC for the same drug type but different packaging. Hence, the output results will be one-to-many.
-A drug RxCui will matche to multiple NDC of pharmaceutical brands, and no corresponding NDC will be <code>NA</code>.</p>
+    <p>User can input the data.frame with drug column which encoded in RxCui, and to add the result of converting column named ATC.</p>
+<p>The same drug components in ATC might depend on different ATC medication route.
+Hence, this function also refer to the research of <code>Bodenreider et al.</code>(https://www.researchgate.net/publication/276067397_Analyzing_US_prescription_lists_with_RxNorm_and_the_ATCDDD_Index) and adds the parameter <code>MatchRoute</code> for user to consider.
+If user wants to compare the ATC medication route, input <code>TRUE</code> in the parameter <code>MatchRoute</code>, otherwise input <code>FALSE</code>.
+Because RxCui is slightly different from the ATC drug vocabulary, not every RxCui has a corresponding ATC code.
+Therefore, if RxCui does not have a corresponding ATC code, this field will display <code>NA</code>, and pharm does not provide the code conversion of the clinical drug and brand drug combination package, such as birth control pills.
+If the input RxCui is a drug combination package, the field output result will be filled in GPCK or BPCK.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># sample of getting NDC via SBD SCD RxCui list of esophagitis</span>
-<span class='va'>Esophagitis_NDC_List</span> <span class='op'>&lt;-</span> <span class='fu'>getNDCViaSBDRxCui123</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>Esophagitis_SBD_SCD_List</span><span class='op'>[</span><span class='fl'>1</span>,<span class='op'>]</span>,SBDRxCuiColName <span class='op'>=</span> <span class='va'>SBD.rxcui</span>,cores <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>Esophagitis_NDC_List</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    RxCui       Name MinConcept.Id MinConcept.Name SBD.rxcui NDC
-#&gt; 1:  7646 Omeprazole       D004941     Esophagitis   2262026  NA</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># sample of getting ATC via RxCui.</span>
+<span class='va'>sample_data_subset_atc</span> <span class='op'>&lt;-</span> <span class='fu'>getATCViaRxCui</span><span class='op'>(</span>df <span class='op'>=</span> <span class='va'>sample_data_subset_rxcui</span>,RxCuiColName <span class='op'>=</span> <span class='va'>RxCui</span>,cores <span class='op'>=</span> <span class='fl'>2</span>,MatchRoute <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>sample_data_subset_atc</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 7</span><span>
+#&gt;   MemberId DispenseDate NationalDrugCode Quantity DaysSupply RxCui  ATC    
+#&gt;      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;date&gt;</span><span>       </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>               </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #949494;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>  
+#&gt; </span><span style='color: #BCBCBC;'>1</span><span>        1 2031-12-01   00186504031            30         30 606731 A02BC05
+#&gt; </span><span style='color: #BCBCBC;'>2</span><span>        1 2032-01-31   00186504031            30         30 606731 A02BC05
+#&gt; </span><span style='color: #BCBCBC;'>3</span><span>        1 2032-03-25   00186504031            30         30 606731 A02BC05
+#&gt; </span><span style='color: #BCBCBC;'>4</span><span>       42 2032-01-05   00186504031            30         30 606731 A02BC05
+#&gt; </span><span style='color: #BCBCBC;'>5</span><span>       42 2032-03-07   00186504031            30         30 606731 A02BC05
+#&gt; </span><span style='color: #BCBCBC;'>6</span><span>       42 2032-04-30   00186504031            30         30 606731 A02BC05</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -1,7 +1,7 @@
-#' @rdname getATCViaNHINo123
+#' @rdname getATCViaNHINo
 #' @export
 
-getATCViaNHINo123 <- function(df, NHINoColName = NHINo){
+getATCViaNHINo <- function(df, NHINoColName = NHINo){
 
   colnames(df)[colnames(df)==deparse(substitute(NHINoColName))] <- "NHINo"
 
