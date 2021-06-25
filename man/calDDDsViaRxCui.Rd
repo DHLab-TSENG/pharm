@@ -8,7 +8,7 @@ calDDDsViaRxCui(
   df,
   RxCuiColName = RxCui,
   QuantityColName = Quantity,
-  DaysSupplyColName = DaysSupply,
+  DaysSupply = DaysSupply,
   cores = 4
 )
 }

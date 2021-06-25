@@ -25,18 +25,17 @@ library(dplyr)
 ```
 
 ### 範例資料  
-`sample_data`資料內容的生成方式為，先將來源資料-美國真實給藥紀錄去識別化，對原始資料的病患編碼重新編排順序，並將每筆給藥日期做時間推移。再將部份給藥紀錄中的NDC替換為相同藥物但不同的NDC，意指該藥物的NDC編碼歷史中不同的NDC編碼。最終資料結果，共產生2,747,617筆給藥紀錄，39,989筆病患編號，分別來自於不同的病人。
+`sample_data`資料內容的生成方式為，先將來源資料 - 美國真實給藥紀錄去識別化，對原始資料的病患編碼重新編排順序，並將每筆給藥日期做時間推移。再將部份給藥紀錄中的NDC替換為相同藥物但不同的NDC，意指該藥物的NDC編碼歷史中不同的NDC編碼。最終資料結果，共產生2,747,617筆給藥紀錄，39,989筆病患編號，分別來自於不同的病人。
 
-本套件功能演示所使用的資料內容`sample_data_subset`，是由`sample_data`資料中`MemberId`病患編號 = 1 AND 42 select出的資料子集。資料欄位如下:
+本套件功能演示所使用的資料內容`sample_data_subset`，是由`sample_data`資料中`MemberId`病患編號 = 1 AND 病患編號 = 42 select 出的資料子集。資料欄位如下:
 
 * `MemberId` 病患編號
-* `DispenseDate` 配藥日期，時間區間為 2025-12-06 至 2038-01-25
+* `DispenseDate` 配藥日期，時間區間為 2025 - 12 - 06 至 2038 - 01 - 25
 * `NationalDrugCode` 藥物的美國藥物編碼(NDC)，共17,326種不同的藥物編碼
 * `Quantity` 配藥數量
 * `DaysSupply` 藥物供給天數
 
 ```{r message=FALSE, warning=FALSE}
-load("~/GitHub/pharm/data/sample_data_subset.rda")
 knitr::kable(sample_data_subset)
 ```
 
@@ -68,9 +67,9 @@ knitr::kable(
 * 台灣全民健康保險藥品編碼
 
 ### **1. Get SBD SCD RxCui Via RxCui**
-在取得`Esophagitis_List`適應症之藥物成分RxCui表後，使用者透過輸入RxCui表可以取得所有含有這些藥物成份之藥廠品牌以及臨床用藥。
+在取得[Esophagitis_List](#1-get-rxcui-via-maytreat)適應症之藥物成分RxCui表後，使用者透過輸入RxCui表可以取得所有含有這些藥物成份之藥廠品牌以及臨床用藥。
 
-範例:輸入`Esophagitis_List`食道炎的適應症之藥物成分RxCui表，可以取得轉換後的SBD或SCD RxCui，並且存在`Esophagitis_SBD_SCD_List`表中。資料欄位如下:
+範例:輸入[Esophagitis_List](#1-get-rxcui-via-maytreat)食道炎的適應症之藥物成分RxCui表，可以取得轉換後的SBD或SCD RxCui，並且存在`Esophagitis_SBD_SCD_List`表中。資料欄位如下:
 
 * `RxCui` 藥物RxCui
 * `Name` 藥物名稱
@@ -89,9 +88,9 @@ knitr::kable(
 
 ### **2. NDC 與 RxNorm 編碼轉換**
 #### **2.1. RxNorm 轉換為 NDC** 
-在取得`Esophagitis_SBD_SCD_List`適應症之藥物成分的SBD或SCD RxCui表後，使用者透過輸入SBD或SCD RxCui表可以取得所有含有這些藥物成份之NDC。但在這些藥物成份中，一個藥物會因為來自不同藥廠品牌而有不同包裝和NDC，因此輸出結果大多會產生一對多，一個藥物對上多個藥廠品牌的NDC，無相對應代碼則顯示NA。
+在取得[Esophagitis_SBD_SCD_List](#1-get-sbd-scd-rxcui-via-rxcui)適應症之藥物成分的SBD或SCD RxCui表後，使用者透過輸入SBD或SCD RxCui表可以取得所有含有這些藥物成份之NDC。但在這些藥物成份中，一個藥物會因為來自不同藥廠品牌而有不同包裝和NDC，因此輸出結果大多會產生一對多，一個藥物對上多個藥廠品牌的NDC，無相對應代碼則顯示NA。
 
-範例:輸入`Esophagitis_SBD_SCD_List`食道炎的適應症之藥物成分SBD或SCD RxCui表，可以取得轉換後的NDC，並且存在`Esophagitis_NDC_List`表中。資料欄位如下:
+範例:輸入[Esophagitis_SBD_SCD_List](#1-get-sbd-scd-rxcui-via-rxcui)適應症之藥物成分的SBD或SCD RxCui表後，使用者透過輸入SBD或SCD食道炎的適應症之藥物成分SBD或SCD RxCui表，可以取得轉換後的NDC，並且存在`Esophagitis_NDC_List`表中。資料欄位如下:
 
 * `RxCui` 藥物RxCui
 * `Name` 藥物名稱
@@ -112,12 +111,12 @@ knitr::kable(
 #### **2.2. NDC 轉換為 RxNorm** 
 在取得[sample_data_subset](#範例資料)後，使用者透過輸入NDC表可以取得所有含有這些藥物之RxNorm。
 
-範例:輸入`sample_data_subset`範例資料來源，可以取得轉換後的RxNorm，並且存在`sample_data_subset_rxcui`表中。資料欄位如下:
+範例:輸入[sample_data_subset](#範例資料)範例資料來源，可以取得轉換後的RxNorm，並且存在`sample_data_subset_rxcui`表中。資料欄位如下:
 
 * `MemberId` 病患編號
 * `DispenseDate` 配藥日期，時間區間為 2025-12-06 至 2038-01-25
 * `NationalDrugCode` 藥物的美國藥物編碼(NDC)，共17,326種不同的藥物編碼
-* `Quantity` 配藥數量(單位??)
+* `Quantity` 配藥數量
 * `DaysSupply` 藥物供給天數
 * `RxCui` 藥物RxCui
 * `ndcStatus` 藥物NDC狀態
@@ -174,6 +173,14 @@ knitr::kable(
 使用者透過輸入台灣任一醫院藥物編碼可以取得對應之台灣健康保險藥物編碼，若無對應之編碼則顯示`NA`。
 
 範例:輸入台灣醫院藥品編碼，可以取得轉換後的台灣健康保險藥物編碼。
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+knitr::kable(
+  head(
+    getNHINoViaHC(df, HospitalCodeColName, SourceDf, Source_NhinoColName, Source_HospitalCodeColName)
+  )
+)
+```
 
 #### **4.2. 長庚醫院藥物編碼 轉換為 台灣健康保險藥物編碼**
 使用者透過輸入長庚醫院藥物編碼可以取得對應之台灣健康保險藥物編碼，若無對應之編碼則顯示`NA`。
@@ -258,12 +265,12 @@ knitr::kable(getDrugEra(MemberIDColName = MemberId,
 * `DailyDosage` 每日服用之DDD量
 * `Unit` 單位
 
-```{r, warning=FALSE, message=FALSE,eval=FALSE}
+```{r message=FALSE, warning=FALSE}
 sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, 
                                          RxCuiColName = RxCui, 
                                          QuantityColName = Quantity, 
-                                         DaysSupplyColName = DaysSupply, 
-                                         cores = 4)
+                                         DaysSupply = DaysSupply, 
+                                         cores = 2)
 knitr::kable(
   head(sample_data_subset_atc)
 )
@@ -277,7 +284,7 @@ knitr::kable(
 * `MemberId` 病患編號
 * `DDDs` 累積之DDD總量
 
-```{r, warning=FALSE, message=FALSE,eval = FALSE}
+```{r, warning=FALSE, message=FALSE,eval=FALSE}
 accumulat_DDD <- calDDDsAccumulation(case = sample_data_subset_atc, 
                                    PatientIdColName = MemberId,
                                    DispensingColName = DispenseDate,
@@ -299,10 +306,10 @@ knitr::kable(accumulat_DDD)
 * `DDDs_Before_15_Days` 計算DDD值的時間點前15天
 * `DDDs_After_30_Days` 計算DDD值的時間點後30天
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE,eval=FALSE}
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
-```{r, warning=FALSE, message=FALSE, eval = FALSE}
+```{r, warning=FALSE, message=FALSE,eval=FALSE,eval=FALSE}
 index_DDD <- calDDDsRange(case = sample_data_subset_atc,
                            index_dayColName = Index_Day,
                            expo_range_before = 15,
@@ -319,21 +326,27 @@ knitr::kable(index_DDD)
 視覺化呈現以上計算後的資料結果，可以幫助使用者快速了解資料內容或是分析結果，也能快速看出資料中藥物類別的分布狀況、呈現藥物世代分析結果以及個別病患的用藥歷史。
 
 ### **1. ATC分布統計圖**  
-`get.ATC1LevelPlot`功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數`level`讓使用者可以選擇繪製ATC編碼第一階或第二階分布。
+`getATCLevelPlot`功能可將以ATC編碼之藥物資料，以長條圖的方式顯示其分布狀況，此功能也提供一參數`level`讓使用者可以選擇繪製ATC編碼第一階或第二階分布。座標軸如下:
+
+* `count` 個數
+* `ATC1Level` ATC 的階層分布
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
-# level distribution 1
+# level 1 distribution
 getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 1)
-# level distribution 2
+# level 2 distribution
 getATCLevelPlot(df = sample_data_ATC1LevelPlot, 
                   ATCColName = ATC, 
                   level = 2)
 ```
 
 ### **2. 藥物世代長條圖**  
-`get.DrugEraPlot`功能，可將以`get.DrugEra`計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。
+`getDrugEraPlot`功能，可將以`getDrugEra`計算之藥物世代結果，以視覺化的方式呈現，其輸出結果以長條圖的方式呈現，輸入資料不同藥物供給長度的藥物世代數量，以及在各個藥物供給長度中的藥物世代裡，給藥次數的分布狀況。長條圖內的數值表示在該時間區間內的藥物世代，每個藥物代有幾次的發藥紀錄。座標軸如下:
+
+* `Drug Era` 藥物世代的數量
+* `Total Supply Days` 藥物世代的時間長度
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDrugEraPlot(df = sample_data_DrugEraPlot,
@@ -344,7 +357,10 @@ getDrugEraPlot(df = sample_data_DrugEraPlot,
 ```
 
 ### **3. 視覺化用藥歷史**  
-`get.DispensingPlot`可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。
+`getDispensingPlot`可在藥物資料中，選擇特定的病患並將其用藥歷史做視覺化呈現，此功能也以子圖的方式將不同的藥物分開呈現。在藥物種類方面，使用者可自行選擇此圖以NDC作為分類，每筆藥物紀錄間的時間間隔，若有重疊則顯示為負值。座標軸如下:
+
+* `Dispensing Time` 同種藥物的發藥順序
+* `Date` 藥物歷史的時間軸
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDispensingPlot(df = sample_data_subset, 
@@ -359,21 +375,21 @@ getDispensingPlot(df = sample_data_subset,
 ## Reference
 **一、適應症查詢藥物功能**
 
-衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119 [10 July 2019].
+衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119
 
-WHO(2019d), ATC/DDD Index 2018. available at https://www.whocc.no/atc_ddd_index/ [10 July 2019].
+WHO(2019d), ATC/DDD Index 2018. available at https://www.whocc.no/atc_ddd_index/
 
-U.S. National Library of Medicine(2019b), RxNorm API. available at https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html# [10 July 2019].
+U.S. National Library of Medicine(2019b), RxNorm API. available at https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html#
 
-MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264 [10 July 2019].
+MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264
 
 **二、藥物編碼轉換功能**
 
 衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則.
 
-Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm [10 July 2019].
+Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm
 
-U.S. National Library of Medicine(2019c), RxNav. available at https://mor.nlm.nih.gov/RxNav/ [10 July 2019].
+U.S. National Library of Medicine(2019c), RxNav. available at https://mor.nlm.nih.gov/RxNav/
 
 Bodenreider et al. (2014), Analyzing U.S. Prescription Lists with RxNorm and the ATC/DDD Index. AMIA ... Annual Symposium proceedings. AMIA Symposium, 2014: 297–306. https://pubmed.ncbi.nlm.nih.gov/25954332/
 

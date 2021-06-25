@@ -586,6 +586,12 @@
 <a href="#get-nhino-via-hc" class="anchor"></a><strong>3.1. Get NHINo via HC</strong>
 </h4>
 <p>User can get NHINo which has contained these drug ingredients by input HC, and no corresponding NHINo will be<code>NA</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>
+    <span class="fu"><a href="../reference/getNHINoViaHC.html">getNHINoViaHC</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">HospitalCodeColName</span>, <span class="va">SourceDf</span>, <span class="va">Source_NhinoColName</span>, <span class="va">Source_HospitalCodeColName</span><span class="op">)</span>
+  <span class="op">)</span>
+<span class="op">)</span></code></pre></div>
 </div>
 <div id="get-nhino-via-rcfno" class="section level4">
 <h4 class="hasAnchor">
@@ -599,7 +605,7 @@
 <li>
 <code>NHINO1</code> drug NHINo</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>
     <span class="fu"><a href="../reference/getNHINoViaRCFNo.html">getNHINoViaRCFNo</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">sample_taiwan_drug</span>, 
@@ -651,7 +657,7 @@
 <li>
 <code>ATC_CODE</code> drug ATC</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span>
     <span class="fu"><a href="../reference/getATCViaNHINo.html">getATCViaNHINo</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">sample_nhino_code</span>,
@@ -727,7 +733,7 @@
 <li>
 <code>Supply Days</code> the days of drug era that patient`s drug supplied</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="fu"><a href="../reference/getDrugEra.html">getDrugEra</a></span><span class="op">(</span>MemberIDColName <span class="op">=</span> <span class="va">MemberId</span>,
                          <span class="va">sample_data_subset</span>,
                          DrugColName <span class="op">=</span> <span class="va">NationalDrugCode</span>,
@@ -900,11 +906,11 @@
 <li>
 <code>Unit</code> drug unit</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sample_data_subset_atc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calDDDsViaRxCui.html">calDDDsViaRxCui</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">sample_data_subset_atc</span>, 
                                          RxCuiColName <span class="op">=</span> <span class="va">RxCui</span>, 
                                          QuantityColName <span class="op">=</span> <span class="va">Quantity</span>, 
-                                         DaysSupplyColName <span class="op">=</span> <span class="va">DaysSupply</span>, 
+                                         DaysSupply <span class="op">=</span> <span class="va">DaysSupply</span>, 
                                          cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
 <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sample_data_subset_atc</span><span class="op">)</span>
@@ -922,7 +928,7 @@
 <li>
 <code>DDDs</code> accumulated DDDs</li>
 </ul>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">accumulat_DDD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calDDDsAccumulation.html">calDDDsAccumulation</a></span><span class="op">(</span>case <span class="op">=</span> <span class="va">sample_data_subset_atc</span>, 
                                    PatientIdColName <span class="op">=</span> <span class="va">MemberId</span>,
                                    DispensingColName <span class="op">=</span> <span class="va">DispenseDate</span>,
@@ -951,7 +957,7 @@
 <li>
 <code>DDDs_After_30_Days</code> calculate DDDs in custom time interval after index 30 day</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">index_DDD</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/calDDDsRange.html">calDDDsRange</a></span><span class="op">(</span>case <span class="op">=</span> <span class="va">sample_data_subset_atc</span>,
                            index_dayColName <span class="op">=</span> <span class="va">Index_Day</span>,
                            expo_range_before <span class="op">=</span> <span class="fl">15</span>,
@@ -977,22 +983,22 @@
 <p>Example: User input the data table <code>sample_data_ATC1LevelPlot</code>. For the field information in the data set:</p>
 <ul>
 <li>
-<code>count</code> ?</li>
+<code>count</code> number</li>
 <li>
-<code>ATC1Level</code> ATC level 1, the first-order distribution of ATC</li>
+<code>ATC1Level</code> ATC level, the first-order distribution of ATC</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># level distribution 1</span>
 <span class="fu"><a href="../reference/getATCLevelPlot.html">getATCLevelPlot</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">sample_data_ATC1LevelPlot</span>, 
                   ATCColName <span class="op">=</span> <span class="va">ATC</span>, 
                   level <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-16-1.png" width="576"></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># level distribution 2</span>
 <span class="fu"><a href="../reference/getATCLevelPlot.html">getATCLevelPlot</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">sample_data_ATC1LevelPlot</span>, 
                   ATCColName <span class="op">=</span> <span class="va">ATC</span>, 
                   level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
-<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-16-2.png" width="576"></p>
+<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-17-2.png" width="576"></p>
 </div>
 <div id="drug-era-plot" class="section level3">
 <h3 class="hasAnchor">
@@ -1001,29 +1007,32 @@
 <p>User can get the visualized result of the drug era calculated by <code>get.DrugEra</code>. User has to consider different drug, drug era, supplied days, and the distribution of the dospensing drug. Then, show the plot that distribution of the patient`s dispensing drug times in bar chart.</p>
 <p>Example: User input the data table <code>sample_data_DrugEraPlot</code>. For the field information in the data set:</p>
 <ul>
-<li><code>Drug Era</code></li>
-<li><code>Total Supply Days</code></li>
+<li>
+<code>Drug Era</code> number of drug era</li>
+<li>
+<code>Total Supply Days</code> length of drug era The values in the bar graph indicate the drug era in this time interval, and the drug records for each drug era are several times.</li>
 </ul>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/getDrugEraPlot.html">getDrugEraPlot</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">sample_data_DrugEraPlot</span>,
                 MemberIDColName <span class="op">=</span> <span class="va">MemberId</span>,
                 DrugColName <span class="op">=</span> <span class="va">ATC</span>,
                 DrugEraColName <span class="op">=</span> <span class="va">DrugEra</span>,
                 SupplyDaysColName <span class="op">=</span> <span class="va">SupplyDays</span><span class="op">)</span></code></pre></div>
-<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-17-1.png" width="576"></p>
+<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
 </div>
 <div id="dispensing-drug-history-plot" class="section level3">
 <h3 class="hasAnchor">
 <a href="#dispensing-drug-history-plot" class="anchor"></a><strong>3. dispensing drug history plot</strong>
 </h3>
-<p>User can get specific patient`s drug history plot in bar chart. In addition, user can also get separately sub-plots of different drug history.</p>
+<p>User can get specific patient`s drug history plot in bar chart and get separately sub-plots of different drug history. In addition, user can choose to classify drugs, this chart is classified by NDC code. The time interval between each drug record is displayed as a negative number if there is overlap.</p>
 <p>Example: User input the data table <code>sample_data_ATC1LevelPlot</code>. For the field information in the data set:</p>
 <ul>
 <li>
-<code>Dispensing Time</code> interval time of the patient dispensing time</li>
-<li><code>Date</code></li>
+<code>Dispensing Time</code> delivery order of the same drug</li>
+<li>
+<code>Date</code> timeline of drug history</li>
 </ul>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/getDispensingPlot.html">getDispensingPlot</a></span><span class="op">(</span>df <span class="op">=</span> <span class="va">sample_data_subset</span>, 
                    MemberIDColName <span class="op">=</span> <span class="va">MemberId</span>,
                    DrugColName <span class="op">=</span> <span class="va">NationalDrugCode</span>,
@@ -1031,21 +1040,21 @@
                    Member <span class="op">=</span> <span class="fl">42</span>, 
                    TimeInterval <span class="op">=</span> <span class="fl">20</span>, 
                    Unit <span class="op">=</span> <span class="va">day</span><span class="op">)</span></code></pre></div>
-<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-18-1.png" width="576"></p>
+<p><img src="Eng_Overview_files/figure-html/unnamed-chunk-19-1.png" width="576"></p>
 </div>
 </div>
 <div id="reference" class="section level2">
 <h2 class="hasAnchor">
 <a href="#reference" class="anchor"></a>Reference</h2>
 <p><strong>I. Get Drug Ingredient Via Indication</strong></p>
-<p>衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at <a href="https://data.gov.tw/dataset/9119" class="uri">https://data.gov.tw/dataset/9119</a> [10 July 2019].</p>
-<p>WHO(2019d), ATC/DDD Index 2018. available at <a href="https://www.whocc.no/atc_ddd_index/" class="uri">https://www.whocc.no/atc_ddd_index/</a> [10 July 2019].</p>
-<p>U.S. National Library of Medicine(2019b), RxNorm API. available at <a href="https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html#" class="uri">https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html#</a> [10 July 2019].</p>
-<p>MAYO CLINIC (2019), Esophagitis Diagnosis &amp; Treatment. available at <a href="https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264" class="uri">https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264</a> [10 July 2019].</p>
+<p>衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at <a href="https://data.gov.tw/dataset/9119" class="uri">https://data.gov.tw/dataset/9119</a></p>
+<p>WHO(2019d), ATC/DDD Index 2018. available at <a href="https://www.whocc.no/atc_ddd_index/" class="uri">https://www.whocc.no/atc_ddd_index/</a></p>
+<p>U.S. National Library of Medicine(2019b), RxNorm API. available at <a href="https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html#" class="uri">https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html#</a></p>
+<p>MAYO CLINIC (2019), Esophagitis Diagnosis &amp; Treatment. available at <a href="https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264" class="uri">https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264</a></p>
 <p><strong>II. Drug Code Integration</strong></p>
 <p>衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則.</p>
-<p>Food and Drug Administration (2019), National Drug Code Directory. available at <a href="https://www.fda.gov/drugs/informationondrugs/ucm142438.htm" class="uri">https://www.fda.gov/drugs/informationondrugs/ucm142438.htm</a> [10 July 2019].</p>
-<p>U.S. National Library of Medicine(2019c), RxNav. available at <a href="https://mor.nlm.nih.gov/RxNav/" class="uri">https://mor.nlm.nih.gov/RxNav/</a> [10 July 2019].</p>
+<p>Food and Drug Administration (2019), National Drug Code Directory. available at <a href="https://www.fda.gov/drugs/informationondrugs/ucm142438.htm" class="uri">https://www.fda.gov/drugs/informationondrugs/ucm142438.htm</a></p>
+<p>U.S. National Library of Medicine(2019c), RxNav. available at <a href="https://mor.nlm.nih.gov/RxNav/" class="uri">https://mor.nlm.nih.gov/RxNav/</a></p>
 <p>Bodenreider et al. (2014), Analyzing U.S. Prescription Lists with RxNorm and the ATC/DDD Index. AMIA … Annual Symposium proceedings. AMIA Symposium, 2014: 297–306. <a href="https://pubmed.ncbi.nlm.nih.gov/25954332/" class="uri">https://pubmed.ncbi.nlm.nih.gov/25954332/</a></p>
 <p><strong>III. Calculate Drug Data</strong></p>
 <p>WHO(2019c), Guidelines for ATC Classification and DDD Assignment 2018. <a href="https://www.whocc.no/atc_ddd_index_and_guidelines/guidelines/" class="uri">https://www.whocc.no/atc_ddd_index_and_guidelines/guidelines/</a></p>

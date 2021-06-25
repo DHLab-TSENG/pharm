@@ -4,12 +4,12 @@
 calDDDsViaRxCui <- function(df,
                            RxCuiColName = RxCui,
                            QuantityColName = Quantity,
-                           DaysSupplyColName = DaysSupply,
+                           DaysSupply = DaysSupply,
                            cores = 4){
 
   colnames(df)[colnames(df)==deparse(substitute(RxCuiColName))] <- "wRxCui"
   colnames(df)[colnames(df)==deparse(substitute(QuantityColName))] <- "Quantity"
-  colnames(df)[colnames(df)==deparse(substitute(DaysSupplyConName))] <- "DaysSupply"
+  colnames(df)[colnames(df)==deparse(substitute(DaysSupply))] <- "DaysSupply"
   dfu <- df %>% select("wRxCui") %>% unique()
   cl <- makeCluster(cores)
   registerDoParallel(cl)
@@ -68,7 +68,7 @@ calDDDsViaRxCui <- function(df,
   RxCui_Strength$Unit <- Unit
   colnames(RxCui_Strength)[colnames(RxCui_Strength)=="wRxCui"] <- deparse(substitute(RxCuiColName))
   colnames(RxCui_Strength)[colnames(RxCui_Strength)=="Quantity"] <- deparse(substitute(QuantityColName))
-  colnames(RxCui_Strength)[colnames(RxCui_Strength)=="DaysSupply"] <- deparse(substitute(DaysSupplyConName))
+  colnames(RxCui_Strength)[colnames(RxCui_Strength)=="DaysSupply"] <- deparse(substitute(DaysSupply))
 
   return (RxCui_Strength)
 }

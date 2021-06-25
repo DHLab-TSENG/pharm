@@ -204,6 +204,14 @@ knitr::kable(
 #### **3.1. Get NHINo via HC**
 User can get NHINo which has contained these drug ingredients by input HC, and no corresponding NHINo will be`NA`.
 
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+knitr::kable(
+  head(
+    getNHINoViaHC(df, HospitalCodeColName, SourceDf, Source_NhinoColName, Source_HospitalCodeColName)
+  )
+)
+```
+
 #### **3.2. Get NHINo via RCFNo**
 User can get NHINo which has contained these drug ingredients by input the data table `sample_taiwan_drug`, and no corresponding NHINo will be`NA`.
 
@@ -297,11 +305,10 @@ For the field information in the data set:
 * `Unit` drug unit
 
 ```{r, warning=FALSE, message=FALSE,eval=FALSE}
-
 sample_data_subset_atc <- calDDDsViaRxCui(df = sample_data_subset_atc, 
                                          RxCuiColName = RxCui, 
                                          QuantityColName = Quantity, 
-                                         DaysSupplyColName = DaysSupply, 
+                                         DaysSupply = DaysSupply, 
                                          cores = 2)
 knitr::kable(
   head(sample_data_subset_atc)
@@ -342,7 +349,7 @@ For the field information in the data set:
 * `DDDs_Before_15_Days` calculate DDDs in custom time interval before index 15 day
 * `DDDs_After_30_Days` calculate DDDs in custom time interval after index 30 day
 
-```{r message=FALSE, warning=FALSE, include=FALSE, eval=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE,eval=FALSE}
 sample_data_subset_atc$Index_Day <- as.Date(c("2032-01-29", "2032-01-29", "2032-01-29", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22", "2032-04-22"))
 ```
 ```{r, warning=FALSE, message=FALSE,eval=FALSE}
@@ -370,8 +377,8 @@ Then, show the plot of its distribution in bar chart.
 Example: User input the data table `sample_data_ATC1LevelPlot`.
 For the field information in the data set:
 
-* `count` ?
-* `ATC1Level` ATC level 1, the first-order distribution of ATC
+* `count` number
+* `ATC1Level` ATC level, the first-order distribution of ATC
 
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
@@ -393,8 +400,9 @@ Then, show the plot that distribution of the patient`s dispensing drug times in 
 Example: User input the data table `sample_data_DrugEraPlot`.
 For the field information in the data set:
 
-* `Drug Era`
-* `Total Supply Days`
+* `Drug Era` number of drug era
+* `Total Supply Days` length of drug era
+The values in the bar graph indicate the drug era in this time interval, and the drug records for each drug era are several times.
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDrugEraPlot(df = sample_data_DrugEraPlot,
@@ -405,14 +413,14 @@ getDrugEraPlot(df = sample_data_DrugEraPlot,
 ```
 
 ### **3. dispensing drug history plot**  
-User can get specific patient`s drug history plot in bar chart.
-In addition, user can also get separately sub-plots of  different drug history.
+User can get specific patient`s drug history plot in bar chart and get separately sub-plots of different drug history.
+In addition, user can choose to classify drugs, this chart is classified by NDC code. The time interval between each drug record is displayed as a negative number if there is overlap.
 
 Example: User input the data table `sample_data_ATC1LevelPlot`.
 For the field information in the data set:
 
-* `Dispensing Time` interval time of the patient dispensing time
-* `Date`
+* `Dispensing Time` delivery order of the same drug
+* `Date` timeline of drug history
 
 ```{r, warning=FALSE, message=FALSE, fig.width=6, fig.height=4}
 getDispensingPlot(df = sample_data_subset, 
@@ -427,21 +435,21 @@ getDispensingPlot(df = sample_data_subset,
 ## Reference
 **I. Get Drug Ingredient Via Indication**
 
-衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119 [10 July 2019].
+衛生福利部食品藥物管理署(2019), 藥品藥理治療分類ATC碼資料集. available at https://data.gov.tw/dataset/9119
 
-WHO(2019d), ATC/DDD Index 2018. available at https://www.whocc.no/atc_ddd_index/ [10 July 2019].
+WHO(2019d), ATC/DDD Index 2018. available at https://www.whocc.no/atc_ddd_index/
 
-U.S. National Library of Medicine(2019b), RxNorm API. available at https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html# [10 July 2019].
+U.S. National Library of Medicine(2019b), RxNorm API. available at https://mor.nlm.nih.gov/download/rxnav/RxNormAPIs.html#
 
-MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264 [10 July 2019].
+MAYO CLINIC (2019), Esophagitis Diagnosis & Treatment. available at https://www.mayoclinic.org/diseases-conditions/esophagitis/diagnosis-treatment/drc-20361264
 
 **II. Drug Code Integration**
 
 衛生福利部中央健康保險署(2019), 全民健康保險藥品編碼原則.
 
-Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm [10 July 2019].
+Food and Drug Administration (2019), National Drug Code Directory. available at https://www.fda.gov/drugs/informationondrugs/ucm142438.htm
 
-U.S. National Library of Medicine(2019c), RxNav. available at https://mor.nlm.nih.gov/RxNav/ [10 July 2019].
+U.S. National Library of Medicine(2019c), RxNav. available at https://mor.nlm.nih.gov/RxNav/
 
 Bodenreider et al. (2014), Analyzing U.S. Prescription Lists with RxNorm and the ATC/DDD Index. AMIA ... Annual Symposium proceedings. AMIA Symposium, 2014: 297–306. https://pubmed.ncbi.nlm.nih.gov/25954332/
 
