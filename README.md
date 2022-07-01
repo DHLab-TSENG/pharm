@@ -1,4 +1,8 @@
-## Introduction
+## Getting started with pharm package
+
+![pharm](https://user-images.githubusercontent.com/8377506/176843013-50d54235-2fc0-4d54-9720-1bfa9fba1591.png)
+
+
 Currently, most of the healthcare data, such as electronic medical records(e-MD) and medical insurance data are digitized. However, there is still no unified record standard for drug records.
 
 The Pharm package is an open-source software tool aimed at integrating standard drug code, indication screening and definition of daily dose calculation function.
